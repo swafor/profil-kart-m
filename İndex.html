@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijital Kartvizit</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #38bdf8;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        p.description {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .google {
+            background-color: #4285f4;
+        }
+
+        .btn-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- Profil Görseli -->
+        <img src="https://via.placeholder.com/100" alt="Profil Fotoğrafı" class="profile-img">
+        
+        <!-- Başlık ve Açıklama -->
+        <h1>Firma / Kişi Adı</h1>
+        <p class="description">Bizi sosyal medyada takip edin veya görüşlerinizi belirtin.</p>
+
+        <!-- Bağlantı Butonları -->
+        <div class="links-container">
+            <a href="https://instagram.com/KULLANICI_ADI" target="_blank" class="btn-link instagram">
+                Instagram Hesabımız
+            </a>
+            
+            <a href="https://g.page/r/GOOGLE_DEGERLENDIRME_LINKI/review" target="_blank" class="btn-link google">
+                Google'da Yorum Yap
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

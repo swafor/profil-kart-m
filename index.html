@@ -1,84 +1,166 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>İşletme Profili</title>
- <style>
- body {
- font-family: Arial, sans-serif;
- text-align: center;
- background-color: #f4f4f4;
- padding: 20px;
- }
- .profile-card {
- background: white;
- padding: 30px;
- border-radius: 15px;
- box-shadow: 0 4px 8px rgba(0,0,0,0.1);
- max-width: 400px;
- margin: 0 auto;
- }
- .btn {
- display: block;
- width: 100%;
- padding: 15px;
- margin: 10px 0;
- border: none;
- border-radius: 8px;
- font-size: 16px;
- font-weight: bold;
- cursor: pointer;
- text-decoration: none;
- color: white;
- transition: opacity 0.3s ease;
- }
- .btn-google { background-color: #4285F4; }
- .btn-instagram { background-color: #E1306C; }
- .btn-iban { background-color: #28a745; }
- .btn:hover { opacity: 0.9; }
- .copy-alert {
- display: none;
- color: #28a745;
- font-weight: bold;
- margin-top: 15px;
- font-size: 14px;
- }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İşletme İletişim Sayfası</title>
+    <style>
+        /* Modern, temiz ve göz yormayan bir tasarım dili */
+        :root {
+            --primary-blue: #3B82F6; /* Google Mavi */
+            --primary-pink: #EC4899; /* Instagram Pembe/Kırmızı */
+            --primary-green: #10B981; /* IBAN Yeşil */
+            --bg-color: #f1f3f6; /* Hafif dokulu, bembeyaz olmayan arka plan */
+            --text-color: #333;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Yumuşak gölge */
+            --font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(#d1d5db 1px, transparent 1px),
+                radial-gradient(#d1d5db 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            /* Hafif noktalı bir doku ekledik */
+            font-family: var(--font-family);
+            color: var(--text-color);
+        }
+
+        /* Kart Konteyneri - Orantı ve Taşıma Sorununun Çözümü */
+        .card-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            width: 90%; /* Ekran genişliğinin %90'ı kadar */
+            max-width: 400px; /* Çok büyük ekranlarda aşırı büyümesin */
+            padding: 40px;
+            text-align: center;
+            box-sizing: border-box; /* Padding'i genişliğe dahil et */
+            overflow: hidden; /* Taşmayı önle */
+        }
+
+        .işletme-adı {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .bize-değerlendirin {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Düğme Tasarımları */
+        .button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:last-child {
+            margin-bottom: 0;
+        }
+
+        .button:active {
+            transform: translateY(1px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .button-google {
+            background-color: var(--primary-blue);
+        }
+
+        .button-instagram {
+            background-color: var(--primary-pink);
+        }
+
+        .button-iban {
+            background-color: var(--primary-green);
+        }
+
+        /* Kopyalama Bildirimi */
+        #copied-notif {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
 
- <div class="profile-card">
- <h2>İşletme Adı</h2>
- <p>Bizi değerlendirin ve sosyal medyada takip edin.</p>
- 
- <a href="https://g.page/your-business/review" class="btn btn-google" target="_blank">Google'da Değerlendir</a>
- <a href="https://instagram.com/your-business" class="btn btn-instagram" target="_blank">Instagram'da Takip Et</a>
- <button class="btn btn-iban" onclick="copyIban()">IBAN Kopyala</button>
+<div class="card-container">
+    <div class="işletme-adı">İşletme Adı</div>
+    <div class="bize-değerlendirin">Bizi değerlendirin ve sosyal medyada takip edin.</div>
 
- <div id="copy-message" class="copy-alert">
- İşletme bilgileri ve IBAN kopyalandı!
- </div>
- </div>
+    <a href="https://g.page/iletmeadi/review" target="_blank" class="button button-google">Google'da Değerlendir</a>
+    <a href="https://instagram.com/iletmeadi" target="_blank" class="button button-instagram">Instagram'da Takip Et</a>
+    
+    <!-- IBAN Kopyalama Düğmesi - JavaScript ile Kopyalama ve Yönlendirme -->
+    <button class="button button-iban" id="ibanCopyButton">IBAN Kopyala</button>
+</div>
 
- <script>
- function copyIban() {
- const businessName = "İŞLETME ADI SOYADI";
- const ibanNumber = "TR2859365825591759275";
- const textToCopy = `İsim Soyisim: ${Ayşegül Er}\nIBAN: ${ibanNumber}`;
+<div id="copied-notif">IBAN kopyalandı! Yönlendiriliyor...</div>
 
- navigator.clipboard.writeText(textToCopy).then(() => {
- const alertBox = document.getElementById('copy-message');
- alertBox.style.display = 'block';
- setTimeout(() => {
- alertBox.style.display = 'none';
- }, 2000);
- }).catch(err => {
- console.error('Kopyalama başarısız oldu: ', err);
- });
- }
- </script>
+<script>
+    const ibanString = 'TR000000000000000000000000'; // Gerçek IBAN'ınızı buraya girin
+    const copyButton = document.getElementById('ibanCopyButton');
+    const notification = document.getElementById('copied-notif');
+    const destinationUrl = 'https://site_url/iban_info.html'; // Yönlendirme URL'si
+
+    copyButton.addEventListener('click', async () => {
+        try {
+            // IBAN'ı kopyala
+            await navigator.clipboard.writeText(ibanString);
+            
+            // Bildirimi göster
+            notification.style.display = 'block';
+            
+            // 2 saniye sonra yönlendir ve bildirimi gizle
+            setTimeout(() => {
+                notification.style.display = 'none';
+                window.location.href = destinationUrl; 
+            }, 2000); 
+
+        } catch (err) {
+            console.error('IBAN kopyalama başarısız oldu:', err);
+            notification.textContent = 'Kopyalama başarısız!';
+            notification.style.backgroundColor = '#d32f2f'; // Kırmızı hata bildirimi
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+                notification.textContent = 'IBAN kopyalandı! Yönlendiriliyor...'; // Orijinal metni geri yükle
+                notification.style.backgroundColor = '#333';
+            }, 3000);
+        }
+    });
+</script>
 
 </body>
 </html>
-

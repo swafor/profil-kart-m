@@ -1,109 +1,116 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dijital Kartvizit</title>
+    <title>İşletme İletişim & IBAN</title>
+    <!-- FontAwesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --accent-color: #38bdf8;
-            --accent-hover: #0284c7;
-            --border-color: #334155;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="light"] {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --accent-color: #0284c7;
-            --accent-hover: #0369a1;
-            --border-color: #e2e8f0;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --primary-blue: #3B82F6;
+            --primary-pink: #E1306C;
+            --primary-green: #10B981;
+            --text-main: #1F2937;
+            --text-sub: #6B7280;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* Arka Plan: Modern yumuşak gradient (Noktacıklar kaldırıldı) */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
             padding: 20px;
         }
 
-        .card {
-            background-color: var(--card-bg);
+        /* Ana Konteyner */
+        .app-card {
+            background: #ffffff;
             width: 100%;
-            max-width: 450px;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            max-width: 380px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            padding: 32px 24px;
             position: relative;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .profile-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
+            overflow: hidden;
+            min-height: 420px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 2.5rem;
-            color: white;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 8px;
+        /* Sayfa Geçiş Ekranları */
+        .page {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
         }
 
-        .status-open {
-            background-color: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
+        .page-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .status-closed {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+        .page-iban {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
+            padding: 32px 24px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* IBAN Sayfası Aktif Durumu */
+        .app-card.show-iban .page-main {
+            transform: translateX(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .app-card.show-iban .page-iban {
+            left: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Başlıklar */
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 28px;
+            line-height: 1.4;
+        }
+
+        /* Butonlar */
+        .btn-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
         .btn {
@@ -112,253 +119,233 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background-color: var(--card-bg);
-            color: var(--text-main);
-            text-decoration: none;
+            padding: 16px;
+            border-radius: 16px;
+            color: #ffffff;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
+            font-size: 16px;
+            text-decoration: none;
             border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            color: white;
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-google { background-color: var(--primary-blue); }
+        .btn-instagram { background-color: var(--primary-pink); }
+        .btn-iban { background-color: var(--primary-green); }
+
+        /* IBAN Kart Tasarımı */
+        .iban-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .iban-header h2 {
+            font-size: 22px;
+            color: var(--text-main);
         }
 
         .info-box {
-            background-color: rgba(0,0,0,0.05);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border-color);
-        }
-
-        .iban-field {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
+            transition: border-color 0.2s;
         }
 
-        /* Pop-up Modalları */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+        .info-box:hover {
+            border-color: var(--primary-green);
         }
 
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        #qrcode {
+        .info-details {
             display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow: hidden;
+        }
+
+        .info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-sub);
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .copy-icon-btn {
+            background: #EFEFEE;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
 
-        #qrcode img {
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
+        .copy-icon-btn:hover {
+            background: var(--primary-green);
+            color: white;
         }
 
+        .btn-back {
+            background: #F3F4F6;
+            color: var(--text-main);
+            margin-top: 10px;
+        }
+
+        .btn-back:hover {
+            background: #E5E7EB;
+        }
+
+        /* Toast Bildirim */
         .toast {
-            visibility: hidden;
-            min-width: 200px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 12px;
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(100px);
+            background: #10B981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .toast.show {
-            visibility: visible;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
-
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeIcon">
-            <i class="fa-solid fa-moon"></i>
-        </button>
+    <div class="app-card" id="appCard">
+        
+        <!-- ANA SAYFA -->
+        <div class="page page-main">
+            <h1>İşletme Adı</h1>
+            <p class="subtitle">Bizi değerlendirin ve sosyal medyada takip edin.</p>
 
-        <div class="profile-header">
-            <div class="avatar"><i class="fa-solid fa-user"></i></div>
-            <h2>Ad Soyad</h2>
-            <p style="color: var(--text-sub);">Unvan / Şirket Adı</p>
-            <div id="statusBadge" class="status-badge"></div>
-        </div>
-
-        <button class="btn btn-primary" onclick="downloadVCard()">
-            <i class="fa-solid fa-user-plus"></i> Rehbere Kaydet
-        </button>
-
-        <div class="info-box iban-field" onclick="copyIBAN('TR00 0000 0000 0000 0000 0000 00')">
-            <div>
-                <small style="color: var(--text-sub);">IBAN (Tıkla Kopyala)</small>
-                <p style="font-size: 0.9rem; font-weight: bold;">TR00 0000... 0000 00</p>
+            <div class="btn-list">
+                <a href="https://g.page/review" target="_blank" class="btn btn-google">
+                    <i class="fa-brands fa-google"></i> Google'da Değerlendir
+                </a>
+                <a href="https://instagram.com" target="_blank" class="btn btn-instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
+                </a>
+                <button class="btn btn-iban" onclick="openIbanPage()">
+                    <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
+                </button>
             </div>
-            <i class="fa-regular fa-copy"></i>
         </div>
 
-        <a href="https://maps.google.com" target="_blank" class="btn">
-            <i class="fa-solid fa-location-dot"></i> Yol Tarifi Al
-        </a>
+        <!-- IBAN VE İSİM SAYFASI -->
+        <div class="page page-iban">
+            <div>
+                <div class="iban-header">
+                    <h2>Banka Bilgileri</h2>
+                    <p class="subtitle" style="margin-bottom: 16px;">Kopyalamak için ikona tıklayın</p>
+                </div>
 
-        <a href="katalog.pdf" download class="btn">
-            <i class="fa-solid fa-file-pdf"></i> Kataloğu İndir
-        </a>
+                <!-- Alıcı / İsim Soyisim -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">ALICI İSİM SOYİSİM</span>
+                        <span class="info-value" id="nameText">Ahmet Yılmaz</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('nameText', 'İsim Soyisim')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
 
-        <button class="btn" onclick="openModal('qrModal')">
-            <i class="fa-solid fa-qrcode"></i> QR Kodumu Göster
-        </button>
+                <!-- IBAN -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">IBAN NUMARASI</span>
+                        <span class="info-value" id="ibanText">TR92 0006 2000 0000 0000 0000 00</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('ibanText', 'IBAN')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
 
-        <button class="btn" onclick="openModal('appointmentModal')">
-            <i class="fa-solid fa-calendar-check"></i> Randevu Al
-        </button>
-    </div>
-
-    <div id="qrModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('qrModal')">&times;</span>
-            <h3>Kartvizit QR Kodu</h3>
-            <div id="qrcode"></div>
-            <p style="font-size: 0.85rem; color: var(--text-sub);">Kameranızla okutabilirsiniz.</p>
+            <!-- Geri Dön Butonu -->
+            <button class="btn btn-back" onclick="closeIbanPage()">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </button>
         </div>
+
     </div>
 
-    <div id="qrModal" class="modal" id="appointmentModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('appointmentModal')">&times;</span>
-            <h3>Randevu Talebi</h3>
-            <p style="margin: 15px 0; font-size: 0.9rem;">Calendly veya iletişim formunuz buraya gelecek.</p>
-        </div>
+    <!-- Kopyalandı Bildirimi (Toast) -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Kopyalandı!</span>
     </div>
 
-    <div id="toast" class="toast">IBAN kopyalandı!</div>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXX'); // Kendi Google Analytics ID'nizi girin
-    </script>
+        const appCard = document.getElementById('appCard');
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
 
-    <script>
-        // 1. Karanlık / Aydınlık Mod
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('themeIcon').querySelector('i');
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.setAttribute('data-theme', 'light');
-                icon.className = 'fa-solid fa-sun';
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                icon.className = 'fa-solid fa-moon';
-            }
+        // IBAN Sayfasına Geçiş
+        function openIbanPage() {
+            appCard.classList.add('show-iban');
         }
 
-        // 2. Canlı Çalışma Saatleri Durumu (Örnek: 09:00 - 18:00)
-        function checkStatus() {
-            const now = new Date();
-            const hour = now.getHours();
-            const badge = document.getElementById('statusBadge');
+        // Ana Sayfaya Dönüş
+        function closeIbanPage() {
+            appCard.classList.remove('show-iban');
+        }
+
+        // Metin Kopyalama Fonksiyonu
+        function copyToClipboard(elementId, label) {
+            const textToCopy = document.getElementById(elementId).innerText;
             
-            if (hour >= 9 && hour < 18) {
-                badge.textContent = '• Şu an Açık';
-                badge.className = 'status-badge status-open';
-            } else {
-                badge.textContent = '• Şu an Kapalı';
-                badge.className = 'status-badge status-closed';
-            }
-        }
-        checkStatus();
-
-        // 3. vCard (.vcf) Dosyası Oluşturma ve İndirme
-        function downloadVCard() {
-            const vcardData = 
-`BEGIN:VCARD
-VERSION:3.0
-FN:Ad Soyad
-ORG:Şirket Adı
-TITLE:Unvan
-TEL;TYPE=CELL:+905000000000
-EMAIL:ornek@email.com
-END:VCARD`;
-
-            const blob = new Blob([vcardData], { type: 'text/vcard' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'kartvizit.vcf';
-            a.click();
-            window.URL.revokeObjectURL(url);
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast(`${label} kopyalandı!`);
+            }).catch(err => {
+                showToast('Kopyalama başarısız!');
+            });
         }
 
-        // 4. IBAN Kopyalama
-        function copyIBAN(iban) {
-            navigator.clipboard.writeText(iban);
-            const toast = document.getElementById("toast");
-            toast.className = "toast show";
-            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        // Toast Bildirim Gösterici
+        function showToast(message) {
+            toastMsg.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
         }
-
-        // 5. Dinamik QR Kod Üretimi
-        new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href,
-            width: 180,
-            height: 180
-        });
-
-        // Modal Kontrolleri
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </body>
 </html>

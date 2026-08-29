@@ -75,38 +75,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-            background: var(--box-bg);
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-title);
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .theme-toggle-btn:hover {
-            transform: scale(1.12) rotate(15deg);
-            background: var(--box-bg-hover);
-        }
-
-        .theme-toggle-btn:active {
-            transform: scale(0.95);
-        }
-
         /* Ana Konteyner / Cam Efekti */
         .app-card {
             background: var(--card-bg);
@@ -119,13 +87,45 @@
             border-radius: 32px;
             border: 1px solid var(--card-border);
             box-shadow: var(--card-shadow);
-            padding: 36px 24px;
+            padding: 44px 24px 36px 24px;
             position: relative;
             overflow: hidden;
             min-height: 520px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        /* PANEL İÇİ PANEL SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: var(--box-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-title);
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.12) rotate(15deg);
+            background: var(--box-bg-hover);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
         }
 
         /* Sayfa Geçiş Ekranları */
@@ -418,13 +418,13 @@
 </head>
 <body>
 
-    <!-- TEMA DEĞİŞTİRME BUTTONI -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
-        <i class="fa-solid fa-sun" id="themeIcon"></i>
-    </button>
-
     <div class="app-card" id="appCard">
         
+        <!-- PANELİN SAĞ ÜST KÖŞESİNDEKİ TEMA BUTONU -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+
         <!-- ANA SAYFA -->
         <div class="page page-main">
             <h1>İşletme Adı</h1>

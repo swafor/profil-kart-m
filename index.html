@@ -403,22 +403,22 @@
                 <!-- Banka Uygulaması Aç Butonları -->
                 <div class="bank-section-title">IBAN Kopyala & Uygulama Aç</div>
                 <div class="bank-grid">
-                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat')">
                         <i class="fa-solid fa-building-columns"></i> Ziraat
                     </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('garanti://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('garanti')">
                         <i class="fa-solid fa-building-columns"></i> Garanti
                     </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi')">
                         <i class="fa-solid fa-building-columns"></i> İş Bankası
                     </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi')">
                         <i class="fa-solid fa-building-columns"></i> Yapı Kredi
                     </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('akbank://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('akbank')">
                         <i class="fa-solid fa-building-columns"></i> Akbank
                     </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank://')">
+                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank')">
                         <i class="fa-solid fa-building-columns"></i> VakıfBank
                     </button>
                 </div>
@@ -442,6 +442,40 @@
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
 
+        // Banka Deeplink Konfigürasyonu (iOS / Android)
+        const bankLinks = {
+            yapikredi: {
+                ios: "ykb://",
+                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;end",
+                web: "https://www.yapikredi.com.tr"
+            },
+            ziraat: {
+                ios: "ziraatmobile://",
+                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;end",
+                web: "https://www.ziraatbank.com.tr"
+            },
+            garanti: {
+                ios: "garanticep://",
+                android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;end",
+                web: "https://www.garantibbva.com.tr"
+            },
+            isbankasi: {
+                ios: "iscep://",
+                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;end",
+                web: "https://www.isbank.com.tr"
+            },
+            akbank: {
+                ios: "akbankdirekt://",
+                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;end",
+                web: "https://www.akbank.com"
+            },
+            vakifbank: {
+                ios: "vakifbankmobile://",
+                android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;end",
+                web: "https://www.vakifbank.com.tr"
+            }
+        };
+
         function openIbanPage() {
             appCard.classList.add('show-iban');
         }
@@ -460,17 +494,29 @@
             });
         }
 
-        function copyAndOpenBank(bankDeepLink) {
+        function copyAndOpenBank(bankKey) {
             const ibanText = document.getElementById('ibanText').innerText;
-            
-            // 1. Önce IBAN'ı otomatik kopyala
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+            const bank = bankLinks[bankKey];
+
+            // 1. Önce IBAN kopyalama işlemini gerçekleştir
             navigator.clipboard.writeText(ibanText).then(() => {
                 showToast('IBAN kopyalandı, uygulama açılıyor...');
-                
-                // 2. Kısa bir gecikmeyle banka uygulamasını tetikle
+
+                // 2. İşletim sistemine uygun bağlantıyı tetikle
                 setTimeout(() => {
-                    window.location.href = bankDeepLink;
-                }, 800);
+                    if (isAndroid && bank.android) {
+                        window.location.href = bank.android;
+                    } else if (isIOS && bank.ios) {
+                        window.location.href = bank.ios;
+                    } else {
+                        // Masaüstü veya bilinmeyen platformda web sitesini aç
+                        window.open(bank.web, '_blank');
+                    }
+                }, 500);
             }).catch(err => {
                 showToast('Kopyalama başarısız!');
             });

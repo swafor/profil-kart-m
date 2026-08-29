@@ -1,12 +1,3 @@
-İşletme telefon numarası ve e-posta adresini içeren, kopyalama butonlu yeni bir panel **IBAN Bilgileri** bölümünün hemen altına eklendi.
-
-### Yapılan Güncellemeler:
-
-1. **Yeni Panel (İletişim Bilgileri):** IBAN kartının hemen altına `İLETİŞİM BİLGİLERİ` başlığı altında **Telefon** ve **E-Posta** alanları eklendi.
-2. **Kopyalama Desteği:** Her iki bilginin yanında tıklanınca ilgili veriyi panoya kopyalayan ve "Kopyalandı!" bildirimi gösteren butonlar tanımlandı.
-3. **Uyumlu Tasarım:** Ana tasarımın cam efekti (glassmorphism) ve renk paletleriyle %100 uyumlu CSS düzenlemeleri yapıldı.
-
-```html
 <!DOCTYPE html>
 <html lang="tr" data-theme="dark">
 <head>
@@ -21,6 +12,7 @@
             --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
             --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
             --primary-green: linear-gradient(135deg, #10B981, #059669);
+            --primary-orange: linear-gradient(135deg, #F97316, #EA580C);
         }
 
         /* --- KARANLIK TEMA (Varsayılan) --- */
@@ -105,7 +97,7 @@
             justify-content: center;
         }
 
-        /* PANEL İÇİ PANEL SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
+        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
         .theme-toggle-btn {
             position: absolute;
             top: 20px;
@@ -150,7 +142,8 @@
             text-align: center;
         }
 
-        .page-iban {
+        /* Alt Sayfa Geçiş Stilleri (IBAN ve İletişim Panelleri) */
+        .sub-page {
             position: absolute;
             top: 0;
             left: 100%;
@@ -169,16 +162,25 @@
             opacity: 0;
             pointer-events: none;
             overflow-y: auto;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* IBAN Sayfası Aktif Durumu */
-        .app-card.show-iban .page-main {
+        /* IBAN veya İletişim Açıldığında Ana Sayfa Kayması */
+        .app-card.show-iban .page-main,
+        .app-card.show-contact .page-main {
             transform: translateX(-100%) scale(0.9);
             opacity: 0;
             pointer-events: none;
         }
 
-        .app-card.show-iban .page-iban {
+        /* Aktif Ekran Gösterimleri */
+        .app-card.show-iban #ibanPage {
+            left: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .app-card.show-contact #contactPage {
             left: 0;
             opacity: 1;
             pointer-events: auto;
@@ -263,14 +265,18 @@
             background: var(--primary-green); 
             box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.5);
         }
-
-        /* IBAN Kart Tasarımı */
-        .iban-header {
-            text-align: center;
-            margin-bottom: 16px;
+        .btn-contact { 
+            background: var(--primary-orange); 
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.5);
         }
 
-        .iban-header h2 {
+        /* Bilgi Kartı Stilleri */
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-header h2 {
             font-size: 22px;
             font-weight: 800;
             color: var(--text-title);
@@ -281,7 +287,7 @@
             border: 1px solid var(--box-border);
             border-radius: 18px;
             padding: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -339,7 +345,7 @@
             transform: scale(1.1);
         }
 
-        /* Banka Hızlı Erişim Butonları */
+        /* Banka Hızlı Erişim Grid */
         .section-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -430,38 +436,47 @@
 
     <div class="app-card" id="appCard">
         
-        <!-- PANELİN SAĞ ÜST KÖŞESİNDEKİ TEMA BUTONU -->
+        <!-- SAĞ ÜST TEMA BUTONU -->
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
             <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
 
-        <!-- ANA SAYFA -->
+        <!-- ANA SAYFA (PANEL 1, 2, 3 ve 4) -->
         <div class="page page-main">
             <h1>İşletme Adı</h1>
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
+                <!-- PANEL 1 -->
                 <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-google">
                     <i class="fa-brands fa-google"></i> Google'da Konumumuz
                 </a>
+
+                <!-- PANEL 2 -->
                 <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
                 </a>
-                <button class="btn btn-iban" onclick="openIbanPage()">
+
+                <!-- PANEL 3 -->
+                <button class="btn btn-iban" onclick="openPage('show-iban')">
                     <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
+                </button>
+
+                <!-- YENİ EKLENEN PANEL 4: İLETİŞİM BİLGİLERİ -->
+                <button class="btn btn-contact" onclick="openPage('show-contact')">
+                    <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
             </div>
         </div>
 
-        <!-- IBAN VE İLETİŞİM SAYFASI -->
-        <div class="page page-iban">
+        <!-- IBAN PANEL SAYFASI (3. PANEL DETAYI) -->
+        <div class="sub-page" id="ibanPage">
             <div>
-                <div class="iban-header">
+                <div class="page-header">
                     <h2>Banka Bilgileri</h2>
-                    <p class="subtitle" style="margin-bottom: 12px;">Bilgileri kopyalayıp bankanızı seçin</p>
+                    <p class="subtitle" style="margin-bottom: 12px;">IBAN kopyalayıp banka uygulamasını açabilirsiniz.</p>
                 </div>
 
-                <!-- Alıcı / İsim Soyisim -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">ALICI İSİM SOYİSİM</span>
@@ -472,7 +487,6 @@
                     </button>
                 </div>
 
-                <!-- IBAN -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">IBAN NUMARASI</span>
@@ -483,39 +497,37 @@
                     </button>
                 </div>
 
-                <!-- Banka Uygulaması Aç Butonları -->
-                <div class="section-title">IBAN Kopyala & Uygulama Aç</div>
+                <div class="section-title">Hızlı Banka Erişimi</div>
                 <div class="bank-grid">
-                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat')">
-                        <i class="fa-solid fa-building-columns"></i> Ziraat
-                    </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('garanti')">
-                        <i class="fa-solid fa-building-columns"></i> Garanti
-                    </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi')">
-                        <i class="fa-solid fa-building-columns"></i> İş Bankası
-                    </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi')">
-                        <i class="fa-solid fa-building-columns"></i> Yapı Kredi
-                    </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('akbank')">
-                        <i class="fa-solid fa-building-columns"></i> Akbank
-                    </button>
-                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank')">
-                        <i class="fa-solid fa-building-columns"></i> VakıfBank
-                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat')"><i class="fa-solid fa-building-columns"></i> Ziraat</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('garanti')"><i class="fa-solid fa-building-columns"></i> Garanti</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi')"><i class="fa-solid fa-building-columns"></i> İş Bankası</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi')"><i class="fa-solid fa-building-columns"></i> Yapı Kredi</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('akbank')"><i class="fa-solid fa-building-columns"></i> Akbank</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank')"><i class="fa-solid fa-building-columns"></i> VakıfBank</button>
+                </div>
+            </div>
+
+            <button class="btn btn-back" onclick="closePages()">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </button>
+        </div>
+
+        <!-- 4. PANEL DETAYI: İLETİŞİM BİLGİLERİ SAYFASI -->
+        <div class="sub-page" id="contactPage">
+            <div>
+                <div class="page-header">
+                    <h2>İletişim Bilgileri</h2>
+                    <p class="subtitle" style="margin-bottom: 16px;">İşletmemize ait doğrudan iletişim kanalları</p>
                 </div>
 
-                <!-- YENİ İLETİŞİM BİLGİLERİ PANELİ -->
-                <div class="section-title">İletişim Bilgileri</div>
-                
                 <!-- Telefon Numarası -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">TELEFON NUMARASI</span>
                         <span class="info-value" id="phoneText">+90 555 123 45 67</span>
                     </div>
-                    <button class="copy-icon-btn" onclick="copyToClipboard('phoneText', 'Telefon')" title="Kopyala">
+                    <button class="copy-icon-btn" onclick="copyToClipboard('phoneText', 'Telefon Numarası')" title="Kopyala">
                         <i class="fa-regular fa-copy"></i>
                     </button>
                 </div>
@@ -526,22 +538,20 @@
                         <span class="info-label">E-POSTA ADRESİ</span>
                         <span class="info-value" id="emailText">info@isletmeadi.com</span>
                     </div>
-                    <button class="copy-icon-btn" onclick="copyToClipboard('emailText', 'E-Posta')" title="Kopyala">
+                    <button class="copy-icon-btn" onclick="copyToClipboard('emailText', 'E-Posta Adresi')" title="Kopyala">
                         <i class="fa-regular fa-copy"></i>
                     </button>
                 </div>
-
             </div>
 
-            <!-- Geri Dön Butonu -->
-            <button class="btn btn-back" onclick="closeIbanPage()">
+            <button class="btn btn-back" onclick="closePages()">
                 <i class="fa-solid fa-arrow-left"></i> Geri Dön
             </button>
         </div>
 
     </div>
 
-    <!-- Kopyalandı Bildirimi (Toast) -->
+    <!-- Toast Bildirim -->
     <div class="toast" id="toast">
         <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Kopyalandı!</span>
     </div>
@@ -567,59 +577,22 @@
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('selectedTheme', theme);
-
-            if (theme === 'dark') {
-                themeIcon.className = 'fa-solid fa-sun';
-            } else {
-                themeIcon.className = 'fa-solid fa-moon';
-            }
+            themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        // Sayfa yüklendiğinde temayı ayarla
         initTheme();
 
-        // === BANKA BAĞLANTILARI ===
-        const bankLinks = {
-            yapikredi: {
-                ios: "ykb://",
-                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end",
-                web: "https://www.yapikredi.com.tr"
-            },
-            ziraat: {
-                ios: "ziraatmobile://",
-                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end",
-                web: "https://www.ziraatbank.com.tr"
-            },
-            garanti: {
-                ios: "garanticep://",
-                android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;S.browser_fallback_url=https://www.garantibbva.com.tr;end",
-                web: "https://www.garantibbva.com.tr"
-            },
-            isbankasi: {
-                ios: "iscep://",
-                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;S.browser_fallback_url=https://www.isbank.com.tr;end",
-                web: "https://www.isbank.com.tr"
-            },
-            akbank: {
-                ios: "akbankdirekt://",
-                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;S.browser_fallback_url=https://www.akbank.com;end",
-                web: "https://www.akbank.com"
-            },
-            vakifbank: {
-                ios: "vakifbankmobile://",
-                android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;S.browser_fallback_url=https://www.vakifbank.com.tr;end",
-                web: "https://www.vakifbank.com.tr"
-            }
-        };
-
-        function openIbanPage() {
-            appCard.classList.add('show-iban');
+        // === SAYFA GEÇİŞLERİ ===
+        function openPage(className) {
+            appCard.classList.remove('show-iban', 'show-contact');
+            appCard.classList.add(className);
         }
 
-        function closeIbanPage() {
-            appCard.classList.remove('show-iban');
+        function closePages() {
+            appCard.classList.remove('show-iban', 'show-contact');
         }
 
+        // === KOPYALAMA FONKSİYONLARI ===
         function copyToClipboard(elementId, label) {
             const textToCopy = document.getElementById(elementId).innerText;
             
@@ -647,6 +620,16 @@
             }
             document.body.removeChild(textArea);
         }
+
+        // === BANKA BAĞLANTILARI ===
+        const bankLinks = {
+            yapikredi: { ios: "ykb://", android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end", web: "https://www.yapikredi.com.tr" },
+            ziraat: { ios: "ziraatmobile://", android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end", web: "https://www.ziraatbank.com.tr" },
+            garanti: { ios: "garanticep://", android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;S.browser_fallback_url=https://www.garantibbva.com.tr;end", web: "https://www.garantibbva.com.tr" },
+            isbankasi: { ios: "iscep://", android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;S.browser_fallback_url=https://www.isbank.com.tr;end", web: "https://www.isbank.com.tr" },
+            akbank: { ios: "akbankdirekt://", android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;S.browser_fallback_url=https://www.akbank.com;end", web: "https://www.akbank.com" },
+            vakifbank: { ios: "vakifbankmobile://", android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;S.browser_fallback_url=https://www.vakifbank.com.tr;end", web: "https://www.vakifbank.com.tr" }
+        };
 
         function copyAndOpenBank(bankKey) {
             const ibanText = document.getElementById('ibanText').innerText.replace(/\s+/g, '');
@@ -683,5 +666,3 @@
     </script>
 </body>
 </html>
-
-```

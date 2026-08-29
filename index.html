@@ -1,3 +1,12 @@
+İşletme telefon numarası ve e-posta adresini içeren, kopyalama butonlu yeni bir panel **IBAN Bilgileri** bölümünün hemen altına eklendi.
+
+### Yapılan Güncellemeler:
+
+1. **Yeni Panel (İletişim Bilgileri):** IBAN kartının hemen altına `İLETİŞİM BİLGİLERİ` başlığı altında **Telefon** ve **E-Posta** alanları eklendi.
+2. **Kopyalama Desteği:** Her iki bilginin yanında tıklanınca ilgili veriyi panoya kopyalayan ve "Kopyalandı!" bildirimi gösteren butonlar tanımlandı.
+3. **Uyumlu Tasarım:** Ana tasarımın cam efekti (glassmorphism) ve renk paletleriyle %100 uyumlu CSS düzenlemeleri yapıldı.
+
+```html
 <!DOCTYPE html>
 <html lang="tr" data-theme="dark">
 <head>
@@ -331,7 +340,7 @@
         }
 
         /* Banka Hızlı Erişim Butonları */
-        .bank-section-title {
+        .section-title {
             font-size: 11px;
             text-transform: uppercase;
             font-weight: 800;
@@ -376,6 +385,7 @@
             border: 1px solid var(--box-border);
             padding: 12px;
             font-size: 14px;
+            margin-top: 10px;
         }
 
         .btn-back:hover {
@@ -443,7 +453,7 @@
             </div>
         </div>
 
-        <!-- IBAN VE İSİM SAYFASI -->
+        <!-- IBAN VE İLETİŞİM SAYFASI -->
         <div class="page page-iban">
             <div>
                 <div class="iban-header">
@@ -474,7 +484,7 @@
                 </div>
 
                 <!-- Banka Uygulaması Aç Butonları -->
-                <div class="bank-section-title">IBAN Kopyala & Uygulama Aç</div>
+                <div class="section-title">IBAN Kopyala & Uygulama Aç</div>
                 <div class="bank-grid">
                     <button class="btn-bank" onclick="copyAndOpenBank('ziraat')">
                         <i class="fa-solid fa-building-columns"></i> Ziraat
@@ -495,6 +505,32 @@
                         <i class="fa-solid fa-building-columns"></i> VakıfBank
                     </button>
                 </div>
+
+                <!-- YENİ İLETİŞİM BİLGİLERİ PANELİ -->
+                <div class="section-title">İletişim Bilgileri</div>
+                
+                <!-- Telefon Numarası -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">TELEFON NUMARASI</span>
+                        <span class="info-value" id="phoneText">+90 555 123 45 67</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('phoneText', 'Telefon')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- E-Posta Adresi -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">E-POSTA ADRESİ</span>
+                        <span class="info-value" id="emailText">info@isletmeadi.com</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('emailText', 'E-Posta')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
             </div>
 
             <!-- Geri Dön Butonu -->
@@ -647,3 +683,5 @@
     </script>
 </body>
 </html>
+
+```

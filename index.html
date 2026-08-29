@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +7,45 @@
     <!-- FontAwesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* === RENK VE TEMA DEĞİŞKENLERİ === */
         :root {
             --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
             --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
             --primary-green: linear-gradient(135deg, #10B981, #059669);
+        }
+
+        /* --- KARANLIK TEMA (Varsayılan) --- */
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #022c22);
+            --card-bg: linear-gradient(-45deg, rgba(15, 23, 42, 0.75), rgba(30, 27, 75, 0.75), rgba(49, 16, 66, 0.75), rgba(2, 44, 34, 0.75));
+            --card-border: rgba(255, 255, 255, 0.12);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            --text-title: #FFFFFF;
+            --text-subtitle: #94A3B8;
+            --text-main: #F1F5F9;
+            --text-label: #64748B;
+            --box-bg: rgba(255, 255, 255, 0.05);
+            --box-bg-hover: rgba(255, 255, 255, 0.12);
+            --box-border: rgba(255, 255, 255, 0.08);
+            --toast-bg: #0F172A;
+            --toast-text: #FFFFFF;
+        }
+
+        /* --- AYDINLIK TEMA --- */
+        [data-theme="light"] {
+            --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            --card-bg: linear-gradient(-45deg, rgba(255, 255, 255, 0.45), rgba(255, 240, 245, 0.55), rgba(224, 242, 254, 0.45), rgba(220, 252, 231, 0.45));
+            --card-border: rgba(255, 255, 255, 0.6);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --text-title: #0F172A;
+            --text-subtitle: #334155;
             --text-main: #0F172A;
-            --text-sub: #475569;
+            --text-label: #475569;
+            --box-bg: rgba(255, 255, 255, 0.35);
+            --box-bg-hover: rgba(255, 255, 255, 0.55);
+            --box-border: rgba(255, 255, 255, 0.4);
+            --toast-bg: #FFFFFF;
+            --toast-text: #0F172A;
         }
 
         * {
@@ -20,18 +53,20 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
         }
 
-        /* Canlı ve Hareketli Arka Plan */
+        /* Akıcı Hareketli Arka Plan */
         body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: var(--bg-gradient);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             padding: 20px;
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -40,18 +75,50 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Ana Konteyner: Senkronize Renk Değiştiren Koyu Cam Efekti */
+        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            background: var(--box-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-title);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.12) rotate(15deg);
+            background: var(--box-bg-hover);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Ana Konteyner / Cam Efekti */
         .app-card {
-            background: linear-gradient(-45deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6), rgba(30, 58, 138, 0.4), rgba(76, 29, 149, 0.4));
+            background: var(--card-bg);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             width: 100%;
             max-width: 380px;
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--card-shadow);
             padding: 36px 24px;
             position: relative;
             overflow: hidden;
@@ -81,10 +148,11 @@
             width: 100%;
             height: 100%;
             padding: 30px 24px;
-            background: linear-gradient(-45deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.7), rgba(30, 58, 138, 0.5), rgba(76, 29, 149, 0.5));
+            background: var(--card-bg);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -111,17 +179,17 @@
         h1 {
             font-size: 28px;
             font-weight: 800;
-            color: #FFFFFF;
+            color: var(--text-title);
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         p.subtitle {
             font-size: 14px;
-            color: #E2E8F0;
+            color: var(--text-subtitle);
             margin-bottom: 24px;
             line-height: 1.5;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         /* Butonlar */
@@ -196,12 +264,12 @@
         .iban-header h2 {
             font-size: 22px;
             font-weight: 800;
-            color: #FFFFFF;
+            color: var(--text-title);
         }
 
         .info-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
             border-radius: 18px;
             padding: 14px;
             margin-bottom: 10px;
@@ -212,8 +280,8 @@
         }
 
         .info-box:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: var(--box-bg-hover);
+            border-color: var(--card-border);
             transform: translateY(-2px);
         }
 
@@ -228,27 +296,27 @@
             font-size: 10px;
             text-transform: uppercase;
             font-weight: 800;
-            color: #94A3B8;
+            color: var(--text-label);
             letter-spacing: 0.8px;
         }
 
         .info-value {
             font-size: 14px;
             font-weight: 700;
-            color: #F1F5F9;
+            color: var(--text-main);
             word-break: break-all;
         }
 
         .copy-icon-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
             width: 40px;
             height: 40px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #F1F5F9;
+            color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s ease;
             flex-shrink: 0;
@@ -267,7 +335,7 @@
             font-size: 11px;
             text-transform: uppercase;
             font-weight: 800;
-            color: #94A3B8;
+            color: var(--text-label);
             letter-spacing: 0.8px;
             margin: 16px 0 8px 0;
             text-align: center;
@@ -281,11 +349,11 @@
         }
 
         .btn-bank {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
             border-radius: 12px;
             padding: 10px;
-            color: #F1F5F9;
+            color: var(--text-main);
             font-weight: 600;
             font-size: 12px;
             display: flex;
@@ -297,22 +365,22 @@
         }
 
         .btn-bank:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: var(--box-bg-hover);
+            border-color: var(--card-border);
             transform: translateY(-2px);
         }
 
         .btn-back {
-            background: rgba(255, 255, 255, 0.05);
-            color: #F1F5F9;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--box-bg);
+            color: var(--text-main);
+            border: 1px solid var(--box-border);
             padding: 12px;
             font-size: 14px;
         }
 
         .btn-back:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
+            background: var(--box-bg-hover);
+            color: var(--text-title);
         }
 
         /* Toast Bildirim */
@@ -321,8 +389,8 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #0F172A;
-            color: white;
+            background: var(--toast-bg);
+            color: var(--toast-text);
             padding: 14px 28px;
             border-radius: 50px;
             font-weight: 600;
@@ -334,7 +402,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--box-border);
         }
 
         .toast i {
@@ -350,6 +418,11 @@
 </head>
 <body>
 
+    <!-- TEMA DEĞİŞTİRME BUTTONI -->
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+    </button>
+
     <div class="app-card" id="appCard">
         
         <!-- ANA SAYFA -->
@@ -358,7 +431,7 @@
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
-                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" class="btn btn-google">
+                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-google">
                     <i class="fa-brands fa-google"></i> Google'da Konumumuz
                 </a>
                 <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-instagram">
@@ -441,37 +514,64 @@
         const appCard = document.getElementById('appCard');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
+        const themeIcon = document.getElementById('themeIcon');
 
-        // Banka Deeplink Konfigürasyonu (iOS / Android)
+        // === TEMA YÖNETİMİ ===
+        function initTheme() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
+            setTheme(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('selectedTheme', theme);
+
+            if (theme === 'dark') {
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        // Sayfa yüklendiğinde temayı ayarla
+        initTheme();
+
+        // === BANKA BAĞLANTILARI ===
         const bankLinks = {
             yapikredi: {
                 ios: "ykb://",
-                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;end",
+                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end",
                 web: "https://www.yapikredi.com.tr"
             },
             ziraat: {
                 ios: "ziraatmobile://",
-                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;end",
+                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end",
                 web: "https://www.ziraatbank.com.tr"
             },
             garanti: {
                 ios: "garanticep://",
-                android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;end",
+                android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;S.browser_fallback_url=https://www.garantibbva.com.tr;end",
                 web: "https://www.garantibbva.com.tr"
             },
             isbankasi: {
                 ios: "iscep://",
-                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;end",
+                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;S.browser_fallback_url=https://www.isbank.com.tr;end",
                 web: "https://www.isbank.com.tr"
             },
             akbank: {
                 ios: "akbankdirekt://",
-                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;end",
+                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;S.browser_fallback_url=https://www.akbank.com;end",
                 web: "https://www.akbank.com"
             },
             vakifbank: {
                 ios: "vakifbankmobile://",
-                android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;end",
+                android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;S.browser_fallback_url=https://www.vakifbank.com.tr;end",
                 web: "https://www.vakifbank.com.tr"
             }
         };
@@ -487,39 +587,54 @@
         function copyToClipboard(elementId, label) {
             const textToCopy = document.getElementById(elementId).innerText;
             
-            navigator.clipboard.writeText(textToCopy).then(() => {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToast(`${label} kopyalandı!`);
+                }).catch(() => {
+                    fallbackCopy(textToCopy, label);
+                });
+            } else {
+                fallbackCopy(textToCopy, label);
+            }
+        }
+
+        function fallbackCopy(text, label) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
                 showToast(`${label} kopyalandı!`);
-            }).catch(err => {
+            } catch (err) {
                 showToast('Kopyalama başarısız!');
-            });
+            }
+            document.body.removeChild(textArea);
         }
 
         function copyAndOpenBank(bankKey) {
-            const ibanText = document.getElementById('ibanText').innerText;
+            const ibanText = document.getElementById('ibanText').innerText.replace(/\s+/g, '');
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const isAndroid = /android/i.test(userAgent);
             const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             const bank = bankLinks[bankKey];
 
-            // 1. Önce IBAN kopyalama işlemini gerçekleştir
-            navigator.clipboard.writeText(ibanText).then(() => {
-                showToast('IBAN kopyalandı, uygulama açılıyor...');
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(ibanText);
+            } else {
+                fallbackCopy(ibanText, 'IBAN');
+            }
 
-                // 2. İşletim sistemine uygun bağlantıyı tetikle
-                setTimeout(() => {
-                    if (isAndroid && bank.android) {
-                        window.location.href = bank.android;
-                    } else if (isIOS && bank.ios) {
-                        window.location.href = bank.ios;
-                    } else {
-                        // Masaüstü veya bilinmeyen platformda web sitesini aç
-                        window.open(bank.web, '_blank');
-                    }
-                }, 500);
-            }).catch(err => {
-                showToast('Kopyalama başarısız!');
-            });
+            showToast('IBAN kopyalandı, yönlendiriliyor...');
+
+            if (isAndroid && bank.android) {
+                window.location.href = bank.android;
+            } else if (isIOS && bank.ios) {
+                window.location.href = bank.ios;
+            } else {
+                window.open(bank.web, '_blank');
+            }
         }
 
         function showToast(message) {

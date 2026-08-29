@@ -12,7 +12,7 @@
             --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
             --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
             --primary-green: linear-gradient(135deg, #10B981, #059669);
-            --primary-orange: linear-gradient(135deg, #F97316, #EA580C);
+            --primary-purple: linear-gradient(135deg, #8B5CF6, #6366F1, #4F46E5);
         }
 
         /* --- KARANLIK TEMA (Varsayılan) --- */
@@ -265,9 +265,10 @@
             background: var(--primary-green); 
             box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.5);
         }
+        /* MOR VARYASYON (İLETİŞİM PANELİ) */
         .btn-contact { 
-            background: var(--primary-orange); 
-            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.5);
+            background: var(--primary-purple); 
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5);
         }
 
         /* Bilgi Kartı Stilleri */
@@ -339,9 +340,9 @@
         }
 
         .copy-icon-btn:hover {
-            background: #10B981;
+            background: #8B5CF6;
             color: white;
-            border-color: #10B981;
+            border-color: #8B5CF6;
             transform: scale(1.1);
         }
 
@@ -422,7 +423,7 @@
         }
 
         .toast i {
-            color: #10B981;
+            color: #8B5CF6;
             font-size: 18px;
         }
 
@@ -441,7 +442,7 @@
             <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
 
-        <!-- ANA SAYFA (PANEL 1, 2, 3 ve 4) -->
+        <!-- ANA SAYFA -->
         <div class="page page-main">
             <h1>İşletme Adı</h1>
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
@@ -462,14 +463,14 @@
                     <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
                 </button>
 
-                <!-- YENİ EKLENEN PANEL 4: İLETİŞİM BİLGİLERİ -->
+                <!-- PANEL 4: İLETİŞİM BİLGİLERİ (MOR VARYASYON) -->
                 <button class="btn btn-contact" onclick="openPage('show-contact')">
                     <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
             </div>
         </div>
 
-        <!-- IBAN PANEL SAYFASI (3. PANEL DETAYI) -->
+        <!-- IBAN PANEL SAYFASI -->
         <div class="sub-page" id="ibanPage">
             <div>
                 <div class="page-header">

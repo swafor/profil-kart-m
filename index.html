@@ -55,7 +55,7 @@
             padding: 36px 24px;
             position: relative;
             overflow: hidden;
-            min-height: 440px;
+            min-height: 520px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -80,7 +80,7 @@
             left: 100%;
             width: 100%;
             height: 100%;
-            padding: 36px 24px;
+            padding: 30px 24px;
             background: linear-gradient(-45deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.7), rgba(30, 58, 138, 0.5), rgba(76, 29, 149, 0.5));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -91,6 +91,7 @@
             box-sizing: border-box;
             opacity: 0;
             pointer-events: none;
+            overflow-y: auto;
         }
 
         /* IBAN Sayfası Aktif Durumu */
@@ -118,7 +119,7 @@
         p.subtitle {
             font-size: 14px;
             color: #E2E8F0;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             line-height: 1.5;
             font-weight: 500;
         }
@@ -189,11 +190,11 @@
         /* IBAN Kart Tasarımı */
         .iban-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .iban-header h2 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #FFFFFF;
         }
@@ -202,8 +203,8 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -224,7 +225,7 @@
         }
 
         .info-label {
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             font-weight: 800;
             color: #94A3B8;
@@ -232,7 +233,7 @@
         }
 
         .info-value {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #F1F5F9;
             word-break: break-all;
@@ -241,8 +242,8 @@
         .copy-icon-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -261,10 +262,52 @@
             transform: scale(1.1);
         }
 
+        /* Banka Hızlı Erişim Butonları */
+        .bank-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #94A3B8;
+            letter-spacing: 0.8px;
+            margin: 16px 0 8px 0;
+            text-align: center;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-bank {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            color: #F1F5F9;
+            font-weight: 600;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-bank:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         .btn-back {
             background: rgba(255, 255, 255, 0.05);
             color: #F1F5F9;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            font-size: 14px;
         }
 
         .btn-back:hover {
@@ -332,7 +375,7 @@
             <div>
                 <div class="iban-header">
                     <h2>Banka Bilgileri</h2>
-                    <p class="subtitle" style="margin-bottom: 20px;">Kopyalamak için ikona tıklayın</p>
+                    <p class="subtitle" style="margin-bottom: 12px;">Bilgileri kopyalayıp bankanızı seçin</p>
                 </div>
 
                 <!-- Alıcı / İsim Soyisim -->
@@ -354,6 +397,29 @@
                     </div>
                     <button class="copy-icon-btn" onclick="copyToClipboard('ibanText', 'IBAN')" title="Kopyala">
                         <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- Banka Uygulaması Aç Butonları -->
+                <div class="bank-section-title">IBAN Kopyala & Uygulama Aç</div>
+                <div class="bank-grid">
+                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat://')">
+                        <i class="fa-solid fa-building-columns"></i> Ziraat
+                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('garanti://')">
+                        <i class="fa-solid fa-building-columns"></i> Garanti
+                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi://')">
+                        <i class="fa-solid fa-building-columns"></i> İş Bankası
+                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi://')">
+                        <i class="fa-solid fa-building-columns"></i> Yapı Kredi
+                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('akbank://')">
+                        <i class="fa-solid fa-building-columns"></i> Akbank
+                    </button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank://')">
+                        <i class="fa-solid fa-building-columns"></i> VakıfBank
                     </button>
                 </div>
             </div>
@@ -394,12 +460,28 @@
             });
         }
 
+        function copyAndOpenBank(bankDeepLink) {
+            const ibanText = document.getElementById('ibanText').innerText;
+            
+            // 1. Önce IBAN'ı otomatik kopyala
+            navigator.clipboard.writeText(ibanText).then(() => {
+                showToast('IBAN kopyalandı, uygulama açılıyor...');
+                
+                // 2. Kısa bir gecikmeyle banka uygulamasını tetikle
+                setTimeout(() => {
+                    window.location.href = bankDeepLink;
+                }, 800);
+            }).catch(err => {
+                showToast('Kopyalama başarısız!');
+            });
+        }
+
         function showToast(message) {
             toastMsg.innerText = message;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 2000);
+            }, 2500);
         }
     </script>
 </body>

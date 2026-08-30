@@ -546,7 +546,7 @@
                     class="subtitle"
                     style="margin-bottom:12px;"
                 >
-                    IBAN kopyalanır ve seçtiğiniz banka açılır.
+                    IBAN kopyalandı. Lütfen bankanızı seçin.
                 </p>
 
             </div>
@@ -784,42 +784,37 @@
     const banks = {
         ziraat: {
             name: "Ziraat Mobil",
-            scheme: "ziraatmobil://",
             appStore: "https://apps.apple.com/tr/app/ziraat-mobil/id504377787",
             playStore: "https://play.google.com/store/apps/details?id=com.ziraat.ziraatmobil",
             web: "https://www.ziraatbank.com.tr/"
         },
         garanti: {
             name: "Garanti BBVA",
-            scheme: "garantibbva://",
-            appStore: "https://apps.apple.com/tr/app/garanti-bbva-mobil-bankacilik/id388431457",
+            appStore: "https://apps.apple.com/tr/app/garanti-bbva-mobil-bankac%C4%B1l%C4%B1k/id388431457",
             playStore: "https://play.google.com/store/apps/details?id=com.garanti.cepsubesi",
             web: "https://www.garantibbva.com.tr/"
         },
         isbankasi: {
             name: "İşCep",
             scheme: "iscep://",
-            appStore: "https://apps.apple.com/tr/app/i-cep/id308261752",
+            appStore: "https://apps.apple.com/tr/app/i%C5%9Fcep/id308261752",
             playStore: "https://play.google.com/store/apps/details?id=com.isbank.iscep",
             web: "https://www.isbank.com.tr/"
         },
         yapikredi: {
             name: "Yapı Kredi Mobil",
-            scheme: "ykb://",
             appStore: "https://apps.apple.com/tr/app/yap%C4%B1-kredi-mobil/id407079414",
             playStore: "https://play.google.com/store/apps/details?id=com.ykb.android",
             web: "https://www.yapikredi.com.tr/"
         },
         akbank: {
             name: "Akbank Mobil",
-            scheme: "akbank://",
             appStore: "https://apps.apple.com/tr/app/akbank/id410167182",
             playStore: "https://play.google.com/store/apps/details?id=com.akbank.android.apps.akbank_direkt",
             web: "https://www.akbank.com/"
         },
         vakifbank: {
             name: "VakıfBank Mobil",
-            scheme: "vakifbank://",
             appStore: "https://apps.apple.com/tr/app/vak%C4%B1fbank-mobil-bankac%C4%B1l%C4%B1k/id405947136",
             playStore: "https://play.google.com/store/apps/details?id=com.vakifbank.mobile",
             web: "https://www.vakifbank.com.tr/"
@@ -954,13 +949,20 @@
         }
 
         const device = getDevice();
-        showToast("IBAN Kopyalandı. " + bank.name + " yönlendiriliyor...");
 
-        // Doğrudan açma denemesi (Eğer destekleniyorsa app açılır, açılmazsa mağazaya gider)
-        directOpenBank(bank, device, button);
+        if (bank.scheme && (device === "ios" || device === "android")) {
+            showToast("IBAN Kopyalandı. " + bank.name + " açılıyor...");
+            tryOpenScheme(bank, device, button);
+        } else {
+            showToast("IBAN Kopyalandı. Mağazaya yönlendiriliyor...");
+            setTimeout(() => {
+                if (button) button.classList.remove("bank-loading");
+                openStoreOrWeb(bank, device);
+            }, 800);
+        }
     }
 
-    function directOpenBank(bank, device, button) {
+    function tryOpenScheme(bank, device, button) {
         let leftPage = false;
 
         const onVisibility = () => {
@@ -984,12 +986,8 @@
         document.addEventListener("visibilitychange", onVisibility);
         window.addEventListener("pagehide", onPageHide);
 
-        // İşletim sistemine yönlendirme talebi gönder
-        if (device === "ios" || device === "android") {
-            window.location.href = bank.scheme;
-        }
+        window.location.href = bank.scheme;
 
-        // 1.5 saniye içinde uygulama açılmazsa doğrudan Mağaza/Web sayfasına aktar
         setTimeout(() => {
             if (!leftPage) {
                 cleanup();

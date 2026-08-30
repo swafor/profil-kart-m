@@ -57,7 +57,6 @@
             transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
         }
 
-        /* Akıcı Hareketli Arka Plan */
         body {
             min-height: 100vh;
             display: flex;
@@ -76,7 +75,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Ana Konteyner / Cam Efekti */
         .app-card {
             background: var(--card-bg);
             background-size: 400% 400%;
@@ -97,7 +95,6 @@
             justify-content: center;
         }
 
-        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
         .theme-toggle-btn {
             position: absolute;
             top: 20px;
@@ -129,7 +126,6 @@
             transform: scale(0.95);
         }
 
-        /* Sayfa Geçiş Ekranları */
         .page {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
@@ -142,7 +138,6 @@
             text-align: center;
         }
 
-        /* Alt Sayfa Geçiş Stilleri (IBAN ve İletişim Panelleri) */
         .sub-page {
             position: absolute;
             top: 0;
@@ -165,7 +160,6 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* IBAN veya İletişim Açıldığında Ana Sayfa Kayması */
         .app-card.show-iban .page-main,
         .app-card.show-contact .page-main {
             transform: translateX(-100%) scale(0.9);
@@ -173,7 +167,6 @@
             pointer-events: none;
         }
 
-        /* Aktif Ekran Gösterimleri */
         .app-card.show-iban #ibanPage {
             left: 0;
             opacity: 1;
@@ -186,7 +179,6 @@
             pointer-events: auto;
         }
 
-        /* Başlıklar */
         h1 {
             font-size: 28px;
             font-weight: 800;
@@ -203,7 +195,6 @@
             font-weight: 600;
         }
 
-        /* Butonlar */
         .btn-list {
             width: 100%;
             display: flex;
@@ -265,13 +256,11 @@
             background: var(--primary-green); 
             box-shadow: 0 10px 20px -5px rgba(4, 120, 87, 0.5);
         }
-        /* MOR VARYASYON (İLETİŞİM PANELİ) */
         .btn-contact { 
             background: var(--primary-purple); 
             box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5);
         }
 
-        /* Bilgi Kartı Stilleri */
         .page-header {
             text-align: center;
             margin-bottom: 20px;
@@ -346,7 +335,6 @@
             transform: scale(1.1);
         }
 
-        /* Banka Hızlı Erişim Grid */
         .section-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -400,7 +388,6 @@
             color: var(--text-title);
         }
 
-        /* Toast Bildirim */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -437,7 +424,6 @@
 
     <div class="app-card" id="appCard">
         
-        <!-- SAĞ ÜST TEMA BUTONU -->
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
             <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
@@ -448,22 +434,18 @@
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
-                <!-- PANEL 1 -->
                 <a href="#" id="linkGoogle" target="_blank" class="btn btn-google">
                     <i class="fa-brands fa-google"></i> Google'da Konumumuz
                 </a>
 
-                <!-- PANEL 2 -->
                 <a href="#" id="linkInstagram" target="_blank" class="btn btn-instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
                 </a>
 
-                <!-- PANEL 3 -->
                 <button class="btn btn-iban" onclick="openPage('show-iban')">
                     <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
                 </button>
 
-                <!-- PANEL 4: İLETİŞİM BİLGİLERİ (MOR VARYASYON) -->
                 <button class="btn btn-contact" onclick="openPage('show-contact')">
                     <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
@@ -514,7 +496,7 @@
             </button>
         </div>
 
-        <!-- 4. PANEL DETAYI: İLETİŞİM BİLGİLERİ SAYFASI -->
+        <!-- İLETİŞİM BİLGİLERİ SAYFASI -->
         <div class="sub-page" id="contactPage">
             <div>
                 <div class="page-header">
@@ -522,7 +504,6 @@
                     <p class="subtitle" style="margin-bottom: 16px;">İşletmemize ait doğrudan iletişim kanalları</p>
                 </div>
 
-                <!-- Telefon Numarası -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">TELEFON NUMARASI</span>
@@ -533,7 +514,6 @@
                     </button>
                 </div>
 
-                <!-- E-Posta Adresi -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">E-POSTA ADRESİ</span>
@@ -558,9 +538,6 @@
     </div>
 
     <script>
-        /* =========================================================
-           DİNAMİK BİLGİ YÖNETİMİ
-        ========================================================= */
         const businessData = {
             name: "NFCHanem", 
             googleMapsUrl: "https://maps.app.goo.gl/", 
@@ -586,7 +563,6 @@
         const toastMsg = document.getElementById('toastMsg');
         const themeIcon = document.getElementById('themeIcon');
 
-        // === TEMA YÖNETİMİ ===
         function initTheme() {
             const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
             setTheme(savedTheme);
@@ -604,7 +580,6 @@
             themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
 
-        // === SAYFA GEÇİŞLERİ ===
         function openPage(className) {
             appCard.classList.remove('show-iban', 'show-contact');
             appCard.classList.add(className);
@@ -614,7 +589,6 @@
             appCard.classList.remove('show-iban', 'show-contact');
         }
 
-        // === KOPYALAMA FONKSİYONLARI ===
         function copyToClipboard(elementId, label) {
             const textToCopy = document.getElementById(elementId).innerText;
             
@@ -643,37 +617,45 @@
             document.body.removeChild(textArea);
         }
 
-        // === İOS UYUMLU GÜNCELLENMİŞ BANKA BAĞLANTILARI ===
-        const bankLinks = {
-            yapikredi: { 
-                ios: "ykb://", 
-                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end", 
-                web: "https://www.yapikredi.com.tr" 
+        /* =========================================================
+           GÜNCELLENMİŞ MOBİL UYGULAMA YÖNLENDİRME YAPISI
+        ========================================================= */
+        const bankAppConfigs = {
+            yapikredi: {
+                iosScheme: "ykb://",
+                androidPackage: "com.ykb.android",
+                storeIos: "https://apps.apple.com/tr/app/yapa-kredi-mobil/id437255152",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.ykb.android"
             },
-            ziraat: { 
-                ios: "ziraatmobile://", 
-                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end", 
-                web: "https://www.ziraatbank.com.tr" 
+            ziraat: {
+                iosScheme: "ziraatmobile://",
+                androidPackage: "com.ziraat.ziraatmobil",
+                storeIos: "https://apps.apple.com/tr/app/ziraat-mobil/id660233215",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.ziraat.ziraatmobil"
             },
-            garanti: { 
-                ios: "garanticep://", 
-                android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;S.browser_fallback_url=https://www.garantibbva.com.tr;end", 
-                web: "https://www.garantibbva.com.tr" 
+            garanti: {
+                iosScheme: "garanticep://",
+                androidPackage: "com.garanti.cepsubesi",
+                storeIos: "https://apps.apple.com/tr/app/garanti-bbva-mobil/id380182181",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.garanti.cepsubesi"
             },
-            isbankasi: { 
-                ios: "iscep://", 
-                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;S.browser_fallback_url=https://www.isbank.com.tr;end", 
-                web: "https://www.isbank.com.tr" 
+            isbankasi: {
+                iosScheme: "iscep://",
+                androidPackage: "com.isbank.iscep",
+                storeIos: "https://apps.apple.com/tr/app/a-cep/id400030230",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.isbank.iscep"
             },
-            akbank: { 
-                ios: "akbankdirekt://", 
-                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;S.browser_fallback_url=https://www.akbank.com;end", 
-                web: "https://www.akbank.com" 
+            akbank: {
+                iosScheme: "akbankdirekt://",
+                androidPackage: "com.akbank.android.apps.akbank_direkt",
+                storeIos: "https://apps.apple.com/tr/app/akbank/id470001090",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.akbank.android.apps.akbank_direkt"
             },
-            vakifbank: { 
-                ios: "vakifbankmobile://", 
-                android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;S.browser_fallback_url=https://www.vakifbank.com.tr;end", 
-                web: "https://www.vakifbank.com.tr" 
+            vakifbank: {
+                iosScheme: "vakifbankmobile://",
+                androidPackage: "com.vakifbank.mobile",
+                storeIos: "https://apps.apple.com/tr/app/vakafbank-mobil/id655410141",
+                storeAndroid: "https://play.google.com/store/apps/details?id=com.vakifbank.mobile"
             }
         };
 
@@ -683,32 +665,42 @@
             const isAndroid = /android/i.test(userAgent);
             const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            const bank = bankLinks[bankKey];
+            const bank = bankAppConfigs[bankKey];
 
-            // Pano Kopyalama
+            // 1. IBAN Kopyalama İşlemi
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(ibanText);
             } else {
                 fallbackCopy(ibanText, 'IBAN');
             }
 
-            showToast('IBAN kopyalandı, yönlendiriliyor...');
+            showToast('IBAN kopyalandı, uygulama açılıyor...');
 
-            // Yönlendirme Mantığı
-            if (isAndroid && bank.android) {
-                window.location.href = bank.android;
-            } else if (isIOS && bank.ios) {
-                const start = Date.now();
-                window.location.href = bank.ios;
+            // 2. Uygulamaya Zorunlu Yönlendirme Mantığı
+            if (isAndroid) {
+                // Android Intent yapısı: Uygulama varsa açar, yoksa Play Store'a atar (Asla web sitesine gitmez)
+                const intentUrl = `intent://open#Intent;scheme=${bankKey};package=${bank.androidPackage};S.browser_fallback_url=${encodeURIComponent(bank.storeAndroid)};end`;
+                window.location.href = intentUrl;
 
-                // iOS Safari bloklarsa veya uygulama yüklü değilse Web Fallback devreye girer
+            } else if (isIOS) {
+                // iOS için Gizli iframe + URL Scheme yöntemi (Safari engellemelerini aşar)
+                const now = Date.now();
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = bank.iosScheme;
+                document.body.appendChild(iframe);
+
+                // Eğer uygulama yüklü değilse App Store'a yönlendir
                 setTimeout(() => {
-                    if (Date.now() - start < 1800) {
-                        window.location.href = bank.web;
+                    document.body.removeChild(iframe);
+                    if (Date.now() - now < 2000) {
+                        window.location.href = bank.storeIos;
                     }
                 }, 1500);
+
             } else {
-                window.open(bank.web, '_blank');
+                // Masaüstü cihazlar için varsayılan App Store / Play Store bilgilendirmesi
+                window.open(bank.storeAndroid, '_blank');
             }
         }
 
@@ -720,7 +712,6 @@
             }, 2500);
         }
 
-        // Başlatma İşlemleri
         initTheme();
         loadBusinessData();
     </script>

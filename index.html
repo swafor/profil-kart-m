@@ -618,44 +618,32 @@
         }
 
         /* =========================================================
-           GÜNCELLENMİŞ MOBİL UYGULAMA YÖNLENDİRME YAPISI
+           SADECE MOBİL UYGULAMA AÇMA YAPISI (STORE / WEB YOK)
         ========================================================= */
-        const bankAppConfigs = {
-            yapikredi: {
-                iosScheme: "ykb://",
-                androidPackage: "com.ykb.android",
-                storeIos: "https://apps.apple.com/tr/app/yapa-kredi-mobil/id437255152",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.ykb.android"
-            },
+        const bankSchemes = {
             ziraat: {
-                iosScheme: "ziraatmobile://",
-                androidPackage: "com.ziraat.ziraatmobil",
-                storeIos: "https://apps.apple.com/tr/app/ziraat-mobil/id660233215",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.ziraat.ziraatmobil"
+                ios: "ziraatmobile://",
+                android: "intent://open#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;end"
             },
             garanti: {
-                iosScheme: "garanticep://",
-                androidPackage: "com.garanti.cepsubesi",
-                storeIos: "https://apps.apple.com/tr/app/garanti-bbva-mobil/id380182181",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.garanti.cepsubesi"
+                ios: "garanticep://",
+                android: "intent://open#Intent;scheme=garanticep;package=com.garanti.cepsubesi;end"
             },
             isbankasi: {
-                iosScheme: "iscep://",
-                androidPackage: "com.isbank.iscep",
-                storeIos: "https://apps.apple.com/tr/app/a-cep/id400030230",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.isbank.iscep"
+                ios: "iscep://",
+                android: "intent://open#Intent;scheme=iscep;package=com.isbank.iscep;end"
+            },
+            yapikredi: {
+                ios: "ykb://",
+                android: "intent://open#Intent;scheme=ykb;package=com.ykb.android;end"
             },
             akbank: {
-                iosScheme: "akbankdirekt://",
-                androidPackage: "com.akbank.android.apps.akbank_direkt",
-                storeIos: "https://apps.apple.com/tr/app/akbank/id470001090",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.akbank.android.apps.akbank_direkt"
+                ios: "akbankdirekt://",
+                android: "intent://open#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;end"
             },
             vakifbank: {
-                iosScheme: "vakifbankmobile://",
-                androidPackage: "com.vakifbank.mobile",
-                storeIos: "https://apps.apple.com/tr/app/vakafbank-mobil/id655410141",
-                storeAndroid: "https://play.google.com/store/apps/details?id=com.vakifbank.mobile"
+                ios: "vakifbankmobile://",
+                android: "intent://open#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;end"
             }
         };
 
@@ -665,9 +653,9 @@
             const isAndroid = /android/i.test(userAgent);
             const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            const bank = bankAppConfigs[bankKey];
+            const bank = bankSchemes[bankKey];
 
-            // 1. IBAN Kopyalama İşlemi
+            // 1. IBAN Pano Kopyalama
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(ibanText);
             } else {
@@ -676,31 +664,20 @@
 
             showToast('IBAN kopyalandı, uygulama açılıyor...');
 
-            // 2. Uygulamaya Zorunlu Yönlendirme Mantığı
-            if (isAndroid) {
-                // Android Intent yapısı: Uygulama varsa açar, yoksa Play Store'a atar (Asla web sitesine gitmez)
-                const intentUrl = `intent://open#Intent;scheme=${bankKey};package=${bank.androidPackage};S.browser_fallback_url=${encodeURIComponent(bank.storeAndroid)};end`;
-                window.location.href = intentUrl;
-
-            } else if (isIOS) {
-                // iOS için Gizli iframe + URL Scheme yöntemi (Safari engellemelerini aşar)
-                const now = Date.now();
+            // 2. Doğrudan Yerel Uygulama Çağrısı
+            if (isAndroid && bank.android) {
+                // Android için mağazaya düşmeyen saf intent yönlendirmesi
+                window.location.href = bank.android;
+            } else if (isIOS && bank.ios) {
+                // iOS Safari bloklamasını aşan iframe tetikleyici
                 const iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 iframe.src = bank.iosScheme;
                 document.body.appendChild(iframe);
 
-                // Eğer uygulama yüklü değilse App Store'a yönlendir
                 setTimeout(() => {
                     document.body.removeChild(iframe);
-                    if (Date.now() - now < 2000) {
-                        window.location.href = bank.storeIos;
-                    }
-                }, 1500);
-
-            } else {
-                // Masaüstü cihazlar için varsayılan App Store / Play Store bilgilendirmesi
-                window.open(bank.storeAndroid, '_blank');
+                }, 1000);
             }
         }
 

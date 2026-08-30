@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İşletme İletişim & IBAN</title>
+    <title>İşletme İletişim & IBAN Kartı</title>
     <!-- FontAwesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,7 +15,7 @@
             --primary-purple: linear-gradient(135deg, #8B5CF6, #6366F1, #4F46E5);
         }
 
-        /* --- KARANLIK TEMA (Varsayılan) --- */
+        /* --- KARANLIK TEMA --- */
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #022c22);
             --card-bg: linear-gradient(-45deg, rgba(15, 23, 42, 0.75), rgba(30, 27, 75, 0.75), rgba(49, 16, 66, 0.75), rgba(2, 44, 34, 0.75));
@@ -57,7 +57,6 @@
             transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
         }
 
-        /* Akıcı Hareketli Arka Plan */
         body {
             min-height: 100vh;
             display: flex;
@@ -76,7 +75,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Ana Konteyner / Cam Efekti */
         .app-card {
             background: var(--card-bg);
             background-size: 400% 400%;
@@ -97,7 +95,6 @@
             justify-content: center;
         }
 
-        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
         .theme-toggle-btn {
             position: absolute;
             top: 20px;
@@ -129,7 +126,6 @@
             transform: scale(0.95);
         }
 
-        /* Sayfa Geçiş Ekranları */
         .page {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
@@ -142,7 +138,6 @@
             text-align: center;
         }
 
-        /* Alt Sayfa Geçiş Stilleri (IBAN ve İletişim Panelleri) */
         .sub-page {
             position: absolute;
             top: 0;
@@ -165,7 +160,6 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* IBAN veya İletişim Açıldığında Ana Sayfa Kayması */
         .app-card.show-iban .page-main,
         .app-card.show-contact .page-main {
             transform: translateX(-100%) scale(0.9);
@@ -173,22 +167,15 @@
             pointer-events: none;
         }
 
-        /* Aktif Ekran Gösterimleri */
-        .app-card.show-iban #ibanPage {
-            left: 0;
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        .app-card.show-iban #ibanPage,
         .app-card.show-contact #contactPage {
             left: 0;
             opacity: 1;
             pointer-events: auto;
         }
 
-        /* Başlıklar */
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--text-title);
             margin-bottom: 8px;
@@ -203,7 +190,6 @@
             font-weight: 600;
         }
 
-        /* Butonlar */
         .btn-list {
             width: 100%;
             display: flex;
@@ -253,35 +239,13 @@
             transform: translateY(0) scale(0.98);
         }
 
-        .btn-google { 
-            background: var(--primary-blue); 
-            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5);
-        }
-        .btn-instagram { 
-            background: var(--primary-pink); 
-            box-shadow: 0 10px 20px -5px rgba(225, 48, 108, 0.5);
-        }
-        .btn-iban { 
-            background: var(--primary-green); 
-            box-shadow: 0 10px 20px -5px rgba(4, 120, 87, 0.5);
-        }
-        /* MOR VARYASYON (İLETİŞİM PANELİ) */
-        .btn-contact { 
-            background: var(--primary-purple); 
-            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5);
-        }
+        .btn-google { background: var(--primary-blue); box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5); }
+        .btn-instagram { background: var(--primary-pink); box-shadow: 0 10px 20px -5px rgba(225, 48, 108, 0.5); }
+        .btn-iban { background: var(--primary-green); box-shadow: 0 10px 20px -5px rgba(4, 120, 87, 0.5); }
+        .btn-contact { background: var(--primary-purple); box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5); }
 
-        /* Bilgi Kartı Stilleri */
-        .page-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .page-header h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--text-title);
-        }
+        .page-header { text-align: center; margin-bottom: 20px; }
+        .page-header h2 { font-size: 22px; font-weight: 800; color: var(--text-title); }
 
         .info-box {
             background: var(--box-bg);
@@ -346,7 +310,6 @@
             transform: scale(1.1);
         }
 
-        /* Banka Hızlı Erişim Grid */
         .section-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -400,7 +363,6 @@
             color: var(--text-title);
         }
 
-        /* Toast Bildirim */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -422,55 +384,47 @@
             border: 1px solid var(--box-border);
         }
 
-        .toast i {
-            color: #8B5CF6;
-            font-size: 18px;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        .toast i { color: #8B5CF6; font-size: 18px; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 <body>
 
     <div class="app-card" id="appCard">
         
-        <!-- SAĞ ÜST TEMA BUTONU -->
+        <!-- TEMA BUTONU -->
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
             <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
 
         <!-- ANA SAYFA -->
         <div class="page page-main">
-            <h1>İşletme Adı</h1>
+            <!-- DİNAMİK İŞLETME ADI -->
+            <h1 id="displayBusinessName">İşletme Adı</h1>
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
-                <!-- PANEL 1 -->
-                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-google">
+                <!-- DİNAMİK GOOGLE KONUM LINKI -->
+                <a href="#" id="linkGoogle" target="_blank" class="btn btn-google">
                     <i class="fa-brands fa-google"></i> Google'da Konumumuz
                 </a>
 
-                <!-- PANEL 2 -->
-                <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-instagram">
+                <!-- DİNAMİK INSTAGRAM LINKI -->
+                <a href="#" id="linkInstagram" target="_blank" class="btn btn-instagram">
                     <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
                 </a>
 
-                <!-- PANEL 3 -->
                 <button class="btn btn-iban" onclick="openPage('show-iban')">
                     <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
                 </button>
 
-                <!-- PANEL 4: İLETİŞİM BİLGİLERİ (MOR VARYASYON) -->
                 <button class="btn btn-contact" onclick="openPage('show-contact')">
                     <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
             </div>
         </div>
 
-        <!-- IBAN PANEL SAYFASI -->
+        <!-- IBAN SAYFASI -->
         <div class="sub-page" id="ibanPage">
             <div>
                 <div class="page-header">
@@ -481,6 +435,7 @@
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">ALICI İSİM SOYİSİM</span>
+                        <!-- DİNAMİK İSİM -->
                         <span class="info-value" id="nameText">Ahmet Yılmaz</span>
                     </div>
                     <button class="copy-icon-btn" onclick="copyToClipboard('nameText', 'İsim Soyisim')" title="Kopyala">
@@ -491,6 +446,7 @@
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">IBAN NUMARASI</span>
+                        <!-- DİNAMİK IBAN -->
                         <span class="info-value" id="ibanText">TR92 0006 2000 0000 0000 0000 00</span>
                     </div>
                     <button class="copy-icon-btn" onclick="copyToClipboard('ibanText', 'IBAN')" title="Kopyala">
@@ -514,7 +470,7 @@
             </button>
         </div>
 
-        <!-- 4. PANEL DETAYI: İLETİŞİM BİLGİLERİ SAYFASI -->
+        <!-- İLETİŞİM SAYFASI -->
         <div class="sub-page" id="contactPage">
             <div>
                 <div class="page-header">
@@ -522,10 +478,10 @@
                     <p class="subtitle" style="margin-bottom: 16px;">İşletmemize ait doğrudan iletişim kanalları</p>
                 </div>
 
-                <!-- Telefon Numarası -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">TELEFON NUMARASI</span>
+                        <!-- DİNAMİK TELEFON -->
                         <span class="info-value" id="phoneText">+90 555 123 45 67</span>
                     </div>
                     <button class="copy-icon-btn" onclick="copyToClipboard('phoneText', 'Telefon Numarası')" title="Kopyala">
@@ -533,10 +489,10 @@
                     </button>
                 </div>
 
-                <!-- E-Posta Adresi -->
                 <div class="info-box">
                     <div class="info-details">
                         <span class="info-label">E-POSTA ADRESİ</span>
+                        <!-- DİNAMİK E-POSTA -->
                         <span class="info-value" id="emailText">info@isletmeadi.com</span>
                     </div>
                     <button class="copy-icon-btn" onclick="copyToClipboard('emailText', 'E-Posta Adresi')" title="Kopyala">
@@ -552,12 +508,36 @@
 
     </div>
 
-    <!-- Toast Bildirim -->
+    <!-- TOAST BİLDİRİM -->
     <div class="toast" id="toast">
         <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Kopyalandı!</span>
     </div>
 
     <script>
+        /* =========================================================
+           BİLGİLERİNİZİ BU ALANDAN KOLAYCA DEĞİŞTİREBİLİRSİNİZ
+        ========================================================= */
+        const businessData = {
+            name: "Luka Mersin", // İşletme Adı
+            googleMapsUrl: "https://maps.app.goo.gl/6BTDZ5b5pp5bGT728", // Google Harita Linki
+            instagramUser: "luka.mersin", // Instagram Kullanıcı Adı (Başında @ koymayın)
+            receiverName: "Ahmet Yılmaz", // IBAN Alıcı Adı Soyadı
+            iban: "TR92 0006 2000 0000 0000 0000 00", // IBAN Numarası
+            phone: "+90 555 123 45 67", // İletişim Numarası
+            email: "info@lukamersin.com" // İletişim E-Postası
+        };
+
+        // Bilgileri Sayfaya Dolduran Fonksiyon
+        function loadBusinessData() {
+            document.getElementById('displayBusinessName').innerText = businessData.name;
+            document.getElementById('linkGoogle').href = businessData.googleMapsUrl;
+            document.getElementById('linkInstagram').href = `https://www.instagram.com/${businessData.instagramUser}/`;
+            document.getElementById('nameText').innerText = businessData.receiverName;
+            document.getElementById('ibanText').innerText = businessData.iban;
+            document.getElementById('phoneText').innerText = businessData.phone;
+            document.getElementById('emailText').innerText = businessData.email;
+        }
+
         const appCard = document.getElementById('appCard');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
@@ -580,8 +560,6 @@
             localStorage.setItem('selectedTheme', theme);
             themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }
-
-        initTheme();
 
         // === SAYFA GEÇİŞLERİ ===
         function openPage(className) {
@@ -664,6 +642,10 @@
                 toast.classList.remove('show');
             }, 2500);
         }
+
+        // Sayfa yüklendiğinde verileri ve temayı başlat
+        initTheme();
+        loadBusinessData();
     </script>
 </body>
 </html>

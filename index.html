@@ -617,28 +617,34 @@
         ========================================================= */
         const bankLinks = {
             ziraat: {
-                appUrl: "ziraatmobil://",
-                storeUrl: "https://apps.apple.com/tr/app/ziraat-mobil/id885993234"
+                ios: "ziraatmobile://",
+                android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobile;end;",
+                fallback: "https://www.ziraatbank.com.tr"
             },
             garanti: {
-                appUrl: "garantibbva://",
-                storeUrl: "https://apps.apple.com/tr/app/garanti-bbva-mobil/id418092192"
+                ios: "garantimobil://",
+                android: "intent://#Intent;scheme=garantimobil;package=com.garanti.cepsubesi;end;",
+                fallback: "https://www.garantibbva.com.tr"
             },
             isbankasi: {
-                appUrl: "iscep://",
-                storeUrl: "https://apps.apple.com/tr/app/i%C5%9Fcep/id438250262"
+                ios: "iscep://",
+                android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;end;",
+                fallback: "https://www.isbank.com.tr"
             },
             yapikredi: {
-                appUrl: "yapikredimobil://",
-                storeUrl: "https://apps.apple.com/tr/app/yap%C4%B1-kredi-mobil/id449704200"
+                ios: "ykb://",
+                android: "intent://#Intent;scheme=ykb;package=com.ykb.android;end;",
+                fallback: "https://www.yapikredi.com.tr"
             },
             akbank: {
-                appUrl: "akbank://",
-                storeUrl: "https://apps.apple.com/tr/app/akbank/id479205400"
+                ios: "akbankdirekt://",
+                android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;end;",
+                fallback: "https://www.akbank.com"
             },
             vakifbank: {
-                appUrl: "vakifbankmobil://",
-                storeUrl: "https://apps.apple.com/tr/app/vak%C4%B1fbank-mobil/id533100806"
+                ios: "vakifbank://",
+                android: "intent://#Intent;scheme=vakifbank;package=com.vakifbank.mobile;end;",
+                fallback: "https://www.vakifbank.com.tr"
             }
         };
 
@@ -654,14 +660,13 @@
 
             showToast('IBAN kopyalandı, uygulama açılıyor...');
 
-            // 2. Uygulama Açma Yönlendirmesi
+            // 2. Cihaz Tespiti ve Yönlendirme
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             const bank = bankLinks[bankKey];
-            if (bank) {
-                window.location.href = bank.appUrl;
 
-                setTimeout(function () {
-                    window.location.href = bank.storeUrl;
-                }, 1800);
+            if (bank) {
+                const targetUrl = isIOS ? bank.ios : bank.android;
+                window.location.href = targetUrl;
             }
         }
 
@@ -673,8 +678,10 @@
             }, 2500);
         }
 
-        initTheme();
-        loadBusinessData();
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            loadBusinessData();
+        });
     </script>
 </body>
 </html>

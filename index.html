@@ -586,21 +586,26 @@
 
         function copyToClipboard(elementId, label) {
             const textToCopy = document.getElementById(elementId).innerText;
-            
+            executeCopy(textToCopy, label);
+        }
+
+        function executeCopy(text, label) {
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(textToCopy).then(() => {
+                navigator.clipboard.writeText(text).then(() => {
                     showToast(`${label} kopyalandı!`);
                 }).catch(() => {
-                    fallbackCopy(textToCopy, label);
+                    fallbackCopy(text, label);
                 });
             } else {
-                fallbackCopy(textToCopy, label);
+                fallbackCopy(text, label);
             }
         }
 
         function fallbackCopy(text, label) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
             document.body.appendChild(textArea);
             textArea.select();
             try {
@@ -613,7 +618,7 @@
         }
 
         /* =========================================================
-           GÜNCELLENMİŞ BANKA UYGULAMA DEEP LINK BAĞLANTILARI
+           TAM SORUNSUZ BANKA YÖNLENDİRME (DEEP LINK + SAFARI PROTETÖRÜ)
         ========================================================= */
         const bankLinks = {
             ziraat: {
@@ -651,22 +656,37 @@
         function copyAndOpenBank(bankKey) {
             const ibanText = document.getElementById('ibanText').innerText.replace(/\s+/g, '');
             
-            // 1. IBAN Kopyalama
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(ibanText);
-            } else {
-                fallbackCopy(ibanText, 'IBAN');
-            }
-
+            // 1. IBAN'ı Pano'ya Kopyala
+            executeCopy(ibanText, 'IBAN');
             showToast('IBAN kopyalandı, uygulama açılıyor...');
 
-            // 2. Cihaz Tespiti ve Yönlendirme
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            // 2. Güvenli Yönlendirme (Safari Uyarısını ve Çökmeleri Engelleme)
             const bank = bankLinks[bankKey];
+            if (!bank) return;
 
-            if (bank) {
-                const targetUrl = isIOS ? bank.ios : bank.android;
-                window.location.href = targetUrl;
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+            if (isIOS) {
+                // Gizli Iframe ile Safari "Geçersiz Adres" pop-up uyarısı engellenir
+                const iframe = document.createElement("iframe");
+                iframe.style.display = "none";
+                iframe.src = bank.ios;
+                document.body.appendChild(iframe);
+
+                const start = Date.now();
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    // 1.5 sn içinde uygulama açılamadıysa bankanın resmi web sitesini aç
+                    if (Date.now() - start < 2000) {
+                        window.location.href = bank.fallback;
+                    }
+                }, 1500);
+            } else {
+                // Android Intent yapısı (Android cihazlarda pürüzsüz çalışır)
+                window.location.href = bank.android;
+                setTimeout(() => {
+                    window.location.href = bank.fallback;
+                }, 1500);
             }
         }
 

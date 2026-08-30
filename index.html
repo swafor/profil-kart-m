@@ -3,46 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İşletme İletişim & VIP Panel</title>
+    <title>İşletme İletişim & IBAN</title>
     <!-- FontAwesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* === RENK VE TEMA DEĞİŞKENLERİ === */
         :root {
-            --primary-blue: linear-gradient(135deg, #2563EB, #1D4ED8);
-            --primary-pink: linear-gradient(135deg, #E1306C, #C13584, #833AB4);
-            --primary-green: linear-gradient(135deg, #059669, #047857);
-            /* Elit Mor Varyasyonu */
+            --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
+            --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
+            --primary-green: linear-gradient(135deg, #10B981, #059669);
             --primary-purple: linear-gradient(135deg, #8B5CF6, #6366F1, #4F46E5);
         }
 
+        /* --- KARANLIK TEMA (Varsayılan) --- */
         [data-theme="dark"] {
-            --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%, #020617);
-            --card-bg: rgba(15, 23, 42, 0.7);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(139, 92, 246, 0.15);
+            --bg-gradient: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #022c22);
+            --card-bg: linear-gradient(-45deg, rgba(15, 23, 42, 0.75), rgba(30, 27, 75, 0.75), rgba(49, 16, 66, 0.75), rgba(2, 44, 34, 0.75));
+            --card-border: rgba(255, 255, 255, 0.12);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             --text-title: #FFFFFF;
             --text-subtitle: #94A3B8;
-            --text-main: #F8FAFC;
+            --text-main: #F1F5F9;
             --text-label: #64748B;
-            --box-bg: rgba(255, 255, 255, 0.03);
-            --box-bg-hover: rgba(255, 255, 255, 0.08);
+            --box-bg: rgba(255, 255, 255, 0.05);
+            --box-bg-hover: rgba(255, 255, 255, 0.12);
             --box-border: rgba(255, 255, 255, 0.08);
             --toast-bg: #0F172A;
             --toast-text: #FFFFFF;
         }
 
+        /* --- AYDINLIK TEMA --- */
         [data-theme="light"] {
-            --bg-gradient: radial-gradient(circle at top right, #f3e8ff, #e0e7ff 60%, #f1f5f9);
-            --card-bg: rgba(255, 255, 255, 0.65);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --card-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.15);
+            --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            --card-bg: linear-gradient(-45deg, rgba(255, 255, 255, 0.45), rgba(255, 240, 245, 0.55), rgba(224, 242, 254, 0.45), rgba(220, 252, 231, 0.45));
+            --card-border: rgba(255, 255, 255, 0.6);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --text-title: #0F172A;
-            --text-subtitle: #475569;
+            --text-subtitle: #334155;
             --text-main: #0F172A;
-            --text-label: #64748B;
-            --box-bg: rgba(255, 255, 255, 0.5);
-            --box-bg-hover: rgba(255, 255, 255, 0.8);
-            --box-border: rgba(255, 255, 255, 0.6);
+            --text-label: #475569;
+            --box-bg: rgba(255, 255, 255, 0.35);
+            --box-bg-hover: rgba(255, 255, 255, 0.55);
+            --box-border: rgba(255, 255, 255, 0.4);
             --toast-bg: #FFFFFF;
             --toast-text: #0F172A;
         }
@@ -52,28 +54,41 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
         }
 
+        /* Akıcı Hareketli Arka Plan */
         body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             padding: 20px;
+            position: relative;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Ana Konteyner / Cam Efekti */
         .app-card {
             background: var(--card-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             width: 100%;
             max-width: 380px;
             border-radius: 32px;
             border: 1px solid var(--card-border);
             box-shadow: var(--card-shadow);
-            padding: 44px 28px;
+            padding: 44px 24px 36px 24px;
             position: relative;
             overflow: hidden;
             min-height: 520px;
@@ -82,26 +97,42 @@
             justify-content: center;
         }
 
+        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
         .theme-toggle-btn {
             position: absolute;
-            top: 24px;
-            right: 24px;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
             background: var(--box-bg);
             border: 1px solid var(--card-border);
-            width: 38px;
-            height: 38px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-title);
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .theme-toggle-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.12) rotate(15deg);
             background: var(--box-bg-hover);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Sayfa Geçiş Ekranları */
+        .page {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
         }
 
         .page-main {
@@ -111,28 +142,42 @@
             text-align: center;
         }
 
+        /* Alt Sayfa Geçiş Stilleri (IBAN ve İletişim Panelleri) */
         .sub-page {
             position: absolute;
             top: 0;
             left: 100%;
             width: 100%;
             height: 100%;
-            padding: 36px 28px;
+            padding: 30px 24px;
             background: var(--card-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-sizing: border-box;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* IBAN veya İletişim Açıldığında Ana Sayfa Kayması */
+        .app-card.show-iban .page-main,
         .app-card.show-contact .page-main {
-            transform: translateX(-100%) scale(0.92);
+            transform: translateX(-100%) scale(0.9);
             opacity: 0;
             pointer-events: none;
+        }
+
+        /* Aktif Ekran Gösterimleri */
+        .app-card.show-iban #ibanPage {
+            left: 0;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .app-card.show-contact #contactPage {
@@ -141,27 +186,29 @@
             pointer-events: auto;
         }
 
+        /* Başlıklar */
         h1 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
             color: var(--text-title);
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
-            margin-bottom: 6px;
         }
 
         p.subtitle {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-subtitle);
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             line-height: 1.5;
-            font-weight: 500;
+            font-weight: 600;
         }
 
+        /* Butonlar */
         .btn-list {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
         .btn {
@@ -174,33 +221,91 @@
             border-radius: 18px;
             color: #ffffff;
             font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.3px;
+            font-size: 15px;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px) scale(1.02);
         }
 
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-google { 
+            background: var(--primary-blue); 
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5);
+        }
+        .btn-instagram { 
+            background: var(--primary-pink); 
+            box-shadow: 0 10px 20px -5px rgba(225, 48, 108, 0.5);
+        }
+        .btn-iban { 
+            background: var(--primary-green); 
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.5);
+        }
+        /* MOR VARYASYON (İLETİŞİM PANELİ) */
         .btn-contact { 
             background: var(--primary-purple); 
-            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Bilgi Kartı Stilleri */
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-title);
         }
 
         .info-box {
             background: var(--box-bg);
             border: 1px solid var(--box-border);
             border-radius: 18px;
-            padding: 16px;
+            padding: 14px;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            background: var(--box-bg-hover);
+            border-color: var(--card-border);
+            transform: translateY(-2px);
+        }
+
+        .info-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow: hidden;
         }
 
         .info-label {
@@ -208,101 +313,356 @@
             text-transform: uppercase;
             font-weight: 800;
             color: var(--text-label);
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            letter-spacing: 0.8px;
         }
 
         .info-value {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
+            word-break: break-all;
         }
 
         .copy-icon-btn {
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            width: 38px;
-            height: 38px;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
-            color: #8B5CF6;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
 
         .copy-icon-btn:hover {
             background: #8B5CF6;
-            color: #FFFFFF;
+            color: white;
+            border-color: #8B5CF6;
+            transform: scale(1.1);
+        }
+
+        /* Banka Hızlı Erişim Grid */
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: var(--text-label);
+            letter-spacing: 0.8px;
+            margin: 16px 0 8px 0;
+            text-align: center;
+        }
+
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-bank {
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 12px;
+            padding: 10px;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-bank:hover {
+            background: var(--box-bg-hover);
+            border-color: var(--card-border);
+            transform: translateY(-2px);
         }
 
         .btn-back {
             background: var(--box-bg);
             color: var(--text-main);
             border: 1px solid var(--box-border);
-            padding: 14px;
-            border-radius: 16px;
+            padding: 12px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .btn-back:hover {
+            background: var(--box-bg-hover);
+            color: var(--text-title);
+        }
+
+        /* Toast Bildirim */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--toast-bg);
+            color: var(--toast-text);
+            padding: 14px 28px;
+            border-radius: 50px;
             font-weight: 600;
-            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--box-border);
+        }
+
+        .toast i {
+            color: #8B5CF6;
+            font-size: 18px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
     <div class="app-card" id="appCard">
-        <button class="theme-toggle-btn" onclick="toggleTheme()">
-            <i class="fa-solid fa-moon" id="themeIcon"></i>
+        
+        <!-- SAĞ ÜST TEMA BUTONU -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
 
+        <!-- ANA SAYFA -->
         <div class="page page-main">
-            <h1>LUKA MERSİN</h1>
-            <p class="subtitle">Lüks Dijital İletişim Paneli</p>
+            <h1>İşletme Adı</h1>
+            <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
+                <!-- PANEL 1 -->
+                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-google">
+                    <i class="fa-brands fa-google"></i> Google'da Konumumuz
+                </a>
+
+                <!-- PANEL 2 -->
+                <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
+                </a>
+
+                <!-- PANEL 3 -->
+                <button class="btn btn-iban" onclick="openPage('show-iban')">
+                    <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
+                </button>
+
+                <!-- PANEL 4: İLETİŞİM BİLGİLERİ (MOR VARYASYON) -->
                 <button class="btn btn-contact" onclick="openPage('show-contact')">
                     <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
             </div>
         </div>
 
-        <div class="sub-page" id="contactPage">
+        <!-- IBAN PANEL SAYFASI -->
+        <div class="sub-page" id="ibanPage">
             <div>
-                <div style="text-align: center; margin-bottom: 24px;">
-                    <h2 style="font-size: 20px; color: var(--text-title); font-weight: 800;">İletişim</h2>
-                    <p class="subtitle" style="margin-bottom: 0;">Doğrudan İletişim Kanalları</p>
+                <div class="page-header">
+                    <h2>Banka Bilgileri</h2>
+                    <p class="subtitle" style="margin-bottom: 12px;">IBAN kopyalayıp banka uygulamasını açabilirsiniz.</p>
                 </div>
 
                 <div class="info-box">
-                    <div>
-                        <div class="info-label">Telefon Numarası</div>
-                        <div class="info-value" id="phoneText">+90 555 123 45 67</div>
+                    <div class="info-details">
+                        <span class="info-label">ALICI İSİM SOYİSİM</span>
+                        <span class="info-value" id="nameText">Ahmet Yılmaz</span>
                     </div>
-                    <button class="copy-icon-btn" onclick="copyText('phoneText')"><i class="fa-regular fa-copy"></i></button>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('nameText', 'İsim Soyisim')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
                 </div>
 
                 <div class="info-box">
-                    <div>
-                        <div class="info-label">E-Posta Adresi</div>
-                        <div class="info-value" id="emailText">info@isletmeadi.com</div>
+                    <div class="info-details">
+                        <span class="info-label">IBAN NUMARASI</span>
+                        <span class="info-value" id="ibanText">TR92 0006 2000 0000 0000 0000 00</span>
                     </div>
-                    <button class="copy-icon-btn" onclick="copyText('emailText')"><i class="fa-regular fa-copy"></i></button>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('ibanText', 'IBAN')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="section-title">Hızlı Banka Erişimi</div>
+                <div class="bank-grid">
+                    <button class="btn-bank" onclick="copyAndOpenBank('ziraat')"><i class="fa-solid fa-building-columns"></i> Ziraat</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('garanti')"><i class="fa-solid fa-building-columns"></i> Garanti</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('isbankasi')"><i class="fa-solid fa-building-columns"></i> İş Bankası</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('yapikredi')"><i class="fa-solid fa-building-columns"></i> Yapı Kredi</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('akbank')"><i class="fa-solid fa-building-columns"></i> Akbank</button>
+                    <button class="btn-bank" onclick="copyAndOpenBank('vakifbank')"><i class="fa-solid fa-building-columns"></i> VakıfBank</button>
                 </div>
             </div>
 
-            <button class="btn-back" onclick="closePages()"><i class="fa-solid fa-arrow-left"></i> Geri Dön</button>
+            <button class="btn btn-back" onclick="closePages()">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </button>
         </div>
+
+        <!-- 4. PANEL DETAYI: İLETİŞİM BİLGİLERİ SAYFASI -->
+        <div class="sub-page" id="contactPage">
+            <div>
+                <div class="page-header">
+                    <h2>İletişim Bilgileri</h2>
+                    <p class="subtitle" style="margin-bottom: 16px;">İşletmemize ait doğrudan iletişim kanalları</p>
+                </div>
+
+                <!-- Telefon Numarası -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">TELEFON NUMARASI</span>
+                        <span class="info-value" id="phoneText">+90 555 123 45 67</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('phoneText', 'Telefon Numarası')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <!-- E-Posta Adresi -->
+                <div class="info-box">
+                    <div class="info-details">
+                        <span class="info-label">E-POSTA ADRESİ</span>
+                        <span class="info-value" id="emailText">info@isletmeadi.com</span>
+                    </div>
+                    <button class="copy-icon-btn" onclick="copyToClipboard('emailText', 'E-Posta Adresi')" title="Kopyala">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn btn-back" onclick="closePages()">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Toast Bildirim -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Kopyalandı!</span>
     </div>
 
     <script>
-        function openPage(cls) { document.getElementById('appCard').classList.add(cls); }
-        function closePages() { document.getElementById('appCard').classList.remove('show-contact'); }
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        const appCard = document.getElementById('appCard');
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        const themeIcon = document.getElementById('themeIcon');
+
+        // === TEMA YÖNETİMİ ===
+        function initTheme() {
+            const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
+            setTheme(savedTheme);
         }
-        function copyText(id) {
-            navigator.clipboard.writeText(document.getElementById(id).innerText);
-            alert('Kopyalandı!');
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('selectedTheme', theme);
+            themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        initTheme();
+
+        // === SAYFA GEÇİŞLERİ ===
+        function openPage(className) {
+            appCard.classList.remove('show-iban', 'show-contact');
+            appCard.classList.add(className);
+        }
+
+        function closePages() {
+            appCard.classList.remove('show-iban', 'show-contact');
+        }
+
+        // === KOPYALAMA FONKSİYONLARI ===
+        function copyToClipboard(elementId, label) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToast(`${label} kopyalandı!`);
+                }).catch(() => {
+                    fallbackCopy(textToCopy, label);
+                });
+            } else {
+                fallbackCopy(textToCopy, label);
+            }
+        }
+
+        function fallbackCopy(text, label) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`${label} kopyalandı!`);
+            } catch (err) {
+                showToast('Kopyalama başarısız!');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // === BANKA BAĞLANTILARI ===
+        const bankLinks = {
+            yapikredi: { ios: "ykb://", android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end", web: "https://www.yapikredi.com.tr" },
+            ziraat: { ios: "ziraatmobile://", android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end", web: "https://www.ziraatbank.com.tr" },
+            garanti: { ios: "garanticep://", android: "intent://#Intent;scheme=garanticep;package=com.garanti.cepsubesi;S.browser_fallback_url=https://www.garantibbva.com.tr;end", web: "https://www.garantibbva.com.tr" },
+            isbankasi: { ios: "iscep://", android: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;S.browser_fallback_url=https://www.isbank.com.tr;end", web: "https://www.isbank.com.tr" },
+            akbank: { ios: "akbankdirekt://", android: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;S.browser_fallback_url=https://www.akbank.com;end", web: "https://www.akbank.com" },
+            vakifbank: { ios: "vakifbankmobile://", android: "intent://#Intent;scheme=vakifbankmobile;package=com.vakifbank.mobile;S.browser_fallback_url=https://www.vakifbank.com.tr;end", web: "https://www.vakifbank.com.tr" }
+        };
+
+        function copyAndOpenBank(bankKey) {
+            const ibanText = document.getElementById('ibanText').innerText.replace(/\s+/g, '');
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(userAgent);
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+            const bank = bankLinks[bankKey];
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(ibanText);
+            } else {
+                fallbackCopy(ibanText, 'IBAN');
+            }
+
+            showToast('IBAN kopyalandı, yönlendiriliyor...');
+
+            if (isAndroid && bank.android) {
+                window.location.href = bank.android;
+            } else if (isIOS && bank.ios) {
+                window.location.href = bank.ios;
+            } else {
+                window.open(bank.web, '_blank');
+            }
+        }
+
+        function showToast(message) {
+            toastMsg.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
     </script>
 </body>

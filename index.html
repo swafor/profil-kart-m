@@ -796,7 +796,6 @@
         },
         isbankasi: {
             name: "İşCep",
-            scheme: "iscep://",
             appStore: "https://apps.apple.com/tr/app/i%C5%9Fcep/id308261752",
             playStore: "https://play.google.com/store/apps/details?id=com.isbank.iscep",
             web: "https://www.isbank.com.tr/"
@@ -950,50 +949,12 @@
 
         const device = getDevice();
 
-        if (bank.scheme && (device === "ios" || device === "android")) {
-            showToast("IBAN Kopyalandı. " + bank.name + " açılıyor...");
-            tryOpenScheme(bank, device, button);
-        } else {
-            showToast("IBAN Kopyalandı. Mağazaya yönlendiriliyor...");
-            setTimeout(() => {
-                if (button) button.classList.remove("bank-loading");
-                openStoreOrWeb(bank, device);
-            }, 800);
-        }
-    }
-
-    function tryOpenScheme(bank, device, button) {
-        let leftPage = false;
-
-        const onVisibility = () => {
-            if (document.hidden) {
-                leftPage = true;
-                cleanup();
-            }
-        };
-
-        const onPageHide = () => {
-            leftPage = true;
-            cleanup();
-        };
-
-        function cleanup() {
-            document.removeEventListener("visibilitychange", onVisibility);
-            window.removeEventListener("pagehide", onPageHide);
-            if (button) button.classList.remove("bank-loading");
-        }
-
-        document.addEventListener("visibilitychange", onVisibility);
-        window.addEventListener("pagehide", onPageHide);
-
-        window.location.href = bank.scheme;
+        showToast("IBAN Kopyalandı. Mağazaya yönlendiriliyor...");
 
         setTimeout(() => {
-            if (!leftPage) {
-                cleanup();
-                openStoreOrWeb(bank, device);
-            }
-        }, 1500);
+            if (button) button.classList.remove("bank-loading");
+            openStoreOrWeb(bank, device);
+        }, 500);
     }
 
     function openStoreOrWeb(bank, device) {
@@ -1006,7 +967,7 @@
             url = bank.web;
         }
 
-        window.location.href = url;
+        window.open(url, "_blank");
     }
 
     let toastTimer = null;

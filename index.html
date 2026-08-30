@@ -448,11 +448,6 @@
             font-size: 18px;
         }
 
-        .bank-loading {
-            opacity: .7;
-            pointer-events: none;
-        }
-
         @media (max-width:420px) {
             body {
                 padding: 12px;
@@ -613,7 +608,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('ziraat',this)"
+                    onclick="openBank('ziraat')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     Ziraat
@@ -621,7 +616,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('garanti',this)"
+                    onclick="openBank('garanti')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     Garanti
@@ -629,7 +624,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('isbankasi',this)"
+                    onclick="openBank('isbankasi')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     İş Bankası
@@ -637,7 +632,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('yapikredi',this)"
+                    onclick="openBank('yapikredi')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     Yapı Kredi
@@ -645,7 +640,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('akbank',this)"
+                    onclick="openBank('akbank')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     Akbank
@@ -653,7 +648,7 @@
 
                 <button
                     class="btn-bank"
-                    onclick="openBank('vakifbank',this)"
+                    onclick="openBank('vakifbank')"
                 >
                     <i class="fa-solid fa-building-columns"></i>
                     VakıfBank
@@ -691,7 +686,6 @@
 
             </div>
 
-            <!-- REHBERE EKLE BUTONLU TELEFON ALANI -->
             <div class="info-box">
 
                 <div class="info-details">
@@ -771,7 +765,6 @@
 </div>
 
 <script>
-
     const businessData = {
         name: "NFCHanem",
         googleMapsUrl: "https://maps.google.com",
@@ -782,40 +775,41 @@
         email: "info@nfchanem.com"
     };
 
+    // Bölge hatasını çözmek için Apple Store linklerine /tr/ eklendi
     const banks = {
         ziraat: {
             name: "Ziraat Mobil",
-            appStore: "https://apps.apple.com/app/id504377787",
+            appStore: "https://apps.apple.com/tr/app/id504377787",
             playStore: "https://play.google.com/store/apps/details?id=com.ziraat.ziraatmobil",
             web: "https://www.ziraatbank.com.tr/"
         },
         garanti: {
             name: "Garanti BBVA",
-            appStore: "https://apps.apple.com/app/id388431457",
+            appStore: "https://apps.apple.com/tr/app/id388431457",
             playStore: "https://play.google.com/store/apps/details?id=com.garanti.cepsubesi",
             web: "https://www.garantibbva.com.tr/"
         },
         isbankasi: {
             name: "İşCep",
-            appStore: "https://apps.apple.com/app/id308261752",
+            appStore: "https://apps.apple.com/tr/app/id308261752",
             playStore: "https://play.google.com/store/apps/details?id=com.isbank.iscep",
             web: "https://www.isbank.com.tr/"
         },
         yapikredi: {
             name: "Yapı Kredi Mobil",
-            appStore: "https://apps.apple.com/app/id407079414",
+            appStore: "https://apps.apple.com/tr/app/id407079414",
             playStore: "https://play.google.com/store/apps/details?id=com.ykb.android",
             web: "https://www.yapikredi.com.tr/"
         },
         akbank: {
             name: "Akbank Mobil",
-            appStore: "https://apps.apple.com/app/id410167182",
+            appStore: "https://apps.apple.com/tr/app/id410167182",
             playStore: "https://play.google.com/store/apps/details?id=com.akbank.android.apps.akbank_direkt",
             web: "https://www.akbank.com/"
         },
         vakifbank: {
             name: "VakıfBank Mobil",
-            appStore: "https://apps.apple.com/app/id405947136",
+            appStore: "https://apps.apple.com/tr/app/id405947136",
             playStore: "https://play.google.com/store/apps/details?id=com.vakifbank.mobile",
             web: "https://www.vakifbank.com.tr/"
         }
@@ -862,11 +856,7 @@
     }
 
     async function copyText(text, label) {
-        if (!text) {
-            showToast("Kopyalanacak bilgi bulunamadı!");
-            return false;
-        }
-
+        if (!text) return false;
         try {
             if (navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(text);
@@ -904,51 +894,23 @@
 
     function copyToClipboard(elementId, label) {
         const element = document.getElementById(elementId);
-        if (!element) {
-            showToast("Bilgi bulunamadı!");
-            return;
+        if (element) {
+            copyText(element.textContent.trim(), label);
         }
-        copyText(element.textContent.trim(), label);
     }
     
-    // vCard Oluşturma ve İndirme Fonksiyonu
     function downloadVCard() {
-        const vcardContent = `BEGIN:VCARD
-VERSION:3.0
-FN:${businessData.name}
-TEL;TYPE=WORK,VOICE:${businessData.phone}
-EMAIL;TYPE=WORK:${businessData.email}
-END:VCARD`;
-
+        const vcardContent = `BEGIN:VCARD\nVERSION:3.0\nFN:${businessData.name}\nTEL;TYPE=WORK,VOICE:${businessData.phone}\nEMAIL;TYPE=WORK:${businessData.email}\nEND:VCARD`;
         const blob = new Blob([vcardContent], { type: "text/vcard" });
         const url = URL.createObjectURL(blob);
-        
         const a = document.createElement("a");
         a.href = url;
         a.download = `${businessData.name.replace(/\s+/g, '_')}_Iletisim.vcf`;
-        
         document.body.appendChild(a);
         a.click();
-        
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
         showToast("Rehbere ekleme başlatıldı!");
-    }
-
-    function getCleanIBAN() {
-        const element = document.getElementById("ibanText");
-        if (!element) return "";
-        return element.textContent.replace(/\s+/g, "").trim();
-    }
-
-    async function copyIBAN() {
-        const iban = getCleanIBAN();
-        if (!iban) {
-            showToast("IBAN bulunamadı!");
-            return false;
-        }
-        return await copyText(iban, "IBAN");
     }
 
     function getDevice() {
@@ -958,40 +920,34 @@ END:VCARD`;
         return "desktop";
     }
 
-    async function openBank(bankKey, button) {
+    function openBank(bankKey) {
         const bank = banks[bankKey];
-        if (!bank) {
-            showToast("Banka bulunamadı!");
-            return;
-        }
-
-        if (button) button.classList.add("bank-loading");
-
-        const copied = await copyIBAN();
-        
-        // Yükleniyor animasyonunu kopyalama biter bitmez kaldırıyoruz
-        if (button) button.classList.remove("bank-loading");
-        
-        if (!copied) return;
+        if (!bank) return;
 
         const device = getDevice();
-        showToast("IBAN Kopyalandı. Yönlendiriliyor...");
-
-        // Gecikmeyi kaldırdık, anında yönlendirme fonksiyonunu çağırıyoruz
-        openStoreOrWeb(bank, device);
-    }
-
-    function openStoreOrWeb(bank, device) {
-        let url;
+        let url = bank.web;
+        
         if (device === "ios") {
             url = bank.appStore || bank.web;
         } else if (device === "android") {
             url = bank.playStore || bank.web;
-        } else {
-            url = bank.web;
         }
 
-        // Pop-up engeline takılmamak için yeni sekme (window.open) yerine aynı sayfayı yönlendiriyoruz.
+        const ibanElement = document.getElementById("ibanText");
+        const iban = ibanElement ? ibanElement.textContent.replace(/\s+/g, "").trim() : "";
+
+        if (iban) {
+            try {
+                fallbackCopy(iban);
+                showToast("IBAN Kopyalandı. Yönlendiriliyor...");
+            } catch (e) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(iban);
+                    showToast("IBAN Kopyalandı. Yönlendiriliyor...");
+                }
+            }
+        }
+
         window.location.href = url;
     }
 
@@ -1013,7 +969,6 @@ END:VCARD`;
         initTheme();
         loadBusinessData();
     });
-
 </script>
 
 </body>

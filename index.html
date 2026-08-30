@@ -7,49 +7,54 @@
     <!-- FontAwesome İkon Kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* === RENK PALETİ: SARI, YEŞİL, BEYAZ, GRİ === */
         :root {
-            /* Buton Gradient Renkleri */
-            --btn-yellow: linear-gradient(135deg, #F59E0B, #D97706);
-            --btn-green: linear-gradient(135deg, #10B981, #059669);
-            --btn-sage: linear-gradient(135deg, #34D399, #059669);
-            --btn-slate: linear-gradient(135deg, #475569, #334155);
+            /* BUTONLARA ÖZEL UYUMLU RENK GRADYANLARI */
+            --btn-1-gold: linear-gradient(135deg, #EAB308, #CA8A04);
+            --btn-2-emerald: linear-gradient(135deg, #10B981, #059669);
+            --btn-3-sapphire: linear-gradient(135deg, #3B82F6, #1D4ED8);
+            --btn-4-royal: linear-gradient(135deg, #8B5CF6, #6D28D9);
         }
 
         /* --- KARANLIK TEMA --- */
         [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --card-border: rgba(255, 255, 255, 0.12);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            /* Kırmızı Alan: Elit Fildişi / Krem Kraliyet Arka Planı */
+            --bg-color: #F8F6F0;
+            --bg-gradient: radial-gradient(circle at 50% 50%, #FDFBF7 0%, #EFECE6 100%);
+            
+            /* Mavi Alan: Arka plandan ayırt edilecek zengin açık gece mavisi */
+            --card-bg: rgba(30, 41, 59, 0.92);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --card-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.35);
+            
             --text-title: #FFFFFF;
             --text-subtitle: #94A3B8;
             --text-main: #F8FAFC;
             --text-label: #64748B;
-            --box-bg: rgba(255, 255, 255, 0.05);
+            --box-bg: rgba(255, 255, 255, 0.06);
             --box-bg-hover: rgba(255, 255, 255, 0.12);
-            --box-border: rgba(255, 255, 255, 0.08);
-            --toast-bg: #0F172A;
+            --box-border: rgba(255, 255, 255, 0.1);
+            --toast-bg: #1E293B;
             --toast-text: #FFFFFF;
-            --accent-icon: #10B981;
+            --accent-icon: #38BDF8;
         }
 
         /* --- AYDINLIK TEMA --- */
         [data-theme="light"] {
-            --bg-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --bg-color: #F1F5F9;
+            --bg-gradient: none;
+            --card-bg: rgba(255, 255, 255, 0.95);
             --card-border: rgba(203, 213, 225, 0.8);
             --card-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
             --text-title: #0F172A;
             --text-subtitle: #475569;
             --text-main: #0F172A;
             --text-label: #64748B;
-            --box-bg: rgba(241, 245, 249, 0.8);
+            --box-bg: rgba(241, 245, 249, 0.9);
             --box-bg-hover: rgba(226, 232, 240, 1);
-            --box-border: rgba(203, 213, 225, 0.6);
+            --box-border: rgba(203, 213, 225, 0.8);
             --toast-bg: #FFFFFF;
             --toast-text: #0F172A;
-            --accent-icon: #059669;
+            --accent-icon: #0284C7;
         }
 
         * {
@@ -66,11 +71,12 @@
             justify-content: center;
             align-items: center;
             background: var(--bg-color);
+            background-image: var(--bg-gradient);
             padding: 20px;
             position: relative;
         }
 
-        /* Ana Konteyner / Cam Efekti */
+        /* Ana Konteyner (Mavi Çerçeveli Alan) */
         .app-card {
             background: var(--card-bg);
             backdrop-filter: blur(25px);
@@ -89,7 +95,7 @@
             justify-content: center;
         }
 
-        /* SAĞ ÜST TEMA DEĞİŞTİRME BUTONU */
+        /* TEMA DEĞİŞTİRME BUTONU */
         .theme-toggle-btn {
             position: absolute;
             top: 20px;
@@ -117,11 +123,6 @@
             background: var(--box-bg-hover);
         }
 
-        .theme-toggle-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Sayfa Geçiş Ekranları */
         .page {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
@@ -134,7 +135,7 @@
             text-align: center;
         }
 
-        /* Alt Sayfa Geçiş Stilleri */
+        /* Alt Sayfalar */
         .sub-page {
             position: absolute;
             top: 0;
@@ -174,7 +175,6 @@
             pointer-events: auto;
         }
 
-        /* Başlıklar */
         h1 {
             font-size: 28px;
             font-weight: 800;
@@ -191,7 +191,6 @@
             font-weight: 600;
         }
 
-        /* Butonlar */
         .btn-list {
             width: 100%;
             display: flex;
@@ -225,7 +224,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
             transition: left 0.6s ease;
         }
 
@@ -241,28 +240,28 @@
             transform: translateY(0) scale(0.98);
         }
 
-        /* YENİ RENK PALETİNE UYGUN BUTONLAR */
-        .btn-google { 
-            background: var(--btn-yellow); 
-            box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.4);
+        /* HER BİRİ BİRBİRİNDEN FARKLI UYUMLU RENKLER (Sarı Alanlar) */
+        .btn-1 { 
+            background: var(--btn-1-gold); 
+            box-shadow: 0 10px 20px -5px rgba(234, 179, 8, 0.4);
         }
         
-        .btn-instagram { 
-            background: var(--btn-green); 
+        .btn-2 { 
+            background: var(--btn-2-emerald); 
             box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);
         }
 
-        .btn-iban { 
-            background: var(--btn-sage); 
-            box-shadow: 0 10px 20px -5px rgba(52, 211, 153, 0.35);
+        .btn-3 { 
+            background: var(--btn-3-sapphire); 
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
         }
 
-        .btn-contact { 
-            background: var(--btn-slate); 
-            box-shadow: 0 10px 20px -5px rgba(71, 85, 105, 0.4);
+        .btn-4 { 
+            background: var(--btn-4-royal); 
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.4);
         }
 
-        /* Bilgi Kartı Stilleri */
+        /* Bilgi Kutusu Stilleri */
         .page-header {
             text-align: center;
             margin-bottom: 20px;
@@ -331,13 +330,12 @@
         }
 
         .copy-icon-btn:hover {
-            background: #10B981;
+            background: #38BDF8;
             color: white;
-            border-color: #10B981;
+            border-color: #38BDF8;
             transform: scale(1.1);
         }
 
-        /* Banka Hızlı Erişim Grid */
         .section-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -391,7 +389,6 @@
             color: var(--text-title);
         }
 
-        /* Toast Bildirim */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -428,7 +425,6 @@
 
     <div class="app-card" id="appCard">
         
-        <!-- SAĞ ÜST TEMA BUTONU -->
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
             <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
@@ -439,29 +435,29 @@
             <p class="subtitle">Bizi Değerlendirin ve Sosyal Medyada Takip Edin.</p>
 
             <div class="btn-list">
-                <!-- PANEL 1 -->
-                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-google">
+                <!-- BUTON 1: Altın Sarı -->
+                <a href="https://maps.app.goo.gl/6BTDZ5b5pp5bGT728" target="_blank" class="btn btn-1">
                     <i class="fa-brands fa-google"></i> Google'da Konumumuz
                 </a>
 
-                <!-- PANEL 2 -->
-                <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-instagram">
+                <!-- BUTON 2: Zümrüt Yeşili -->
+                <a href="https://www.instagram.com/luka.mersin/" target="_blank" class="btn btn-2">
                     <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
                 </a>
 
-                <!-- PANEL 3 -->
-                <button class="btn btn-iban" onclick="openPage('show-iban')">
+                <!-- BUTON 3: Safir Mavi -->
+                <button class="btn btn-3" onclick="openPage('show-iban')">
                     <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
                 </button>
 
-                <!-- PANEL 4 -->
-                <button class="btn btn-contact" onclick="openPage('show-contact')">
+                <!-- BUTON 4: Kraliyet Moru / Mürdüm -->
+                <button class="btn btn-4" onclick="openPage('show-contact')">
                     <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
                 </button>
             </div>
         </div>
 
-        <!-- IBAN PANEL SAYFASI -->
+        <!-- IBAN SAYFASI -->
         <div class="sub-page" id="ibanPage">
             <div>
                 <div class="page-header">
@@ -505,7 +501,7 @@
             </button>
         </div>
 
-        <!-- İLETİŞİM BİLGİLERİ SAYFASI -->
+        <!-- İLETİŞİM SAYFASI -->
         <div class="sub-page" id="contactPage">
             <div>
                 <div class="page-header">
@@ -541,7 +537,6 @@
 
     </div>
 
-    <!-- Toast Bildirim -->
     <div class="toast" id="toast">
         <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Kopyalandı!</span>
     </div>
@@ -552,7 +547,6 @@
         const toastMsg = document.getElementById('toastMsg');
         const themeIcon = document.getElementById('themeIcon');
 
-        // === TEMA YÖNETİMİ ===
         function initTheme() {
             const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
             setTheme(savedTheme);
@@ -572,7 +566,6 @@
 
         initTheme();
 
-        // === SAYFA GEÇİŞLERİ ===
         function openPage(className) {
             appCard.classList.remove('show-iban', 'show-contact');
             appCard.classList.add(className);
@@ -582,16 +575,12 @@
             appCard.classList.remove('show-iban', 'show-contact');
         }
 
-        // === KOPYALAMA FONKSİYONLARI ===
         function copyToClipboard(elementId, label) {
             const textToCopy = document.getElementById(elementId).innerText;
-            
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     showToast(`${label} kopyalandı!`);
-                }).catch(() => {
-                    fallbackCopy(textToCopy, label);
-                });
+                }).catch(() => fallbackCopy(textToCopy, label));
             } else {
                 fallbackCopy(textToCopy, label);
             }
@@ -611,7 +600,6 @@
             document.body.removeChild(textArea);
         }
 
-        // === BANKA BAĞLANTILARI ===
         const bankLinks = {
             yapikredi: { ios: "ykb://", android: "intent://#Intent;scheme=ykb;package=com.ykb.android;S.browser_fallback_url=https://www.yapikredi.com.tr;end", web: "https://www.yapikredi.com.tr" },
             ziraat: { ios: "ziraatmobile://", android: "intent://#Intent;scheme=ziraatmobile;package=com.ziraat.ziraatmobil;S.browser_fallback_url=https://www.ziraatbank.com.tr;end", web: "https://www.ziraatbank.com.tr" },
@@ -637,21 +625,15 @@
 
             showToast('IBAN kopyalandı, yönlendiriliyor...');
 
-            if (isAndroid && bank.android) {
-                window.location.href = bank.android;
-            } else if (isIOS && bank.ios) {
-                window.location.href = bank.ios;
-            } else {
-                window.open(bank.web, '_blank');
-            }
+            if (isAndroid && bank.android) window.location.href = bank.android;
+            else if (isIOS && bank.ios) window.location.href = bank.ios;
+            else window.open(bank.web, '_blank');
         }
 
         function showToast(message) {
             toastMsg.innerText = message;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
     </script>
 </body>

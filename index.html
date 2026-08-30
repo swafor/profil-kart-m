@@ -382,7 +382,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
 
             color: var(--text-main);
             background: var(--box-bg);
@@ -393,6 +393,14 @@
             font-weight: 700;
 
             cursor: pointer;
+        }
+
+        .btn-bank img,
+        .btn-bank svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            border-radius: 4px;
         }
 
         .btn-bank:hover {
@@ -610,7 +618,10 @@
                     class="btn-bank"
                     onclick="openBank('ziraat')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#E30613"/>
+                        <path d="M9 10H23V13H15L23 22V25H9V22H17L9 13V10Z" fill="white"/>
+                    </svg>
                     Ziraat
                 </button>
 
@@ -618,7 +629,11 @@
                     class="btn-bank"
                     onclick="openBank('garanti')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#0060AF"/>
+                        <path d="M16 8L22 14L16 20L10 14L16 8Z" fill="#00A3E0"/>
+                        <circle cx="16" cy="14" r="3" fill="white"/>
+                    </svg>
                     Garanti
                 </button>
 
@@ -626,7 +641,10 @@
                     class="btn-bank"
                     onclick="openBank('isbankasi')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#003399"/>
+                        <path d="M10 12H22V15H10V12ZM10 17H19V20H10V17Z" fill="white"/>
+                    </svg>
                     İş Bankası
                 </button>
 
@@ -634,7 +652,10 @@
                     class="btn-bank"
                     onclick="openBank('yapikredi')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#004C99"/>
+                        <path d="M11 9H21V13H15V15H20V19H15V23H11V9Z" fill="#FFCC00"/>
+                    </svg>
                     Yapı Kredi
                 </button>
 
@@ -642,7 +663,10 @@
                     class="btn-bank"
                     onclick="openBank('akbank')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#ED1C24"/>
+                        <path d="M16 9L21 21H18.5L16 15L13.5 21H11L16 9Z" fill="white"/>
+                    </svg>
                     Akbank
                 </button>
 
@@ -650,7 +674,10 @@
                     class="btn-bank"
                     onclick="openBank('vakifbank')"
                 >
-                    <i class="fa-solid fa-building-columns"></i>
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#00305E"/>
+                        <path d="M11 10H14L16 16L18 10H21L17.5 22H14.5L11 10Z" fill="#FFC72C"/>
+                    </svg>
                     VakıfBank
                 </button>
 
@@ -775,7 +802,6 @@
         email: "info@nfchanem.com"
     };
 
-    // ID yerine doğrudan arama linkleri kullanılarak bölge hataları engellendi
     const banks = {
         ziraat: {
             name: "Ziraat Mobil",

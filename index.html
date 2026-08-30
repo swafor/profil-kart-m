@@ -3,629 +3,886 @@
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="theme-color"
-    content="#0f172a"
->
-
-<title>İşletme İletişim & IBAN</title>
-
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
->
-
-<style>
-
-:root {
-    --primary-blue: linear-gradient(135deg,#4F46E5,#3B82F6);
-    --primary-pink: linear-gradient(135deg,#F43F5E,#E1306C,#F59E0B);
-    --primary-green: linear-gradient(135deg,#047857,#10B981,#064E3B);
-    --primary-purple: linear-gradient(135deg,#8B5CF6,#6366F1,#4F46E5);
-}
-
-[data-theme="dark"] {
-
-    --bg-gradient:
-        linear-gradient(
-            -45deg,
-            #0f172a,
-            #1e1b4b,
-            #311042,
-            #022c22
-        );
-
-    --card-bg:
-        linear-gradient(
-            -45deg,
-            rgba(15,23,42,.75),
-            rgba(30,27,75,.75),
-            rgba(49,16,66,.75),
-            rgba(2,44,34,.75)
-        );
-
-    --card-border:rgba(255,255,255,.12);
-
-    --card-shadow:
-        0 25px 50px -12px rgba(0,0,0,.7);
-
-    --text-title:#fff;
-    --text-subtitle:#94A3B8;
-    --text-main:#F1F5F9;
-    --text-label:#64748B;
-
-    --box-bg:rgba(255,255,255,.05);
-    --box-bg-hover:rgba(255,255,255,.12);
-    --box-border:rgba(255,255,255,.08);
-
-    --toast-bg:#0F172A;
-    --toast-text:#fff;
-}
-
-[data-theme="light"] {
-
-    --bg-gradient:
-        linear-gradient(
-            -45deg,
-            #ee7752,
-            #e73c7e,
-            #23a6d5,
-            #23d5ab
-        );
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0f172a"
+    >
+
+    <title>İşletme İletişim & IBAN</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
+            --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
+            --primary-green: linear-gradient(135deg, #047857, #10B981, #064E3B);
+            --primary-purple: linear-gradient(135deg, #8B5CF6, #6366F1, #4F46E5);
+        }
 
-    --card-bg:
-        linear-gradient(
-            -45deg,
-            rgba(255,255,255,.45),
-            rgba(255,240,245,.55),
-            rgba(224,242,254,.45),
-            rgba(220,252,231,.45)
-        );
 
-    --card-border:rgba(255,255,255,.6);
+        /* =========================
+           DARK
+        ========================== */
 
-    --card-shadow:
-        0 25px 50px -12px rgba(0,0,0,.25);
+        [data-theme="dark"] {
 
-    --text-title:#0F172A;
-    --text-subtitle:#334155;
-    --text-main:#0F172A;
-    --text-label:#475569;
+            --bg-gradient:
+                linear-gradient(
+                    -45deg,
+                    #0f172a,
+                    #1e1b4b,
+                    #311042,
+                    #022c22
+                );
 
-    --box-bg:rgba(255,255,255,.35);
-    --box-bg-hover:rgba(255,255,255,.55);
-    --box-border:rgba(255,255,255,.4);
+            --card-bg:
+                linear-gradient(
+                    -45deg,
+                    rgba(15,23,42,.75),
+                    rgba(30,27,75,.75),
+                    rgba(49,16,66,.75),
+                    rgba(2,44,34,.75)
+                );
 
-    --toast-bg:#fff;
-    --toast-text:#0F172A;
-}
+            --card-border:
+                rgba(255,255,255,.12);
 
-* {
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+            --card-shadow:
+                0 25px 50px -12px rgba(0,0,0,.7);
 
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-}
+            --text-title:#fff;
+            --text-subtitle:#94A3B8;
+            --text-main:#F1F5F9;
+            --text-label:#64748B;
 
-body {
+            --box-bg:
+                rgba(255,255,255,.05);
 
-    min-height:100vh;
+            --box-bg-hover:
+                rgba(255,255,255,.12);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+            --box-border:
+                rgba(255,255,255,.08);
 
-    background:var(--bg-gradient);
-    background-size:400% 400%;
+            --toast-bg:#0F172A;
+            --toast-text:#fff;
+        }
 
-    animation:gradientBG 15s ease infinite;
 
-    padding:20px;
-}
+        /* =========================
+           LIGHT
+        ========================== */
 
-@keyframes gradientBG {
+        [data-theme="light"] {
 
-    0% {
-        background-position:0% 50%;
-    }
+            --bg-gradient:
+                linear-gradient(
+                    -45deg,
+                    #ee7752,
+                    #e73c7e,
+                    #23a6d5,
+                    #23d5ab
+                );
 
-    50% {
-        background-position:100% 50%;
-    }
+            --card-bg:
+                linear-gradient(
+                    -45deg,
+                    rgba(255,255,255,.45),
+                    rgba(255,240,245,.55),
+                    rgba(224,242,254,.45),
+                    rgba(220,252,231,.45)
+                );
 
-    100% {
-        background-position:0% 50%;
-    }
-}
+            --card-border:
+                rgba(255,255,255,.6);
 
-.app-card {
+            --card-shadow:
+                0 25px 50px -12px rgba(0,0,0,.25);
 
-    width:100%;
-    max-width:380px;
+            --text-title:#0F172A;
+            --text-subtitle:#334155;
+            --text-main:#0F172A;
+            --text-label:#475569;
 
-    min-height:520px;
+            --box-bg:
+                rgba(255,255,255,.35);
 
-    position:relative;
-    overflow:hidden;
+            --box-bg-hover:
+                rgba(255,255,255,.55);
 
-    padding:44px 24px 36px;
+            --box-border:
+                rgba(255,255,255,.4);
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+            --toast-bg:#fff;
+            --toast-text:#0F172A;
+        }
 
-    border-radius:32px;
-    border:1px solid var(--card-border);
 
-    background:var(--card-bg);
-    background-size:400% 400%;
+        * {
 
-    animation:gradientBG 15s ease infinite;
+            box-sizing:border-box;
 
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
+            margin:0;
+            padding:0;
 
-    box-shadow:var(--card-shadow);
-}
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
 
-.theme-toggle-btn {
+            transition:
+                background-color .4s ease,
+                border-color .4s ease,
+                color .3s ease;
+        }
 
-    position:absolute;
 
-    top:20px;
-    right:20px;
+        body {
 
-    z-index:20;
+            min-height:100vh;
 
-    width:40px;
-    height:40px;
+            display:flex;
 
-    border-radius:50%;
+            justify-content:center;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+            align-items:center;
 
-    background:var(--box-bg);
-    border:1px solid var(--card-border);
+            background:
+                var(--bg-gradient);
 
-    color:var(--text-title);
+            background-size:
+                400% 400%;
 
-    cursor:pointer;
+            animation:
+                gradientBG 15s ease infinite;
 
-    font-size:16px;
-}
+            padding:20px;
 
-.theme-toggle-btn:hover {
-    transform:scale(1.1) rotate(10deg);
-}
+            position:relative;
+        }
 
-.page {
-    width:100%;
-}
 
-.page-main {
+        @keyframes gradientBG {
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+            0% {
+                background-position:0% 50%;
+            }
 
-    text-align:center;
+            50% {
+                background-position:100% 50%;
+            }
 
-    transition:
-        all .5s cubic-bezier(.4,0,.2,1);
-}
+            100% {
+                background-position:0% 50%;
+            }
+        }
 
-.sub-page {
 
-    position:absolute;
+        /* =========================
+           CARD
+        ========================== */
 
-    top:0;
-    left:100%;
+        .app-card {
 
-    width:100%;
-    height:100%;
+            background:
+                var(--card-bg);
 
-    padding:30px 24px;
+            background-size:
+                400% 400%;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+            animation:
+                gradientBG 15s ease infinite;
 
-    overflow-y:auto;
+            backdrop-filter:
+                blur(25px);
 
-    opacity:0;
-    pointer-events:none;
+            -webkit-backdrop-filter:
+                blur(25px);
 
-    background:var(--card-bg);
-    background-size:400% 400%;
+            width:100%;
 
-    animation:gradientBG 15s ease infinite;
+            max-width:380px;
 
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
+            border-radius:32px;
 
-    transition:
-        all .5s cubic-bezier(.4,0,.2,1);
-}
+            border:
+                1px solid var(--card-border);
 
-.app-card.show-iban .page-main,
-.app-card.show-contact .page-main {
+            box-shadow:
+                var(--card-shadow);
 
-    transform:translateX(-100%) scale(.9);
+            padding:
+                44px 24px 36px;
 
-    opacity:0;
-    pointer-events:none;
-}
+            position:relative;
 
-.app-card.show-iban #ibanPage,
-.app-card.show-contact #contactPage {
+            overflow:hidden;
 
-    left:0;
+            min-height:520px;
 
-    opacity:1;
+            display:flex;
 
-    pointer-events:auto;
-}
+            flex-direction:column;
 
-h1 {
+            justify-content:center;
+        }
 
-    font-size:28px;
-    font-weight:800;
 
-    color:var(--text-title);
+        /* =========================
+           THEME
+        ========================== */
 
-    margin-bottom:8px;
+        .theme-toggle-btn {
 
-    letter-spacing:-.5px;
-}
+            position:absolute;
 
-.subtitle {
+            top:20px;
+            right:20px;
 
-    font-size:14px;
+            z-index:10;
 
-    color:var(--text-subtitle);
+            background:
+                var(--box-bg);
 
-    margin-bottom:24px;
+            border:
+                1px solid var(--card-border);
 
-    line-height:1.5;
+            width:40px;
+            height:40px;
 
-    font-weight:600;
-}
+            border-radius:50%;
 
-.btn-list {
+            display:flex;
 
-    width:100%;
+            align-items:center;
+            justify-content:center;
 
-    display:flex;
-    flex-direction:column;
+            color:
+                var(--text-title);
 
-    gap:16px;
-}
+            font-size:16px;
 
-.btn {
+            cursor:pointer;
 
-    width:100%;
+            box-shadow:
+                0 4px 12px rgba(0,0,0,.1);
+        }
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-    gap:12px;
+        .theme-toggle-btn:hover {
 
-    padding:16px;
+            transform:
+                scale(1.12)
+                rotate(15deg);
 
-    border:0;
-    border-radius:18px;
+            background:
+                var(--box-bg-hover);
+        }
 
-    color:#fff;
 
-    font-weight:700;
-    font-size:15px;
+        /* =========================
+           PAGES
+        ========================== */
 
-    text-decoration:none;
+        .page {
 
-    cursor:pointer;
+            width:100%;
 
-    transition:
-        all .25s cubic-bezier(.34,1.56,.64,1);
-}
+            transition:
+                all .5s
+                cubic-bezier(.4,0,.2,1);
+        }
 
-.btn:hover {
-    transform:translateY(-3px) scale(1.02);
-}
 
-.btn:active {
-    transform:scale(.98);
-}
+        .page-main {
 
-.btn-google {
-    background:var(--primary-blue);
-    box-shadow:0 10px 20px -5px rgba(59,130,246,.5);
-}
+            display:flex;
 
-.btn-instagram {
-    background:var(--primary-pink);
-    box-shadow:0 10px 20px -5px rgba(225,48,108,.5);
-}
+            flex-direction:column;
 
-.btn-iban {
-    background:var(--primary-green);
-    box-shadow:0 10px 20px -5px rgba(4,120,87,.5);
-}
+            align-items:center;
 
-.btn-contact {
-    background:var(--primary-purple);
-    box-shadow:0 10px 20px -5px rgba(139,92,246,.5);
-}
+            text-align:center;
+        }
 
-.page-header {
 
-    text-align:center;
+        .sub-page {
 
-    margin-bottom:20px;
-}
+            position:absolute;
 
-.page-header h2 {
+            top:0;
+            left:100%;
 
-    font-size:22px;
+            width:100%;
+            height:100%;
 
-    font-weight:800;
+            padding:30px 24px;
 
-    color:var(--text-title);
-}
+            background:
+                var(--card-bg);
 
-.info-box {
+            background-size:
+                400% 400%;
 
-    background:var(--box-bg);
+            animation:
+                gradientBG 15s ease infinite;
 
-    border:1px solid var(--box-border);
+            backdrop-filter:
+                blur(25px);
 
-    border-radius:18px;
+            -webkit-backdrop-filter:
+                blur(25px);
 
-    padding:14px;
+            display:flex;
 
-    margin-bottom:12px;
+            flex-direction:column;
 
-    display:flex;
+            justify-content:space-between;
 
-    justify-content:space-between;
-    align-items:center;
-}
+            opacity:0;
 
-.info-details {
+            pointer-events:none;
 
-    display:flex;
-    flex-direction:column;
+            overflow-y:auto;
 
-    gap:4px;
+            transition:
+                all .5s
+                cubic-bezier(.4,0,.2,1);
+        }
 
-    overflow:hidden;
-}
 
-.info-label {
+        .app-card.show-iban
+        .page-main,
 
-    font-size:10px;
+        .app-card.show-contact
+        .page-main {
 
-    text-transform:uppercase;
+            transform:
+                translateX(-100%)
+                scale(.9);
 
-    font-weight:800;
+            opacity:0;
 
-    color:var(--text-label);
+            pointer-events:none;
+        }
 
-    letter-spacing:.8px;
-}
 
-.info-value {
+        .app-card.show-iban
+        #ibanPage {
 
-    font-size:14px;
+            left:0;
 
-    font-weight:700;
+            opacity:1;
 
-    color:var(--text-main);
+            pointer-events:auto;
+        }
 
-    word-break:break-all;
-}
 
-.copy-icon-btn {
+        .app-card.show-contact
+        #contactPage {
 
-    width:40px;
-    height:40px;
+            left:0;
 
-    flex-shrink:0;
+            opacity:1;
 
-    margin-left:10px;
+            pointer-events:auto;
+        }
 
-    border-radius:12px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+        /* =========================
+           TITLES
+        ========================== */
 
-    background:var(--box-bg);
+        h1 {
 
-    border:1px solid var(--box-border);
+            font-size:28px;
 
-    color:var(--text-main);
+            font-weight:800;
 
-    cursor:pointer;
-}
+            color:
+                var(--text-title);
 
-.copy-icon-btn:hover {
+            margin-bottom:8px;
+        }
 
-    background:#8B5CF6;
 
-    color:#fff;
+        .subtitle {
 
-    border-color:#8B5CF6;
+            font-size:14px;
 
-    transform:scale(1.08);
-}
+            color:
+                var(--text-subtitle);
 
-.section-title {
+            margin-bottom:24px;
 
-    font-size:11px;
+            line-height:1.5;
 
-    text-transform:uppercase;
+            font-weight:600;
+        }
 
-    font-weight:800;
 
-    color:var(--text-label);
+        /* =========================
+           BUTTONS
+        ========================== */
 
-    letter-spacing:.8px;
+        .btn-list {
 
-    margin:16px 0 8px;
+            width:100%;
 
-    text-align:center;
-}
+            display:flex;
 
-.bank-grid {
+            flex-direction:column;
 
-    display:grid;
+            gap:16px;
+        }
 
-    grid-template-columns:repeat(2,1fr);
 
-    gap:8px;
+        .btn {
 
-    margin-bottom:16px;
-}
+            display:flex;
 
-.btn-bank {
+            align-items:center;
 
-    background:var(--box-bg);
+            justify-content:center;
 
-    border:1px solid var(--box-border);
+            gap:12px;
 
-    border-radius:12px;
+            width:100%;
 
-    padding:12px 8px;
+            padding:16px;
 
-    color:var(--text-main);
+            border-radius:18px;
 
-    font-weight:700;
+            color:#fff;
 
-    font-size:12px;
+            font-weight:700;
 
-    display:flex;
+            font-size:15px;
 
-    align-items:center;
-    justify-content:center;
+            text-decoration:none;
 
-    gap:6px;
+            border:none;
 
-    cursor:pointer;
+            cursor:pointer;
 
-    transition:.2s ease;
-}
+            position:relative;
 
-.btn-bank:hover {
+            overflow:hidden;
 
-    background:var(--box-bg-hover);
+            transition:
+                all .3s
+                cubic-bezier(.34,1.56,.64,1);
+        }
 
-    transform:translateY(-2px);
-}
 
-.btn-back {
+        .btn:hover {
 
-    background:var(--box-bg);
+            transform:
+                translateY(-3px)
+                scale(1.02);
+        }
 
-    color:var(--text-main);
 
-    border:1px solid var(--box-border);
+        .btn:active {
 
-    margin-top:10px;
-}
+            transform:
+                translateY(0)
+                scale(.98);
+        }
 
-.toast {
 
-    position:fixed;
+        .btn-google {
 
-    bottom:30px;
-    left:50%;
+            background:
+                var(--primary-blue);
 
-    transform:
-        translateX(-50%)
-        translateY(100px);
+            box-shadow:
+                0 10px 20px -5px
+                rgba(59,130,246,.5);
+        }
 
-    opacity:0;
 
-    z-index:1000;
+        .btn-instagram {
 
-    max-width:calc(100vw - 40px);
+            background:
+                var(--primary-pink);
 
-    white-space:nowrap;
+            box-shadow:
+                0 10px 20px -5px
+                rgba(225,48,108,.5);
+        }
 
-    display:flex;
-    align-items:center;
 
-    gap:10px;
+        .btn-iban {
 
-    padding:14px 28px;
+            background:
+                var(--primary-green);
 
-    border-radius:50px;
+            box-shadow:
+                0 10px 20px -5px
+                rgba(4,120,87,.5);
+        }
 
-    background:var(--toast-bg);
-    color:var(--toast-text);
 
-    border:1px solid var(--box-border);
+        .btn-contact {
 
-    box-shadow:0 20px 25px -5px rgba(0,0,0,.3);
+            background:
+                var(--primary-purple);
 
-    transition:
-        all .4s cubic-bezier(.175,.885,.32,1.275);
-}
+            box-shadow:
+                0 10px 20px -5px
+                rgba(139,92,246,.5);
+        }
 
-.toast.show {
 
-    transform:
-        translateX(-50%)
-        translateY(0);
+        /* =========================
+           SUB PAGE
+        ========================== */
 
-    opacity:1;
-}
+        .page-header {
 
-.toast i {
+            text-align:center;
 
-    color:#8B5CF6;
+            margin-bottom:20px;
+        }
 
-    font-size:18px;
-}
 
-@media(max-width:420px) {
+        .page-header h2 {
 
-    body {
-        padding:12px;
-    }
+            font-size:22px;
 
-    .app-card {
+            font-weight:800;
 
-        max-width:100%;
+            color:
+                var(--text-title);
+        }
 
-        min-height:540px;
 
-        border-radius:28px;
+        /* =========================
+           INFO
+        ========================== */
 
-        padding-left:20px;
-        padding-right:20px;
-    }
-}
+        .info-box {
 
-</style>
+            background:
+                var(--box-bg);
+
+            border:
+                1px solid var(--box-border);
+
+            border-radius:18px;
+
+            padding:14px;
+
+            margin-bottom:12px;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+        }
+
+
+        .info-details {
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:4px;
+
+            overflow:hidden;
+        }
+
+
+        .info-label {
+
+            font-size:10px;
+
+            text-transform:uppercase;
+
+            font-weight:800;
+
+            color:
+                var(--text-label);
+
+            letter-spacing:.8px;
+        }
+
+
+        .info-value {
+
+            font-size:14px;
+
+            font-weight:700;
+
+            color:
+                var(--text-main);
+
+            word-break:break-all;
+        }
+
+
+        /* =========================
+           COPY
+        ========================== */
+
+        .copy-icon-btn {
+
+            background:
+                var(--box-bg);
+
+            border:
+                1px solid var(--box-border);
+
+            width:40px;
+            height:40px;
+
+            border-radius:12px;
+
+            display:flex;
+
+            align-items:center;
+            justify-content:center;
+
+            color:
+                var(--text-main);
+
+            cursor:pointer;
+
+            flex-shrink:0;
+
+            margin-left:10px;
+        }
+
+
+        .copy-icon-btn:hover {
+
+            background:#8B5CF6;
+
+            color:#fff;
+
+            border-color:#8B5CF6;
+
+            transform:scale(1.1);
+        }
+
+
+        /* =========================
+           BANKS
+        ========================== */
+
+        .section-title {
+
+            font-size:11px;
+
+            text-transform:uppercase;
+
+            font-weight:800;
+
+            color:
+                var(--text-label);
+
+            letter-spacing:.8px;
+
+            margin:16px 0 8px;
+
+            text-align:center;
+        }
+
+
+        .bank-grid {
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap:8px;
+
+            margin-bottom:16px;
+        }
+
+
+        .btn-bank {
+
+            background:
+                var(--box-bg);
+
+            border:
+                1px solid var(--box-border);
+
+            border-radius:12px;
+
+            padding:10px;
+
+            color:
+                var(--text-main);
+
+            font-weight:600;
+
+            font-size:12px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            gap:6px;
+
+            cursor:pointer;
+        }
+
+
+        .btn-bank:hover {
+
+            background:
+                var(--box-bg-hover);
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =========================
+           BACK
+        ========================== */
+
+        .btn-back {
+
+            background:
+                var(--box-bg);
+
+            color:
+                var(--text-main);
+
+            border:
+                1px solid var(--box-border);
+
+            padding:12px;
+
+            font-size:14px;
+
+            margin-top:10px;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================== */
+
+        .toast {
+
+            position:fixed;
+
+            bottom:30px;
+            left:50%;
+
+            transform:
+                translateX(-50%)
+                translateY(100px);
+
+            background:
+                var(--toast-bg);
+
+            color:
+                var(--toast-text);
+
+            padding:
+                14px 28px;
+
+            border-radius:50px;
+
+            font-weight:600;
+
+            font-size:14px;
+
+            box-shadow:
+                0 20px 25px -5px
+                rgba(0,0,0,.3);
+
+            opacity:0;
+
+            transition:
+                all .4s
+                cubic-bezier(
+                    .175,
+                    .885,
+                    .32,
+                    1.275
+                );
+
+            z-index:1000;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:10px;
+
+            max-width:
+                calc(100vw - 40px);
+
+            white-space:nowrap;
+        }
+
+
+        .toast.show {
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+            opacity:1;
+        }
+
+
+        .toast i {
+
+            color:#8B5CF6;
+
+            font-size:18px;
+        }
+
+
+        @media(max-width:420px) {
+
+            body {
+                padding:12px;
+            }
+
+            .app-card {
+
+                max-width:100%;
+
+                min-height:540px;
+
+                border-radius:28px;
+
+                padding-left:20px;
+                padding-right:20px;
+            }
+        }
+
+    </style>
 
 </head>
 
@@ -633,355 +890,442 @@ h1 {
 <body>
 
 
-<div class="app-card" id="appCard">
-
-
-<button
-    class="theme-toggle-btn"
-    id="themeToggleBtn"
-    onclick="toggleTheme()"
-    aria-label="Temayı Değiştir"
->
-
-    <i
-        class="fa-solid fa-sun"
-        id="themeIcon"
-    ></i>
-
-</button>
-
-
-<!-- ANA SAYFA -->
-
-<div class="page page-main">
-
-    <h1 id="displayBusinessName">
-        İşletme Adı
-    </h1>
-
-    <p class="subtitle">
-        Bizi Değerlendirin ve Sosyal Medyada Takip Edin.
-    </p>
-
-    <div class="btn-list">
-
-        <a
-            href="#"
-            id="linkGoogle"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-google"
-        >
-
-            <i class="fa-brands fa-google"></i>
-
-            Google'da Konumumuz
-
-        </a>
-
-
-        <a
-            href="#"
-            id="linkInstagram"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-instagram"
-        >
-
-            <i class="fa-brands fa-instagram"></i>
-
-            Instagram'da Takip Et
-
-        </a>
-
-
-        <button
-            class="btn btn-iban"
-            onclick="openPage('show-iban')"
-        >
-
-            <i class="fa-regular fa-credit-card"></i>
-
-            IBAN Bilgileri
-
-        </button>
-
-
-        <button
-            class="btn btn-contact"
-            onclick="openPage('show-contact')"
-        >
-
-            <i class="fa-solid fa-address-book"></i>
-
-            İletişim Bilgileri
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- IBAN SAYFASI -->
-
 <div
-    class="sub-page"
-    id="ibanPage"
+    class="app-card"
+    id="appCard"
 >
 
-<div>
 
-    <div class="page-header">
+    <!-- TEMA -->
 
-        <h2>
-            Banka Bilgileri
-        </h2>
+    <button
+        class="theme-toggle-btn"
+        onclick="toggleTheme()"
+        aria-label="Temayı Değiştir"
+    >
 
-        <p
-            class="subtitle"
-            style="margin-bottom:12px;"
+        <i
+            class="fa-solid fa-sun"
+            id="themeIcon"
+        ></i>
+
+    </button>
+
+
+    <!-- ANA SAYFA -->
+
+    <div
+        class="page page-main"
+    >
+
+        <h1
+            id="displayBusinessName"
         >
-            IBAN kopyalayıp banka uygulamasını açabilirsiniz.
+            İşletme Adı
+        </h1>
+
+
+        <p class="subtitle">
+
+            Bizi Değerlendirin ve
+            Sosyal Medyada Takip Edin.
+
         </p>
 
-    </div>
+
+        <div class="btn-list">
 
 
-    <div class="info-box">
-
-        <div class="info-details">
-
-            <span class="info-label">
-                ALICI İSİM SOYİSİM
-            </span>
-
-            <span
-                class="info-value"
-                id="nameText"
+            <a
+                href="#"
+                id="linkGoogle"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-google"
             >
-                -
-            </span>
+
+                <i
+                    class="fa-brands fa-google"
+                ></i>
+
+                Google'da Konumumuz
+
+            </a>
+
+
+            <a
+                href="#"
+                id="linkInstagram"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-instagram"
+            >
+
+                <i
+                    class="fa-brands fa-instagram"
+                ></i>
+
+                Instagram'da Takip Et
+
+            </a>
+
+
+            <button
+                class="btn btn-iban"
+                onclick="openPage('show-iban')"
+            >
+
+                <i
+                    class="fa-regular fa-credit-card"
+                ></i>
+
+                IBAN Bilgileri
+
+            </button>
+
+
+            <button
+                class="btn btn-contact"
+                onclick="openPage('show-contact')"
+            >
+
+                <i
+                    class="fa-solid fa-address-book"
+                ></i>
+
+                İletişim Bilgileri
+
+            </button>
+
 
         </div>
 
-        <button
-            class="copy-icon-btn"
-            onclick="copyToClipboard('nameText','İsim Soyisim')"
-        >
-
-            <i class="fa-regular fa-copy"></i>
-
-        </button>
-
     </div>
 
 
-    <div class="info-box">
+    <!-- IBAN -->
 
-        <div class="info-details">
+    <div
+        class="sub-page"
+        id="ibanPage"
+    >
 
-            <span class="info-label">
-                IBAN NUMARASI
-            </span>
+        <div>
 
-            <span
-                class="info-value"
-                id="ibanText"
-            >
-                -
-            </span>
+            <div class="page-header">
+
+                <h2>
+                    Banka Bilgileri
+                </h2>
+
+                <p
+                    class="subtitle"
+                    style="margin-bottom:12px"
+                >
+                    IBAN kopyalayıp banka uygulamasını açabilirsiniz.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-details">
+
+                    <span class="info-label">
+                        ALICI İSİM SOYİSİM
+                    </span>
+
+                    <span
+                        class="info-value"
+                        id="nameText"
+                    >
+                        -
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="copy-icon-btn"
+                    onclick="
+                        copyToClipboard(
+                            'nameText',
+                            'İsim Soyisim'
+                        )
+                    "
+                >
+
+                    <i
+                        class="fa-regular fa-copy"
+                    ></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-details">
+
+                    <span class="info-label">
+                        IBAN NUMARASI
+                    </span>
+
+                    <span
+                        class="info-value"
+                        id="ibanText"
+                    >
+                        -
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="copy-icon-btn"
+                    onclick="
+                        copyToClipboard(
+                            'ibanText',
+                            'IBAN'
+                        )
+                    "
+                >
+
+                    <i
+                        class="fa-regular fa-copy"
+                    ></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="section-title">
+                Hızlı Banka Erişimi
+            </div>
+
+
+            <div class="bank-grid">
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('ziraat')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    Ziraat
+
+                </button>
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('garanti')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    Garanti
+
+                </button>
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('isbankasi')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    İş Bankası
+
+                </button>
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('yapikredi')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    Yapı Kredi
+
+                </button>
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('akbank')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    Akbank
+
+                </button>
+
+
+                <button
+                    class="btn-bank"
+                    onclick="openBank('vakifbank')"
+                >
+
+                    <i
+                        class="fa-solid fa-building-columns"
+                    ></i>
+
+                    VakıfBank
+
+                </button>
+
+
+            </div>
 
         </div>
 
+
         <button
-            class="copy-icon-btn"
-            onclick="copyToClipboard('ibanText','IBAN')"
+            class="btn btn-back"
+            onclick="closePages()"
         >
 
-            <i class="fa-regular fa-copy"></i>
+            <i
+                class="fa-solid fa-arrow-left"
+            ></i>
+
+            Geri Dön
 
         </button>
 
     </div>
 
 
-    <div class="section-title">
-        BANKA UYGULAMASINI AÇ
-    </div>
+    <!-- CONTACT -->
+
+    <div
+        class="sub-page"
+        id="contactPage"
+    >
+
+        <div>
+
+            <div class="page-header">
+
+                <h2>
+                    İletişim Bilgileri
+                </h2>
+
+                <p
+                    class="subtitle"
+                    style="margin-bottom:16px"
+                >
+                    İşletmemize ait doğrudan iletişim kanalları
+                </p>
+
+            </div>
 
 
-    <div class="bank-grid">
+            <div class="info-box">
+
+                <div class="info-details">
+
+                    <span class="info-label">
+                        TELEFON NUMARASI
+                    </span>
+
+                    <span
+                        class="info-value"
+                        id="phoneText"
+                    >
+                        -
+                    </span>
+
+                </div>
 
 
-        <button
-            class="btn-bank"
-            onclick="openBank('ziraat')"
-        >
+                <button
+                    class="copy-icon-btn"
+                    onclick="
+                        copyToClipboard(
+                            'phoneText',
+                            'Telefon Numarası'
+                        )
+                    "
+                >
 
-            <i class="fa-solid fa-building-columns"></i>
+                    <i
+                        class="fa-regular fa-copy"
+                    ></i>
 
-            Ziraat
+                </button>
 
-        </button>
-
-
-        <button
-            class="btn-bank"
-            onclick="openBank('garanti')"
-        >
-
-            <i class="fa-solid fa-building-columns"></i>
-
-            Garanti
-
-        </button>
+            </div>
 
 
-        <button
-            class="btn-bank"
-            onclick="openBank('isbankasi')"
-        >
+            <div class="info-box">
 
-            <i class="fa-solid fa-building-columns"></i>
+                <div class="info-details">
 
-            İş Bankası
+                    <span class="info-label">
+                        E-POSTA ADRESİ
+                    </span>
 
-        </button>
+                    <span
+                        class="info-value"
+                        id="emailText"
+                    >
+                        -
+                    </span>
 
-
-        <button
-            class="btn-bank"
-            onclick="openBank('yapikredi')"
-        >
-
-            <i class="fa-solid fa-building-columns"></i>
-
-            Yapı Kredi
-
-        </button>
+                </div>
 
 
-        <button
-            class="btn-bank"
-            onclick="openBank('akbank')"
-        >
+                <button
+                    class="copy-icon-btn"
+                    onclick="
+                        copyToClipboard(
+                            'emailText',
+                            'E-Posta Adresi'
+                        )
+                    "
+                >
 
-            <i class="fa-solid fa-building-columns"></i>
+                    <i
+                        class="fa-regular fa-copy"
+                    ></i>
 
-            Akbank
+                </button>
 
-        </button>
-
-
-        <button
-            class="btn-bank"
-            onclick="openBank('vakifbank')"
-        >
-
-            <i class="fa-solid fa-building-columns"></i>
-
-            VakıfBank
-
-        </button>
-
-
-    </div>
-
-</div>
-
-
-<button
-    class="btn btn-back"
-    onclick="closePages()"
->
-
-    <i class="fa-solid fa-arrow-left"></i>
-
-    Geri Dön
-
-</button>
-
-</div>
-
-
-<!-- İLETİŞİM -->
-
-<div
-    class="sub-page"
-    id="contactPage"
->
-
-<div>
-
-    <div class="page-header">
-
-        <h2>
-            İletişim Bilgileri
-        </h2>
-
-        <p
-            class="subtitle"
-            style="margin-bottom:16px;"
-        >
-            İşletmemize ait doğrudan iletişim kanalları
-        </p>
-
-    </div>
-
-
-    <div class="info-box">
-
-        <div class="info-details">
-
-            <span class="info-label">
-                TELEFON NUMARASI
-            </span>
-
-            <span
-                class="info-value"
-                id="phoneText"
-            >
-                -
-            </span>
+            </div>
 
         </div>
 
-        <button
-            class="copy-icon-btn"
-            onclick="copyToClipboard('phoneText','Telefon Numarası')"
-        >
-
-            <i class="fa-regular fa-copy"></i>
-
-        </button>
-
-    </div>
-
-
-    <div class="info-box">
-
-        <div class="info-details">
-
-            <span class="info-label">
-                E-POSTA ADRESİ
-            </span>
-
-            <span
-                class="info-value"
-                id="emailText"
-            >
-                -
-            </span>
-
-        </div>
 
         <button
-            class="copy-icon-btn"
-            onclick="copyToClipboard('emailText','E-Posta Adresi')"
+            class="btn btn-back"
+            onclick="closePages()"
         >
 
-            <i class="fa-regular fa-copy"></i>
+            <i
+                class="fa-solid fa-arrow-left"
+            ></i>
+
+            Geri Dön
 
         </button>
 
@@ -990,22 +1334,7 @@ h1 {
 </div>
 
 
-<button
-    class="btn btn-back"
-    onclick="closePages()"
->
-
-    <i class="fa-solid fa-arrow-left"></i>
-
-    Geri Dön
-
-</button>
-
-</div>
-
-
-</div>
-
+<!-- TOAST -->
 
 <div
     class="toast"
@@ -1014,7 +1343,9 @@ h1 {
     aria-live="polite"
 >
 
-    <i class="fa-solid fa-circle-check"></i>
+    <i
+        class="fa-solid fa-circle-check"
+    ></i>
 
     <span id="toastMsg">
         Kopyalandı!
@@ -1026,13 +1357,14 @@ h1 {
 <script>
 
 
-/* ==========================================================
+/* =========================================================
    İŞLETME BİLGİLERİ
-========================================================== */
+========================================================= */
 
 const businessData = {
 
-    name: "NFCHanem",
+    name:
+        "NFCHanem",
 
     googleMapsUrl:
         "https://maps.google.com",
@@ -1051,192 +1383,155 @@ const businessData = {
 
     email:
         "info@nfchanem.com"
-
 };
 
 
-/* ==========================================================
+/* =========================================================
    BANKALAR
+=========================================================
 
-   Android tarafında gerçek uygulama PACKAGE ID kullanıyoruz.
+   ÖNEMLİ:
 
-   Bunlar:
-   Ziraat:
-   com.ziraat.ziraatmobil
+   Burada sadece doğrulanmış / kullanılabilir bağlantı
+   yöntemlerini kullanıyoruz.
 
-   Garanti:
-   com.garanti.cepsubesi
+   Eğer bankanın uygulaması dışarıdan deep-link kabul
+   etmiyorsa resmi web adresine gidiyoruz.
 
-   İş Bankası:
-   com.isbank.iscep
+========================================================= */
 
-   Yapı Kredi:
-   com.ykb.android
-
-   Akbank:
-   com.akbank.android.apps.akbank_direkt
-
-   VakıfBank:
-   com.vakifbank.mobile
-========================================================== */
-
-const bankLinks = {
+const banks = {
 
     ziraat: {
 
-        name: "Ziraat Mobil",
-
-        androidPackage:
-            "com.ziraat.ziraatmobil",
-
-        /*
-         * Eski/uygulamaya bağlı scheme.
-         * iOS'ta banka uygulaması destekliyorsa açılır.
-         */
-        iosScheme:
-            "ziraatmobil://",
+        name:
+            "Ziraat Bankası",
 
         web:
-            "https://www.ziraatbank.com.tr/tr/dijital-bankacilik/mobil-bankacilik/ziraat-mobil",
+            "https://www.ziraatbank.com.tr/",
 
-        appStore:
-            "https://apps.apple.com/tr/app/ziraat-mobil/id885993234",
+        ios:
+            null,
 
-        playStore:
-            "https://play.google.com/store/apps/details?id=com.ziraat.ziraatmobil"
+        android:
+            null
     },
 
 
     garanti: {
 
-        name: "Garanti BBVA Mobil",
-
-        androidPackage:
-            "com.garanti.cepsubesi",
-
-        iosScheme:
-            "garanti://",
+        name:
+            "Garanti BBVA",
 
         web:
-            "https://www.garantibbva.com.tr/dijital-bankacilik/mobil-bankacilik",
+            "https://www.garantibbva.com.tr/",
 
-        appStore:
-            "https://apps.apple.com/tr/search?term=Garanti%20BBVA%20Mobil",
+        ios:
+            null,
 
-        playStore:
-            "https://play.google.com/store/apps/details?id=com.garanti.cepsubesi"
+        android:
+            null
     },
 
 
     isbankasi: {
 
-        name: "İşCep",
-
-        androidPackage:
-            "com.isbank.iscep",
-
-        /*
-         * İş Bankası'nın mevcut yapısında çalışan scheme.
-         */
-        iosScheme:
-            "iscep://",
+        name:
+            "İş Bankası",
 
         web:
-            "https://www.isbank.com.tr/iscep",
+            "https://www.isbank.com.tr/",
 
-        appStore:
-            "https://apps.apple.com/tr/search?term=%C4%B0%C5%9FCep",
+        /*
+         * İşCep için daha önce cihazında çalışan yöntem.
+         */
 
-        playStore:
-            "https://play.google.com/store/search?q=%C4%B0%C5%9FCep&c=apps"
+        ios:
+            "iscep://",
+
+        android:
+            "iscep://"
     },
 
 
     yapikredi: {
 
-        name: "Yapı Kredi Mobil",
-
-        androidPackage:
-            "com.ykb.android",
-
-        iosScheme:
-            "ykb://",
+        name:
+            "Yapı Kredi",
 
         web:
-            "https://www.yapikredi.com.tr/kendim-icin/sinirsiz-bankacilik/mobil-bankacilik/yapi-kredi-mobil/",
+            "https://www.yapikredi.com.tr/",
 
-        appStore:
-            "https://apps.apple.com/tr/app/yap%C4%B1-kredi-mobile-superapp/id458627086",
+        ios:
+            null,
 
-        playStore:
-            "https://play.google.com/store/apps/details?id=com.ykb.android"
+        android:
+            null
     },
 
 
     akbank: {
 
-        name: "Akbank Mobil",
-
-        androidPackage:
-            "com.akbank.android.apps.akbank_direkt",
-
-        iosScheme:
-            "akbank://",
+        name:
+            "Akbank",
 
         web:
-            "https://www.akbank.com/dijital-bankacilik/akbank-mobil",
+            "https://www.akbank.com/",
 
-        appStore:
-            "https://apps.apple.com/tr/app/akbank-mobile/id560516360",
+        ios:
+            null,
 
-        playStore:
-            "https://play.google.com/store/apps/details?id=com.akbank.android.apps.akbank_direkt"
+        android:
+            null
     },
 
 
     vakifbank: {
 
-        name: "VakıfBank Mobil",
-
-        androidPackage:
-            "com.vakifbank.mobile",
-
-        iosScheme:
-            "vakifbank://",
+        name:
+            "VakıfBank",
 
         web:
-            "https://www.vakifbank.com.tr/mobil-bankacilik",
+            "https://www.vakifbank.com.tr/",
 
-        appStore:
-            "https://apps.apple.com/tr/app/vak%C4%B1fbank-mobil-bankac%C4%B1l%C4%B1k/id853569450",
+        ios:
+            null,
 
-        playStore:
-            "https://play.google.com/store/apps/details?id=com.vakifbank.mobile"
+        android:
+            null
     }
 
 };
 
 
-/* ==========================================================
+/* =========================================================
    DOM
-========================================================== */
+========================================================= */
 
 const appCard =
-    document.getElementById("appCard");
+    document.getElementById(
+        "appCard"
+    );
 
 const toast =
-    document.getElementById("toast");
+    document.getElementById(
+        "toast"
+    );
 
 const toastMsg =
-    document.getElementById("toastMsg");
+    document.getElementById(
+        "toastMsg"
+    );
 
 const themeIcon =
-    document.getElementById("themeIcon");
+    document.getElementById(
+        "themeIcon"
+    );
 
 
-/* ==========================================================
-   VERİLER
-========================================================== */
+/* =========================================================
+   LOAD
+========================================================= */
 
 function loadBusinessData() {
 
@@ -1285,42 +1580,44 @@ function loadBusinessData() {
 }
 
 
-/* ==========================================================
-   TEMA
-========================================================== */
+/* =========================================================
+   THEME
+========================================================= */
 
 function initTheme() {
 
-    const savedTheme =
-        localStorage.getItem("selectedTheme") ||
-        "dark";
+    const saved =
+        localStorage.getItem(
+            "selectedTheme"
+        ) || "dark";
 
-    setTheme(savedTheme);
+    setTheme(saved);
 }
 
 
 function toggleTheme() {
 
-    const currentTheme =
-        document.documentElement.getAttribute(
-            "data-theme"
-        );
+    const current =
+        document.documentElement
+            .getAttribute(
+                "data-theme"
+            );
 
-    const newTheme =
-        currentTheme === "dark"
+    setTheme(
+        current === "dark"
             ? "light"
-            : "dark";
-
-    setTheme(newTheme);
+            : "dark"
+    );
 }
 
 
 function setTheme(theme) {
 
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme
-    );
+    document.documentElement
+        .setAttribute(
+            "data-theme",
+            theme
+        );
 
     localStorage.setItem(
         "selectedTheme",
@@ -1334,11 +1631,11 @@ function setTheme(theme) {
 }
 
 
-/* ==========================================================
-   SAYFA
-========================================================== */
+/* =========================================================
+   PAGE
+========================================================= */
 
-function openPage(className) {
+function openPage(page) {
 
     appCard.classList.remove(
         "show-iban",
@@ -1346,7 +1643,7 @@ function openPage(className) {
     );
 
     appCard.classList.add(
-        className
+        page
     );
 }
 
@@ -1360,40 +1657,11 @@ function closePages() {
 }
 
 
-/* ==========================================================
-   KOPYALAMA
-========================================================== */
+/* =========================================================
+   COPY
+========================================================= */
 
-function copyToClipboard(
-    elementId,
-    label
-) {
-
-    const element =
-        document.getElementById(elementId);
-
-    if (!element) {
-
-        showToast(
-            "Bilgi bulunamadı!"
-        );
-
-        return;
-    }
-
-
-    const text =
-        element.innerText.trim();
-
-
-    executeCopy(
-        text,
-        label
-    );
-}
-
-
-function executeCopy(
+async function copyText(
     text,
     label
 ) {
@@ -1404,41 +1672,38 @@ function executeCopy(
             "Kopyalanacak bilgi yok!"
         );
 
-        return;
+        return false;
     }
 
 
-    if (
-        navigator.clipboard &&
-        window.isSecureContext
-    ) {
+    try {
 
-        navigator.clipboard
-            .writeText(text)
+        if (
+            navigator.clipboard &&
+            window.isSecureContext
+        ) {
 
-            .then(() => {
+            await navigator.clipboard
+                .writeText(text);
 
-                showToast(
-                    label +
-                    " kopyalandı!"
-                );
+            showToast(
+                label +
+                " kopyalandı!"
+            );
 
-            })
+            return true;
+        }
 
-            .catch(() => {
+    } catch (error) {
 
-                fallbackCopy(
-                    text,
-                    label
-                );
-
-            });
-
-        return;
+        console.log(
+            "Clipboard API başarısız:",
+            error
+        );
     }
 
 
-    fallbackCopy(
+    return fallbackCopy(
         text,
         label
     );
@@ -1464,6 +1729,9 @@ function fallbackCopy(
     textarea.style.left =
         "-9999px";
 
+    textarea.style.top =
+        "0";
+
     textarea.setAttribute(
         "readonly",
         ""
@@ -1474,40 +1742,92 @@ function fallbackCopy(
     );
 
     textarea.focus();
+
     textarea.select();
+
+    textarea.setSelectionRange(
+        0,
+        textarea.value.length
+    );
+
+
+    let success = false;
+
 
     try {
 
-        const success =
+        success =
             document.execCommand(
                 "copy"
             );
 
-        showToast(
-            success
-                ? label + " kopyalandı!"
-                : "Kopyalama başarısız!"
-        );
-
     } catch (error) {
 
-        showToast(
-            "Kopyalama başarısız!"
-        );
-
+        success = false;
     }
+
 
     document.body.removeChild(
         textarea
     );
+
+
+    if (success) {
+
+        showToast(
+            label +
+            " kopyalandı!"
+        );
+
+    } else {
+
+        showToast(
+            "Kopyalama başarısız!"
+        );
+    }
+
+
+    return success;
 }
 
 
-/* ==========================================================
-   IBAN TEMİZLE
-========================================================== */
+function copyToClipboard(
+    elementId,
+    label
+) {
 
-function getCleanIBAN() {
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+    if (!element) {
+
+        showToast(
+            "Bilgi bulunamadı!"
+        );
+
+        return;
+    }
+
+
+    const text =
+        element.innerText
+            .trim();
+
+
+    copyText(
+        text,
+        label
+    );
+}
+
+
+/* =========================================================
+   IBAN
+========================================================= */
+
+function getIBAN() {
 
     const element =
         document.getElementById(
@@ -1518,33 +1838,23 @@ function getCleanIBAN() {
         return "";
     }
 
+
     return element.innerText
         .replace(/\s+/g, "")
         .trim();
 }
 
 
-/* ==========================================================
-   BANKA AÇMA
+/* =========================================================
+   BANKA AÇ
+========================================================= */
 
-   EN ÖNEMLİ KISIM BURASI.
-
-   ANDROID:
-   intent:// ile gerçek PACKAGE ID üzerinden
-   uygulamanın launcher activity'sini açmayı deniyoruz.
-
-   iOS:
-   Bankanın uygulamaya özel scheme'i deneniyor.
-
-   Uygulama açılmazsa:
-   resmi banka sayfasına gönderiyoruz.
-
-========================================================== */
-
-function openBank(bankKey) {
+async function openBank(
+    bankKey
+) {
 
     const bank =
-        bankLinks[bankKey];
+        banks[bankKey];
 
 
     if (!bank) {
@@ -1558,7 +1868,7 @@ function openBank(bankKey) {
 
 
     const iban =
-        getCleanIBAN();
+        getIBAN();
 
 
     if (!iban) {
@@ -1571,248 +1881,157 @@ function openBank(bankKey) {
     }
 
 
-    /* IBAN'I KOPYALA */
+    /*
+     * Önce IBAN'ı kopyala.
+     */
 
-    executeCopy(
+    await copyText(
         iban,
         "IBAN"
     );
 
 
+    /*
+     * Cihaz algıla.
+     */
+
     const ua =
         navigator.userAgent ||
-        navigator.vendor ||
-        window.opera ||
         "";
 
 
-    const isAndroid =
-        /Android/i.test(ua);
-
-
     const isIOS =
-        /iPhone|iPad|iPod/i.test(ua);
+        /iPhone|iPad|iPod/i
+            .test(ua);
 
 
-    const isMobile =
-        isAndroid ||
-        isIOS;
+    const isAndroid =
+        /Android/i
+            .test(ua);
 
+
+    /*
+     * iOS
+     */
+
+    if (
+        isIOS &&
+        bank.ios
+    ) {
+
+        launchApp(
+            bank.ios,
+            bank.web,
+            bank.name
+        );
+
+        return;
+    }
+
+
+    /*
+     * Android
+     */
+
+    if (
+        isAndroid &&
+        bank.android
+    ) {
+
+        launchAndroidApp(
+            bank.android,
+            bank.web,
+            bank.name
+        );
+
+        return;
+    }
+
+
+    /*
+     * Uygulamaya ait doğrulanmış
+     * deep-link bulunmuyorsa
+     * resmi banka sayfasına git.
+     */
 
     showToast(
         bank.name +
-        " açılıyor..."
+        " uygulama bağlantısı desteklenmiyor; resmi site açılıyor."
     );
 
 
-    /* ======================================================
-       ANDROID
-    ====================================================== */
-
-    if (isAndroid) {
-
-        openAndroidBank(
-            bank
-        );
-
-        return;
-    }
-
-
-    /* ======================================================
-       IOS
-    ====================================================== */
-
-    if (isIOS) {
-
-        openIOSBank(
-            bank
-        );
-
-        return;
-    }
-
-
-    /* ======================================================
-       MASAÜSTÜ
-    ====================================================== */
-
-    setTimeout(() => {
-
-        window.location.href =
-            bank.web;
-
-    }, 500);
-}
-
-
-/* ==========================================================
-   ANDROID UYGULAMA AÇ
-
-   ÖNEMLİ:
-   Burada custom scheme kullanmıyoruz.
-
-   Gerçek Android PACKAGE ID kullanıyoruz.
-
-   Chrome Android, intent URI üzerinden uygulama
-   paketini launcher ile açmayı deneyebilir.
-
-========================================================== */
-
-function openAndroidBank(bank) {
-
-    let fallbackDone =
-        false;
-
-
-    let timer;
-
-
-    const fallback = () => {
-
-        if (fallbackDone) {
-            return;
-        }
-
-        fallbackDone = true;
-
-
-        clearTimeout(timer);
-
-
-        showToast(
-            bank.name +
-            " uygulaması açılamadı."
-        );
-
-
-        /*
-         * Önce resmi banka mobil sayfasına gidiyoruz.
-         */
-        setTimeout(() => {
+    setTimeout(
+        () => {
 
             window.location.href =
                 bank.web;
 
-        }, 1000);
-    };
-
-
-    /*
-     * Sayfa tekrar görünür olduğunda
-     * uygulamadan geri dönülmüş olabilir.
-     */
-    const visibilityHandler = () => {
-
-        if (
-            document.visibilityState ===
-            "visible"
-        ) {
-
-            /*
-             * Biraz bekle.
-             */
-        }
-    };
-
-
-    document.addEventListener(
-        "visibilitychange",
-        visibilityHandler
+        },
+        900
     );
+}
 
 
-    /*
-     * Android Intent URI
-     *
-     * action MAIN
-     * category LAUNCHER
-     * package = gerçek banka uygulaması
-     */
+/* =========================================================
+   iOS APP LAUNCH
+========================================================= */
 
-    const intentUrl =
-        "intent:#Intent;" +
-        "action=android.intent.action.MAIN;" +
-        "category=android.intent.category.LAUNCHER;" +
-        "package=" +
-        encodeURIComponent(
-            bank.androidPackage
-        ) +
-        ";end";
+function launchApp(
+    scheme,
+    fallback,
+    bankName
+) {
+
+    let leftPage = false;
+
+    let timer = null;
 
 
-    try {
-
-        window.location.href =
-            intentUrl;
-
-    } catch (error) {
+    function cleanup() {
 
         document.removeEventListener(
             "visibilitychange",
             visibilityHandler
         );
 
-        fallback();
-
-        return;
+        window.removeEventListener(
+            "pagehide",
+            pageHideHandler
+        );
     }
 
 
-    /*
-     * Uygulama açılamadıysa fallback.
-     */
+    function visibilityHandler() {
 
-    timer =
-        setTimeout(() => {
+        if (document.hidden) {
 
-            document.removeEventListener(
-                "visibilitychange",
-                visibilityHandler
-            );
+            leftPage = true;
 
-            fallback();
+            if (timer) {
 
-        }, 1800);
-}
+                clearTimeout(
+                    timer
+                );
+            }
 
-
-/* ==========================================================
-   IOS UYGULAMA AÇ
-
-   iOS'ta web sitesinin herhangi bir uygulamayı zorla
-   açması mümkün değildir.
-
-   Uygulama kendi custom URL scheme'ini veya Universal Link
-   desteğini sağlamışsa açılır.
-
-   Açılmazsa resmi banka sayfasına düşer.
-
-========================================================== */
-
-function openIOSBank(bank) {
-
-    let appOpened =
-        false;
+            cleanup();
+        }
+    }
 
 
-    let fallbackTimer;
+    function pageHideHandler() {
 
+        leftPage = true;
 
-    const visibilityHandler = () => {
-
-        if (
-            document.visibilityState ===
-            "hidden"
-        ) {
-
-            appOpened = true;
+        if (timer) {
 
             clearTimeout(
-                fallbackTimer
+                timer
             );
         }
-    };
+
+        cleanup();
+    }
 
 
     document.addEventListener(
@@ -1821,82 +2040,189 @@ function openIOSBank(bank) {
     );
 
 
-    /*
-     * Bankanın uygulamasının scheme'i.
-     */
-
-    try {
-
-        window.location.href =
-            bank.iosScheme;
-
-    } catch (error) {
-
-        fallbackIOS(
-            bank
-        );
-
-        return;
-    }
-
-
-    /*
-     * Scheme çalışmazsa resmi mobil sayfaya git.
-     */
-
-    fallbackTimer =
-        setTimeout(() => {
-
-            document.removeEventListener(
-                "visibilitychange",
-                visibilityHandler
-            );
-
-
-            if (!appOpened) {
-
-                fallbackIOS(
-                    bank
-                );
-            }
-
-        }, 1800);
-}
-
-
-/* ==========================================================
-   IOS FALLBACK
-========================================================== */
-
-function fallbackIOS(bank) {
-
-    showToast(
-        bank.name +
-        " uygulaması doğrudan açılamadı."
+    window.addEventListener(
+        "pagehide",
+        pageHideHandler
     );
 
 
-    setTimeout(() => {
+    showToast(
+        bankName +
+        " uygulaması açılıyor..."
+    );
 
-        /*
-         * Bankanın resmi mobil bankacılık sayfası.
-         */
-        window.location.href =
-            bank.web;
 
-    }, 1000);
+    /*
+     * iOS'a scheme gönder.
+     */
+
+    window.location.href =
+        scheme;
+
+
+    /*
+     * Uygulama açılmazsa
+     * uzun süre beklemeden
+     * resmi siteye yönlendir.
+     */
+
+    timer =
+        setTimeout(
+            () => {
+
+                cleanup();
+
+                if (!leftPage) {
+
+                    showToast(
+                        "Uygulama açılamadı. Banka sitesi açılıyor..."
+                    );
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                fallback;
+
+                        },
+                        500
+                    );
+                }
+
+            },
+            1800
+        );
 }
 
 
-/* ==========================================================
+/* =========================================================
+   ANDROID APP LAUNCH
+========================================================= */
+
+function launchAndroidApp(
+    scheme,
+    fallback,
+    bankName
+) {
+
+    let leftPage = false;
+
+    let timer = null;
+
+
+    function cleanup() {
+
+        document.removeEventListener(
+            "visibilitychange",
+            visibilityHandler
+        );
+
+        window.removeEventListener(
+            "pagehide",
+            pageHideHandler
+        );
+    }
+
+
+    function visibilityHandler() {
+
+        if (document.hidden) {
+
+            leftPage = true;
+
+            if (timer) {
+
+                clearTimeout(
+                    timer
+                );
+            }
+
+            cleanup();
+        }
+    }
+
+
+    function pageHideHandler() {
+
+        leftPage = true;
+
+        if (timer) {
+
+            clearTimeout(
+                timer
+            );
+        }
+
+        cleanup();
+    }
+
+
+    document.addEventListener(
+        "visibilitychange",
+        visibilityHandler
+    );
+
+
+    window.addEventListener(
+        "pagehide",
+        pageHideHandler
+    );
+
+
+    showToast(
+        bankName +
+        " uygulaması açılıyor..."
+    );
+
+
+    /*
+     * Android custom scheme.
+     */
+
+    window.location.href =
+        scheme;
+
+
+    timer =
+        setTimeout(
+            () => {
+
+                cleanup();
+
+                if (!leftPage) {
+
+                    showToast(
+                        "Uygulama açılamadı. Banka sitesi açılıyor..."
+                    );
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                fallback;
+
+                        },
+                        500
+                    );
+                }
+
+            },
+            1800
+        );
+}
+
+
+/* =========================================================
    TOAST
-========================================================== */
+========================================================= */
 
 let toastTimer =
     null;
 
 
-function showToast(message) {
+function showToast(
+    message
+) {
 
     toastMsg.innerText =
         message;
@@ -1916,27 +2242,29 @@ function showToast(message) {
 
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        }, 2500);
+            },
+            3000
+        );
 }
 
 
-/* ==========================================================
+/* =========================================================
    ESC
-========================================================== */
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if (
-            event.key ===
-            "Escape"
+            event.key === "Escape"
         ) {
 
             closePages();
@@ -1946,9 +2274,9 @@ document.addEventListener(
 );
 
 
-/* ==========================================================
-   BAŞLANGIÇ
-========================================================== */
+/* =========================================================
+   START
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1964,4 +2292,5 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>

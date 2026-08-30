@@ -613,7 +613,7 @@
         }
 
         /* =========================================================
-           UYGULAMA AÇMA VEYA STORE REDIRECTION ENTEGRASYONU
+           GÜNCELLENMİŞ BANKA UYGULAMA DEEP LINK BAĞLANTILARI
         ========================================================= */
         const bankLinks = {
             ziraat: {
@@ -621,7 +621,7 @@
                 storeUrl: "https://apps.apple.com/tr/app/ziraat-mobil/id885993234"
             },
             garanti: {
-                appUrl: "garanticep://",
+                appUrl: "garantibbva://",
                 storeUrl: "https://apps.apple.com/tr/app/garanti-bbva-mobil/id418092192"
             },
             isbankasi: {
@@ -629,15 +629,15 @@
                 storeUrl: "https://apps.apple.com/tr/app/i%C5%9Fcep/id438250262"
             },
             yapikredi: {
-                appUrl: "ykb://",
+                appUrl: "yapikredimobil://",
                 storeUrl: "https://apps.apple.com/tr/app/yap%C4%B1-kredi-mobil/id449704200"
             },
             akbank: {
-                appUrl: "akbankdirekt://",
+                appUrl: "akbank://",
                 storeUrl: "https://apps.apple.com/tr/app/akbank/id479205400"
             },
             vakifbank: {
-                appUrl: "vakifbankmobile://",
+                appUrl: "vakifbankmobil://",
                 storeUrl: "https://apps.apple.com/tr/app/vak%C4%B1fbank-mobil/id533100806"
             }
         };
@@ -652,9 +652,9 @@
                 fallbackCopy(ibanText, 'IBAN');
             }
 
-            showToast('IBAN kopyalandı, uygulama yönlendiriliyor...');
+            showToast('IBAN kopyalandı, uygulama açılıyor...');
 
-            // 2. Senaryonuza Uygun Yönlendirme
+            // 2. Uygulama Açma Yönlendirmesi
             const bank = bankLinks[bankKey];
             if (bank) {
                 window.location.href = bank.appUrl;

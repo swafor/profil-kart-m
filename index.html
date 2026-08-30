@@ -968,19 +968,17 @@ END:VCARD`;
         if (button) button.classList.add("bank-loading");
 
         const copied = await copyIBAN();
-        if (!copied) {
-            if (button) button.classList.remove("bank-loading");
-            return;
-        }
+        
+        // Yükleniyor animasyonunu kopyalama biter bitmez kaldırıyoruz
+        if (button) button.classList.remove("bank-loading");
+        
+        if (!copied) return;
 
         const device = getDevice();
-
         showToast("IBAN Kopyalandı. Yönlendiriliyor...");
 
-        setTimeout(() => {
-            if (button) button.classList.remove("bank-loading");
-            openStoreOrWeb(bank, device);
-        }, 500);
+        // Gecikmeyi kaldırdık, anında yönlendirme fonksiyonunu çağırıyoruz
+        openStoreOrWeb(bank, device);
     }
 
     function openStoreOrWeb(bank, device) {
@@ -993,7 +991,8 @@ END:VCARD`;
             url = bank.web;
         }
 
-        window.open(url, "_blank");
+        // Pop-up engeline takılmamak için yeni sekme (window.open) yerine aynı sayfayı yönlendiriyoruz.
+        window.location.href = url;
     }
 
     let toastTimer = null;

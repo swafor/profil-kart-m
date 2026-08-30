@@ -334,7 +334,7 @@
             word-break: break-all;
         }
 
-        .copy-icon-btn {
+        .action-icon-btn {
             width: 40px;
             height: 40px;
             flex-shrink: 0;
@@ -352,7 +352,7 @@
             cursor: pointer;
         }
 
-        .copy-icon-btn:hover {
+        .action-icon-btn:hover {
             background: #8B5CF6;
             color: #fff;
             border-color: #8B5CF6;
@@ -569,7 +569,7 @@
                 </div>
 
                 <button
-                    class="copy-icon-btn"
+                    class="action-icon-btn"
                     onclick="copyToClipboard('nameText','İsim Soyisim')"
                     aria-label="İsim Soyisim Kopyala"
                 >
@@ -596,7 +596,7 @@
                 </div>
 
                 <button
-                    class="copy-icon-btn"
+                    class="action-icon-btn"
                     onclick="copyToClipboard('ibanText','IBAN')"
                     aria-label="IBAN Kopyala"
                 >
@@ -691,6 +691,7 @@
 
             </div>
 
+            <!-- REHBERE EKLE BUTONLU TELEFON ALANI -->
             <div class="info-box">
 
                 <div class="info-details">
@@ -709,11 +710,11 @@
                 </div>
 
                 <button
-                    class="copy-icon-btn"
-                    onclick="copyToClipboard('phoneText','Telefon Numarası')"
-                    aria-label="Telefon Numarası Kopyala"
+                    class="action-icon-btn"
+                    onclick="downloadVCard()"
+                    aria-label="Rehbere Ekle"
                 >
-                    <i class="fa-regular fa-copy"></i>
+                    <i class="fa-solid fa-user-plus"></i>
                 </button>
 
             </div>
@@ -736,7 +737,7 @@
                 </div>
 
                 <button
-                    class="copy-icon-btn"
+                    class="action-icon-btn"
                     onclick="copyToClipboard('emailText','E-Posta Adresi')"
                     aria-label="E-Posta Kopyala"
                 >
@@ -781,7 +782,6 @@
         email: "info@nfchanem.com"
     };
 
-    // App Store bağlantılarındaki /tr/ uzantıları kaldırıldı (Bölge hatasını engeller)
     const banks = {
         ziraat: {
             name: "Ziraat Mobil",
@@ -909,6 +909,31 @@
             return;
         }
         copyText(element.textContent.trim(), label);
+    }
+    
+    // vCard Oluşturma ve İndirme Fonksiyonu
+    function downloadVCard() {
+        const vcardContent = `BEGIN:VCARD
+VERSION:3.0
+FN:${businessData.name}
+TEL;TYPE=WORK,VOICE:${businessData.phone}
+EMAIL;TYPE=WORK:${businessData.email}
+END:VCARD`;
+
+        const blob = new Blob([vcardContent], { type: "text/vcard" });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${businessData.name.replace(/\s+/g, '_')}_Iletisim.vcf`;
+        
+        document.body.appendChild(a);
+        a.click();
+        
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast("Rehbere ekleme başlatıldı!");
     }
 
     function getCleanIBAN() {

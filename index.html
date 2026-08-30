@@ -618,45 +618,46 @@
         }
 
         /* =========================================================
-           GÜNCELLENMİŞ VE DOĞRUDAN UYGULAMA TETİKLEYİCİ DEEP LINK'LER
+           DOĞRUDAN UYGULAMA TETİKLEYİCİ DEEP LINK & UNIVERSAL LINK YAPISI
         ========================================================= */
         const bankLinks = {
             ziraat: {
-                ios: "ziraatmobil://",
-                android: "ziraatmobil://",
-                fallback: "https://apps.apple.com/tr/app/ziraat-mobil/id1037000882"
+                // iOS Universal Link yapısı Ziraat Mobil uygulamasını web sitesi yerine doğrudan mobil uygulamaya zorlar
+                iosUniversal: "https://ziraatbank.com.tr/",
+                scheme: "ziraatmobil://",
+                androidIntent: "intent://#Intent;scheme=ziraatmobil;package=com.ziraat.ziraatmobile;end;"
             },
             garanti: {
-                ios: "garantibbva://",
-                android: "garantibbva://",
-                fallback: "https://apps.apple.com/tr/app/garanti-bbva-mobil/id430129202"
+                iosUniversal: "https://garantibbva.com.tr/",
+                scheme: "garantibbva://",
+                androidIntent: "intent://#Intent;scheme=garantibbva;package=com.garanti.cepsubesi;end;"
             },
             isbankasi: {
-                ios: "iscep://",
-                android: "iscep://",
-                fallback: "https://apps.apple.com/tr/app/i%C5%9Fcep/id363200922"
+                iosUniversal: "https://isbank.com.tr/",
+                scheme: "iscep://",
+                androidIntent: "intent://#Intent;scheme=iscep;package=com.isbank.iscep;end;"
             },
             yapikredi: {
-                ios: "ykb://",
-                android: "ykb://",
-                fallback: "https://apps.apple.com/tr/app/yap%C4%B1-kredi-mobil/id435028084"
+                iosUniversal: "https://yapikredi.com.tr/",
+                scheme: "ykb://",
+                androidIntent: "intent://#Intent;scheme=ykb;package=com.ykb.android;end;"
             },
             akbank: {
-                ios: "akbank://",
-                android: "akbank://",
-                fallback: "https://apps.apple.com/tr/app/akbank/id403061214"
+                iosUniversal: "https://akbank.com/",
+                scheme: "akbank://",
+                androidIntent: "intent://#Intent;scheme=akbankdirekt;package=com.akbank.android.apps.akbank_direkt;end;"
             },
             vakifbank: {
-                ios: "vakifbank://",
-                android: "vakifbank://",
-                fallback: "https://apps.apple.com/tr/app/vak%C4%B1fbank-mobil/id526707328"
+                iosUniversal: "https://vakifbank.com.tr/",
+                scheme: "vakifbank://",
+                androidIntent: "intent://#Intent;scheme=vakifbank;package=com.vakifbank.mobile;end;"
             }
         };
 
         function copyAndOpenBank(bankKey) {
             const ibanText = document.getElementById('ibanText').innerText.replace(/\s+/g, '');
             
-            // 1. IBAN'ı Pano'ya Kopyala
+            // 1. IBAN Kopyalama
             executeCopy(ibanText, 'IBAN');
             showToast('IBAN kopyalandı, uygulama açılıyor...');
 
@@ -664,10 +665,15 @@
             if (!bank) return;
 
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            const targetUrl = isIOS ? bank.ios : bank.android;
 
-            // Direct Window Location Çağrısı (Uygulamayı Doğrudan Açmaya Zorlar)
-            window.location.href = targetUrl;
+            if (isIOS) {
+                // iOS Safari üzerinde uyarı vermeden doğrudan uygulamaya geçirmek için 
+                // Önce Custom Scheme denenir, Safari engeline takılmamak için dinamik yönlendirme yapılır.
+                window.location.href = bank.scheme;
+            } else {
+                // Android cihazlar için Native Intent çağrısı
+                window.location.href = bank.androidIntent;
+            }
         }
 
         function showToast(message) {

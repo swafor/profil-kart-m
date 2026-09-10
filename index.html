@@ -377,28 +377,25 @@
         }
 
         .btn-bank {
-            min-height: 44px;
+            height: 50px;
+            padding: 6px 12px;
 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
 
-            color: var(--text-main);
             background: var(--box-bg);
             border: 1px solid var(--box-border);
             border-radius: 12px;
 
-            font-size: 12px;
-            font-weight: 700;
-
             cursor: pointer;
+            overflow: hidden;
         }
 
-        .btn-bank svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
+        .btn-bank img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             border-radius: 4px;
         }
 
@@ -617,73 +614,54 @@
                 <button
                     class="btn-bank"
                     onclick="openBank('ziraat')"
+                    aria-label="Ziraat Bankası"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#E30613"/>
-                        <path d="M6 7H18V9.5H11.5L18 16.5V19H6V16.5H12.5L6 9.5V7Z" fill="white"/>
-                    </svg>
-                    Ziraat
+                    <img src="banka3.jpg" alt="Ziraat Bankası">
                 </button>
 
                 <!-- Garanti BBVA -->
                 <button
                     class="btn-bank"
                     onclick="openBank('garanti')"
+                    aria-label="Garanti BBVA"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#0060AF"/>
-                        <path d="M12 5L19 12L12 19L5 12L12 5Z" fill="#00A3E0"/>
-                        <circle cx="12" cy="12" r="3" fill="white"/>
-                    </svg>
-                    Garanti
+                    <img src="banka2.png" alt="Garanti BBVA">
                 </button>
 
                 <!-- İş Bankası -->
                 <button
                     class="btn-bank"
                     onclick="openBank('isbankasi')"
+                    aria-label="İş Bankası"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#003399"/>
-                        <path d="M7 9H17V11.5H7V9ZM7 13.5H14V16H7V13.5Z" fill="white"/>
-                    </svg>
-                    İş Bankası
+                    <img src="banka1.jpg" alt="İş Bankası">
                 </button>
 
                 <!-- Yapı Kredi -->
                 <button
                     class="btn-bank"
                     onclick="openBank('yapikredi')"
+                    aria-label="Yapı Kredi"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#004C99"/>
-                        <path d="M8 7H16V10H11V12H15V15H11V18H8V7Z" fill="#FFCC00"/>
-                    </svg>
-                    Yapı Kredi
+                    <img src="banka4.png" alt="Yapı Kredi">
                 </button>
 
                 <!-- Akbank -->
                 <button
                     class="btn-bank"
                     onclick="openBank('akbank')"
+                    aria-label="Akbank"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#ED1C24"/>
-                        <path d="M12 7L16.5 17H14.5L12 11.5L9.5 17H7.5L12 7Z" fill="white"/>
-                    </svg>
-                    Akbank
+                    <img src="banka.png" alt="Akbank">
                 </button>
 
                 <!-- VakıfBank -->
                 <button
                     class="btn-bank"
                     onclick="openBank('vakifbank')"
+                    aria-label="VakıfBank"
                 >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="24" height="24" rx="6" fill="#00305E"/>
-                        <path d="M8 8H10.5L12 13.5L13.5 8H16L13.5 17H10.5L8 8Z" fill="#FFC72C"/>
-                    </svg>
-                    VakıfBank
+                    <img src="banka.jpg" alt="VakıfBank">
                 </button>
 
             </div>

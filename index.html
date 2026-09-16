@@ -3,19 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0a0b10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050608">
 
     <title>Luka Mersin | VIP İletişim & IBAN</title>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa771c 100%);
+            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #9a6b1f 100%);
             --gold-border: rgba(212, 175, 55, 0.4);
             
             --primary-blue: linear-gradient(135deg, #1e293b, #0f172a, #334155);
@@ -25,10 +28,10 @@
         }
 
         [data-theme="dark"] {
-            --bg-gradient: radial-gradient(circle at 50% 20%, #171923 0%, #0a0b10 60%, #030406 100%);
-            --card-bg: rgba(15, 17, 26, 0.75);
-            --card-border: rgba(212, 175, 55, 0.2);
-            --card-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.08);
+            --bg-gradient: radial-gradient(circle at 50% 20%, #171923 0%, #050608 60%, #020304 100%);
+            --card-bg: rgba(16, 18, 27, 0.85);
+            --card-border: rgba(212, 175, 55, 0.25);
+            --card-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.95), 0 0 60px rgba(212, 175, 55, 0.08);
 
             --text-title: #f8fafc;
             --text-subtitle: #cbd5e1;
@@ -39,13 +42,13 @@
             --box-bg-hover: rgba(212, 175, 55, 0.1);
             --box-border: rgba(255, 255, 255, 0.06);
 
-            --toast-bg: #0f172a;
+            --toast-bg: rgba(15, 23, 42, 0.92);
             --toast-text: #f8fafc;
         }
 
         [data-theme="light"] {
             --bg-gradient: radial-gradient(circle at 50% 20%, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --card-border: rgba(170, 119, 28, 0.3);
             --card-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12), 0 0 40px rgba(170, 119, 28, 0.05);
 
@@ -58,7 +61,7 @@
             --box-bg-hover: rgba(212, 175, 55, 0.12);
             --box-border: rgba(0, 0, 0, 0.06);
 
-            --toast-bg: #ffffff;
+            --toast-bg: rgba(255, 255, 255, 0.92);
             --toast-text: #0f172a;
         }
 
@@ -66,54 +69,56 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         html, body {
             min-height: 100dvh;
             width: 100%;
-            background-color: #0a0b10;
+            background-color: #050608;
             background: var(--bg-gradient);
             background-attachment: fixed;
             overflow-x: hidden;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 24px 16px;
         }
 
         /* 3D Hologram Ana Kapsayıcı */
         .app-container {
             width: 100%;
-            max-width: 460px;
-            margin: 0 auto;
+            max-width: 480px;
+            margin: auto 0;
             position: relative;
             display: flex;
             flex-direction: column;
             background: var(--card-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: 1px solid var(--card-border);
             border-radius: 36px;
             box-shadow: var(--card-shadow);
-            padding: 38px 24px;
+            padding: 42px 28px;
             overflow: hidden;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+            transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
         }
 
-        /* Holografik Işık Yansıması Efekti */
+        /* Holografik Işık Yolu / Shimmer Efekti */
         .app-container::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(212,175,55,0.05) 100%);
+            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 60%);
             pointer-events: none;
-            border-radius: 36px;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: overlay;
         }
 
         .theme-toggle-btn {
@@ -140,65 +145,68 @@
             border-color: #d4af37;
         }
 
-        .page-main, .sub-page {
+        /* Lüks Otel Odası Geçiş Mimarisi */
+        .pages-wrapper {
+            width: 100%;
+            position: relative;
+            min-height: 440px;
+            transform-style: preserve-3d;
+        }
+
+        .page {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
-            transform: translateZ(20px);
-        }
-
-        .sub-page {
             position: absolute;
             top: 0;
-            left: 100%;
-            opacity: 0;
-            pointer-events: none;
-            padding: 38px 24px;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .app-container.show-iban .page-main,
-        .app-container.show-contact .page-main {
-            transform: translateX(-105%) translateZ(20px);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .app-container.show-iban #ibanPage,
-        .app-container.show-contact #contactPage {
             left: 0;
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(10px);
+            transform: scale(0.95) translateZ(-30px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
             opacity: 1;
             pointer-events: auto;
+            filter: blur(0px);
+            transform: scale(1) translateZ(20px);
+            position: relative;
         }
 
+        /* Kabartmalı (Neumorphism / Embossed) Lazer Kazıma Logo Alanı */
         .brand-logo-area {
-            width: 88px;
-            height: 88px;
+            width: 96px;
+            height: 96px;
             border-radius: 28px;
             background: var(--gold-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #0f172a;
-            font-size: 36px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
-            border: 1.5px solid rgba(255, 255, 255, 0.6);
-            transform: translateZ(30px);
+            font-size: 40px;
+            margin-top: 6px;
+            margin-bottom: 22px;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), 0 15px 35px rgba(212, 175, 55, 0.35);
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            transform: translateZ(35px);
         }
 
+        /* Lazer Kazıma Efektli Başlık */
         h1 {
             color: var(--text-title);
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
             margin-bottom: 8px;
-            letter-spacing: -.5px;
-            transform: translateZ(25px);
+            letter-spacing: -0.5px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            transform: translateZ(30px);
         }
 
         p.subtitle {
@@ -207,6 +215,7 @@
             font-weight: 500;
             line-height: 1.5;
             margin-bottom: 28px;
+            letter-spacing: 0.5px;
             transform: translateZ(20px);
         }
 
@@ -218,10 +227,10 @@
             transform: translateZ(20px);
         }
 
-        /* --- SPOTLIGHT PARILTI BUTON EFEKTİ --- */
+        /* Spotlight Parıltı Butonları */
         .btn {
             width: 100%;
-            min-height: 56px;
+            min-height: 58px;
             padding: 16px 20px;
             display: flex;
             align-items: center;
@@ -230,7 +239,7 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 18px;
             color: #fff;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
@@ -263,7 +272,7 @@
         }
 
         .btn i {
-            font-size: 17px;
+            font-size: 18px;
         }
 
         .btn:hover {
@@ -289,7 +298,7 @@
 
         .page-header h2 {
             color: var(--text-title);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             margin-bottom: 4px;
         }
@@ -320,24 +329,25 @@
             text-align: left;
         }
 
+        /* İnce, Aralıklı, Uppercase Etiketler (Letter-spacing: 2px) */
         .info-label {
             color: var(--text-label);
             font-size: 10px;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 2px;
         }
 
         .info-value {
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             word-break: break-all;
         }
 
         .action-icon-btn {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             flex-shrink: 0;
             margin-left: 10px;
             display: flex;
@@ -349,6 +359,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .action-icon-btn:hover {
@@ -363,10 +374,10 @@
             text-align: left;
             width: 100%;
             color: var(--text-label);
-            font-size: 11px;
-            font-weight: 800;
+            font-size: 10px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 2px;
         }
 
         .bank-grid {
@@ -377,9 +388,10 @@
             margin-bottom: 16px;
         }
 
+        /* Şampanya Rengi Işık Sızdıran Banka Butonları */
         .btn-bank {
-            height: 52px;
-            padding: 8px;
+            height: 56px;
+            padding: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -396,7 +408,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212,175,55,0.2), transparent 80%);
+            background: radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212,175,55,0.25), transparent 80%);
             opacity: 0;
             transition: opacity 0.2s ease;
             pointer-events: none;
@@ -415,10 +427,26 @@
             z-index: 2;
         }
 
+        .bank-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--text-title);
+            background: var(--box-bg);
+            border-radius: 16px;
+            z-index: 1;
+        }
+
         .btn-bank:hover {
             background: var(--box-bg-hover);
             transform: translateY(-2px);
             border-color: var(--gold-border);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
         }
 
         .btn-back {
@@ -428,6 +456,7 @@
             margin-top: 10px;
         }
 
+        /* Cam Efektli Toast Bildirimi (Aşağıdan Yukarı Süzülür) */
         .toast {
             position: fixed;
             left: 50%;
@@ -437,24 +466,26 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 24px;
+            padding: 14px 26px;
             color: var(--toast-text);
             background: var(--toast-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--card-border);
             border-radius: 50px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.1);
             font-size: 14px;
             font-weight: 600;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transform: translate(-50%, 40px);
-            transition: all 0.4s cubic-bezier(.175, .885, .32, 1.275);
+            transform: translate(-50%, 50px) scale(0.9);
+            transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .toast.show {
             opacity: 1;
-            transform: translate(-50%, 0);
+            transform: translate(-50%, 0) scale(1);
         }
 
         .toast i {
@@ -467,7 +498,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .app-container {
-                padding: 24px 16px;
+                padding: 30px 16px;
             }
         }
     </style>
@@ -481,104 +512,124 @@
         <i class="fa-solid fa-sun" id="themeIcon"></i>
     </button>
 
-    <!-- ANA SAYFA -->
-    <div class="page-main">
-        <div class="brand-logo-area">
-            <i class="fa-solid fa-crown"></i>
-        </div>
-
-        <h1 id="displayBusinessName">Luka Mersin</h1>
-        <p class="subtitle">VIP Hizmetler, İletişim ve Özel Ödeme Kanalları</p>
-
-        <div class="btn-list">
-            <a href="https://maps.google.com" id="linkGoogle" target="_blank" rel="noopener noreferrer" class="btn btn-google">
-                <i class="fa-brands fa-google"></i> Google'da Konumumuz
-            </a>
-            <a href="#" id="linkInstagram" target="_blank" rel="noopener noreferrer" class="btn btn-instagram">
-                <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
-            </a>
-            <button class="btn btn-iban" onclick="openPage('show-iban')">
-                <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
-            </button>
-            <button class="btn btn-contact" onclick="openPage('show-contact')">
-                <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
-            </button>
-        </div>
-    </div>
-
-    <!-- IBAN SAYFASI -->
-    <div class="sub-page" id="ibanPage">
-        <div class="page-header">
-            <h2>Banka Bilgileri</h2>
-            <p class="subtitle" style="margin-bottom:6px;">IBAN kopyalandı. Lütfen bankanızı seçin.</p>
-        </div>
-
-        <div class="info-box">
-            <div class="info-details">
-                <span class="info-label">ALICI İSİM SOYİSİM</span>
-                <span class="info-value" id="nameText">Ad Soyad</span>
+    <div class="pages-wrapper">
+        <!-- ANA SAYFA -->
+        <div class="page active" id="mainPage">
+            <div class="brand-logo-area">
+                <i class="fa-solid fa-crown"></i>
             </div>
-            <button class="action-icon-btn" onclick="copyToClipboard('nameText','İsim Soyisim')" aria-label="Kopyala">
-                <i class="fa-regular fa-copy"></i>
-            </button>
-        </div>
 
-        <div class="info-box">
-            <div class="info-details">
-                <span class="info-label">IBAN NUMARASI</span>
-                <span class="info-value" id="ibanText">TR00 0000 0000 0000 0000 0000 00</span>
+            <h1 id="displayBusinessName">Luka Mersin</h1>
+            <p class="subtitle">VIP HİZMETLER, İLETİŞİM VE ÖZEL ÖDEME KANALLARI</p>
+
+            <div class="btn-list">
+                <a href="https://maps.google.com" id="linkGoogle" target="_blank" rel="noopener noreferrer" class="btn btn-google">
+                    <i class="fa-brands fa-google"></i> Google'da Konumumuz
+                </a>
+                <a href="#" id="linkInstagram" target="_blank" rel="noopener noreferrer" class="btn btn-instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram'da Takip Et
+                </a>
+                <button class="btn btn-iban" onclick="switchPage('ibanPage')">
+                    <i class="fa-regular fa-credit-card"></i> IBAN Bilgileri
+                </button>
+                <button class="btn btn-contact" onclick="switchPage('contactPage')">
+                    <i class="fa-solid fa-address-book"></i> İletişim Bilgileri
+                </button>
             </div>
-            <button class="action-icon-btn" onclick="copyToClipboard('ibanText','IBAN')" aria-label="Kopyala">
-                <i class="fa-regular fa-copy"></i>
-            </button>
         </div>
 
-        <div class="section-title">Banka Uygulamasını Aç</div>
-
-        <div class="bank-grid">
-            <button class="btn-bank" onclick="openBank('ziraat')"><img src="banka3.jpg" alt="Ziraat"></button>
-            <button class="btn-bank" onclick="openBank('garanti')"><img src="banka2.png" alt="Garanti"></button>
-            <button class="btn-bank" onclick="openBank('isbankasi')"><img src="banka1.jpg" alt="İş Bankası"></button>
-            <button class="btn-bank" onclick="openBank('yapikredi')"><img src="banka4.png" alt="Yapı Kredi"></button>
-            <button class="btn-bank" onclick="openBank('akbank')"><img src="banka.png" alt="Akbank"></button>
-            <button class="btn-bank" onclick="openBank('vakifbank')"><img src="banka.jpg" alt="VakıfBank"></button>
-        </div>
-
-        <button class="btn btn-back" onclick="closePages()">
-            <i class="fa-solid fa-arrow-left"></i> Geri Dön
-        </button>
-    </div>
-
-    <!-- İLETİŞİM SAYFASI -->
-    <div class="sub-page" id="contactPage">
-        <div class="page-header">
-            <h2>İletişim Bilgileri</h2>
-            <p class="subtitle" style="margin-bottom:10px;">Doğrudan iletişim kanalları</p>
-        </div>
-
-        <div class="info-box">
-            <div class="info-details">
-                <span class="info-label">TELEFON NUMARASI</span>
-                <span class="info-value" id="phoneText">+90 500 000 00 00</span>
+        <!-- IBAN SAYFASI -->
+        <div class="page" id="ibanPage">
+            <div class="page-header">
+                <h2>Banka Bilgileri</h2>
+                <p class="subtitle" style="margin-bottom:6px;">IBAN kopyalandı. Lütfen bankanızı seçin.</p>
             </div>
-            <button class="action-icon-btn" onclick="downloadVCard()" aria-label="Rehbere Ekle">
-                <i class="fa-solid fa-user-plus"></i>
-            </button>
-        </div>
 
-        <div class="info-box">
-            <div class="info-details">
-                <span class="info-label">E-POSTA ADRESİ</span>
-                <span class="info-value" id="emailText">info@lukamersin.com</span>
+            <div class="info-box">
+                <div class="info-details">
+                    <span class="info-label">Alıcı İsim Soyisim</span>
+                    <span class="info-value" id="nameText">Ad Soyad</span>
+                </div>
+                <button class="action-icon-btn" id="copyBtnName" onclick="copyToClipboard('nameText','İsim Soyisim', this)" aria-label="Kopyala">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
             </div>
-            <button class="action-icon-btn" onclick="copyToClipboard('emailText','E-Posta')" aria-label="Kopyala">
-                <i class="fa-regular fa-copy"></i>
+
+            <div class="info-box">
+                <div class="info-details">
+                    <span class="info-label">IBAN Numarası</span>
+                    <span class="info-value" id="ibanText">TR00 0000 0000 0000 0000 0000 00</span>
+                </div>
+                <button class="action-icon-btn" id="copyBtnIban" onclick="copyToClipboard('ibanText','IBAN', this)" aria-label="Kopyala">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <div class="section-title">Banka Uygulamasını Aç</div>
+
+            <div class="bank-grid">
+                <button class="btn-bank" onclick="openBank('ziraat')">
+                    <div class="bank-fallback">ZİRAAT</div>
+                    <img src="banka3.jpg" alt="Ziraat" onerror="this.style.display='none'">
+                </button>
+                <button class="btn-bank" onclick="openBank('garanti')">
+                    <div class="bank-fallback">GARANTİ</div>
+                    <img src="banka2.png" alt="Garanti" onerror="this.style.display='none'">
+                </button>
+                <button class="btn-bank" onclick="openBank('isbankasi')">
+                    <div class="bank-fallback">İŞ BANKASI</div>
+                    <img src="banka1.jpg" alt="İş Bankası" onerror="this.style.display='none'">
+                </button>
+                <button class="btn-bank" onclick="openBank('yapikredi')">
+                    <div class="bank-fallback">YAPI KREDİ</div>
+                    <img src="banka4.png" alt="Yapı Kredi" onerror="this.style.display='none'">
+                </button>
+                <button class="btn-bank" onclick="openBank('akbank')">
+                    <div class="bank-fallback">AKBANK</div>
+                    <img src="banka.png" alt="Akbank" onerror="this.style.display='none'">
+                </button>
+                <button class="btn-bank" onclick="openBank('vakifbank')">
+                    <div class="bank-fallback">VAKIFBANK</div>
+                    <img src="banka.jpg" alt="VakıfBank" onerror="this.style.display='none'">
+                </button>
+            </div>
+
+            <button class="btn btn-back" onclick="switchPage('mainPage')">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
             </button>
         </div>
 
-        <button class="btn btn-back" onclick="closePages()">
-            <i class="fa-solid fa-arrow-left"></i> Geri Dön
-        </button>
+        <!-- İLETİŞİM SAYFASI -->
+        <div class="page" id="contactPage">
+            <div class="page-header">
+                <h2>İletişim Bilgileri</h2>
+                <p class="subtitle" style="margin-bottom:10px;">Doğrudan iletişim kanalları</p>
+            </div>
+
+            <div class="info-box">
+                <div class="info-details">
+                    <span class="info-label">Telefon Numarası</span>
+                    <span class="info-value" id="phoneText">+90 500 000 00 00</span>
+                </div>
+                <button class="action-icon-btn" onclick="downloadVCard()" aria-label="Rehbere Ekle">
+                    <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </div>
+
+            <div class="info-box">
+                <div class="info-details">
+                    <span class="info-label">E-Posta Adresi</span>
+                    <span class="info-value" id="emailText">info@lukamersin.com</span>
+                </div>
+                <button class="action-icon-btn" id="copyBtnEmail" onclick="copyToClipboard('emailText','E-Posta', this)" aria-label="Kopyala">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <button class="btn btn-back" onclick="switchPage('mainPage')">
+                <i class="fa-solid fa-arrow-left"></i> Geri Dön
+            </button>
+        </div>
     </div>
 
 </div>
@@ -596,7 +647,8 @@
         receiverName: "Özgür Dankoz",
         iban: "TR00 0000 0000 0000 0000 0000 00",
         phone: "+90 500 000 00 00",
-        email: "info@lukamersin.com"
+        email: "info@lukamersin.com",
+        address: "Mersin, Türkiye"
     };
 
     const banks = {
@@ -639,16 +691,12 @@
         themeIcon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
     }
 
-    function openPage(page) {
-        appContainer.classList.remove("show-iban", "show-contact");
-        appContainer.classList.add(page);
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
     }
 
-    function closePages() {
-        appContainer.classList.remove("show-iban", "show-contact");
-    }
-
-    async function copyText(text, label) {
+    async function copyText(text, label, btnElement) {
         if (!text) return false;
         try {
             if (navigator.clipboard && window.isSecureContext) {
@@ -656,11 +704,13 @@
             } else {
                 fallbackCopy(text);
             }
+            triggerCopyAnimation(btnElement);
             showToast(label + " kopyalandı!");
             return true;
         } catch (error) {
             try {
                 fallbackCopy(text);
+                triggerCopyAnimation(btnElement);
                 showToast(label + " kopyalandı!");
                 return true;
             } catch (e) {
@@ -668,6 +718,21 @@
                 return false;
             }
         }
+    }
+
+    function triggerCopyAnimation(btn) {
+        if (!btn) return;
+        const icon = btn.querySelector("i");
+        if (!icon) return;
+        const originalClass = icon.className;
+        icon.className = "fa-solid fa-check";
+        btn.style.background = "var(--gold-gradient)";
+        btn.style.color = "#0f172a";
+        setTimeout(() => {
+            icon.className = originalClass;
+            btn.style.background = "";
+            btn.style.color = "";
+        }, 1500);
     }
 
     function fallbackCopy(text) {
@@ -684,16 +749,16 @@
         textarea.remove();
     }
 
-    function copyToClipboard(elementId, label) {
+    function copyToClipboard(elementId, label, btnElement) {
         const element = document.getElementById(elementId);
         if (element) {
-            copyText(element.textContent.trim(), label);
+            copyText(element.textContent.trim(), label, btnElement);
         }
     }
     
     function downloadVCard() {
-        const vcardContent = `BEGIN:VCARD\nVERSION:3.0\nFN:${businessData.name}\nTEL;TYPE=WORK,VOICE:${businessData.phone}\nEMAIL;TYPE=WORK:${businessData.email}\nEND:VCARD`;
-        const blob = new Blob([vcardContent], { type: "text/vcard" });
+        const vcardContent = `BEGIN:VCARD\nVERSION:3.0\nFN:${businessData.name}\nN:;${businessData.name};;;\nTEL;TYPE=WORK,VOICE:${businessData.phone}\nEMAIL;TYPE=WORK:${businessData.email}\nADR;TYPE=WORK:;;${businessData.address};;;;\nEND:VCARD`;
+        const blob = new Blob([vcardContent], { type: "text/vcard;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -746,13 +811,12 @@
         }, 2500);
     }
 
-    // 3D Hologram Eğilme Efekti ve Spotlight Parıltı Dinamik Kodları
+    // 3D Hologram, Jiroskop & Spotlight Efekt Dinamikleri
     document.addEventListener("DOMContentLoaded", () => {
         initTheme();
         loadBusinessData();
 
-        // Buton parıltı koordinat takibi
-        const interactiveElements = document.querySelectorAll(".btn, .btn-bank");
+        const interactiveElements = document.querySelectorAll(".btn, .btn-bank, .action-icon-btn");
         interactiveElements.forEach(el => {
             el.addEventListener("mousemove", (e) => {
                 const rect = el.getBoundingClientRect();
@@ -767,16 +831,21 @@
             }, {passive: true});
         });
 
-        // 3D Kart Eğilme Efekti (Masaüstü ve Mobil)
         const container = document.getElementById("appContainer");
         
         function handleTilt(x, y) {
             const rect = container.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            const rotateX = ((y - centerY) / (rect.height / 2)) * -6; // Derece sınırları
+            const rotateX = ((y - centerY) / (rect.height / 2)) * -6;
             const rotateY = ((x - centerX) / (rect.width / 2)) * 6;
             container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // Holografik Shimmer Işık Takibi
+            const shineX = ((x - rect.left) / rect.width) * 100;
+            const shineY = ((y - rect.top) / rect.height) * 100;
+            container.style.setProperty("--shine-x", `${shineX}%`);
+            container.style.setProperty("--shine-y", `${shineY}%`);
         }
 
         document.addEventListener("mousemove", (e) => {
@@ -787,7 +856,6 @@
             container.style.transform = `rotateX(0deg) rotateY(0deg)`;
         });
 
-        // Mobilde jiroskop / dokunma desteği
         window.addEventListener("deviceorientation", (e) => {
             if (e.gamma !== null && e.beta !== null) {
                 const tiltX = Math.max(-10, Math.min(10, e.gamma));

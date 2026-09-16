@@ -142,7 +142,7 @@
             border-color: #d4af37;
         }
 
-        /* Süper Akıcı Yana Kayma (Slide & Glide) Geçiş Mimarisi */
+        /* Daha Yumuşak ve Yavaş Süzülme Geçiş Mimarisi */
         .pages-wrapper {
             width: 100%;
             position: relative;
@@ -157,8 +157,8 @@
             left: 0;
             opacity: 0;
             pointer-events: none;
-            transform: translateX(60px);
-            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+            transform: translateX(80px);
+            transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .page.active {
@@ -170,7 +170,7 @@
 
         .page.exit-left {
             opacity: 0;
-            transform: translateX(-60px);
+            transform: translateX(-80px);
             position: absolute;
         }
 
@@ -762,20 +762,20 @@
         
         if (activePage === targetPage) return;
 
-        // Mevcut sayfayı sol tarafa kaydırarak çıkar
+        // Mevcut sayfayı yavaşça sol tarafa kaydır
         activePage.classList.remove('active');
         activePage.classList.add('exit-left');
 
-        // Hedef sayfayı sağdan pürüzsüzce içeri süz
+        // Hedef sayfayı sağdan süzülerek içeri al
         targetPage.classList.remove('exit-left');
         targetPage.classList.add('active');
 
-        // Geçiş bittiğinde eski sayfanın sınıfını temizle
+        // Geçiş süresine (0.75s) göre eski sayfanın sınıfını temizle
         setTimeout(() => {
             document.querySelectorAll('.page').forEach(p => {
                 if (p !== targetPage) p.classList.remove('exit-left');
             });
-        }, 450);
+        }, 750);
     }
 
     async function copyText(text, label, btnElement) {

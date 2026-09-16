@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#090d16">
+    <meta name="theme-color" content="#0a0b10">
 
-    <title>NFCHanem | İletişim & IBAN</title>
+    <title>Luka Mersin | VIP İletişim & IBAN</title>
 
     <link
         rel="stylesheet"
@@ -15,46 +15,52 @@
 
     <style>
         :root {
-            --primary-blue: linear-gradient(135deg, #4F46E5, #3B82F6);
-            --primary-pink: linear-gradient(135deg, #F43F5E, #E1306C, #F59E0B);
-            --primary-green: linear-gradient(135deg, #047857, #10B981, #064E3B);
-            --primary-purple: linear-gradient(135deg, #8B5CF6, #6366F1, #4F46E5);
+            /* Lüks Altın & Platin / Derin Gece Paleti */
+            --gold-gradient: linear-gradient(135deg, #d4af37, #aa771c, #f3e5ab);
+            --gold-border: rgba(212, 175, 55, 0.35);
+            
+            --primary-blue: linear-gradient(135deg, #1e293b, #0f172a, #334155);
+            --primary-pink: linear-gradient(135deg, #831843, #500724, #9f1239);
+            --primary-green: linear-gradient(135deg, #064e3b, #022c22, #065f46);
+            --primary-purple: linear-gradient(135deg, #3b0764, #2e1065, #581c87);
         }
 
         [data-theme="dark"] {
-            --bg-gradient: linear-gradient(-45deg, #090d16, #141230, #220b30, #011c16);
-            --card-bg: rgba(15, 23, 42, 0.45);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1a1c29 0%, #0a0b10 70%, #050508 100%);
+            --card-bg: rgba(18, 20, 32, 0.65);
+            --card-border: rgba(212, 175, 55, 0.15);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05);
 
-            --text-title: #ffffff;
-            --text-subtitle: #94A3B8;
-            --text-main: #F1F5F9;
-            --text-label: #64748B;
+            --text-title: #f8fafc;
+            --text-subtitle: #cbd5e1;
+            --text-main: #f1f5f9;
+            --text-label: #d4af37;
 
-            --box-bg: rgba(255, 255, 255, 0.04);
-            --box-bg-hover: rgba(255, 255, 255, 0.08);
-            --box-border: rgba(255, 255, 255, 0.07);
+            --box-bg: rgba(255, 255, 255, 0.03);
+            --box-bg-hover: rgba(212, 175, 55, 0.08);
+            --box-border: rgba(255, 255, 255, 0.06);
 
-            --toast-bg: #0F172A;
-            --toast-text: #fff;
+            --toast-bg: #0f172a;
+            --toast-text: #f8fafc;
         }
 
         [data-theme="light"] {
-            --bg-gradient: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #fce7f3, #e0f2fe);
-            --card-bg: rgba(255, 255, 255, 0.5);
-            --card-border: rgba(255, 255, 255, 0.6);
+            --bg-gradient: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 70%, #cbd5e1 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(170, 119, 28, 0.3);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), 0 0 30px rgba(170, 119, 28, 0.05);
 
-            --text-title: #0F172A;
-            --text-subtitle: #475569;
-            --text-main: #0F172A;
-            --text-label: #64748B;
+            --text-title: #0f172a;
+            --text-subtitle: #334155;
+            --text-main: #0f172a;
+            --text-label: #9a6b1f;
 
-            --box-bg: rgba(255, 255, 255, 0.6);
-            --box-bg-hover: rgba(255, 255, 255, 0.9);
-            --box-border: rgba(0, 0, 0, 0.05);
+            --box-bg: rgba(255, 255, 255, 0.7);
+            --box-bg-hover: rgba(212, 175, 55, 0.12);
+            --box-border: rgba(0, 0, 0, 0.06);
 
-            --toast-bg: #fff;
-            --toast-text: #0F172A;
+            --toast-bg: #ffffff;
+            --toast-text: #0f172a;
         }
 
         * {
@@ -64,40 +70,44 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
+        html, body {
             min-height: 100dvh;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            background-color: #0a0b10;
             background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            padding: 24px 16px;
+            background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
         }
 
-        /* Küçük panel yapısı kaldırıldı, tüm ekrana yayılan akışkan kapsayıcı */
+        /* Lüks Ana Kapsayıcı / Çerçeve */
         .app-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
             margin: 0 auto;
             position: relative;
             display: flex;
             flex-direction: column;
-            padding-bottom: 40px;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            box-shadow: var(--card-shadow);
+            padding: 36px 24px;
+            overflow: hidden;
         }
 
         .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            position: absolute;
+            top: 24px;
+            right: 24px;
             z-index: 50;
 
             width: 42px;
@@ -109,19 +119,17 @@
             justify-content: center;
 
             color: var(--text-title);
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: var(--box-bg);
             border: 1px solid var(--card-border);
 
             cursor: pointer;
             font-size: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .theme-toggle-btn:hover {
             transform: scale(1.1) rotate(15deg);
+            border-color: #d4af37;
         }
 
         .page-main, .sub-page {
@@ -139,11 +147,14 @@
             left: 100%;
             opacity: 0;
             pointer-events: none;
+            padding: 36px 24px;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .app-container.show-iban .page-main,
         .app-container.show-contact .page-main {
-            transform: translateX(-100%);
+            transform: translateX(-105%);
             opacity: 0;
             pointer-events: none;
         }
@@ -155,25 +166,26 @@
             pointer-events: auto;
         }
 
-        /* Profil / Marka Alanı */
+        /* Lüks Profil / Marka Alanı */
         .brand-logo-area {
-            width: 88px;
-            height: 88px;
-            border-radius: 28px;
-            background: var(--primary-purple);
+            width: 84px;
+            height: 84px;
+            border-radius: 26px;
+            background: var(--gold-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 36px;
-            margin-top: 20px;
+            color: #0f172a;
+            font-size: 34px;
+            margin-top: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 16px 30px -10px rgba(139, 92, 246, 0.5);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         h1 {
             color: var(--text-title);
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             margin-bottom: 8px;
             letter-spacing: -.5px;
@@ -181,10 +193,10 @@
 
         p.subtitle {
             color: var(--text-subtitle);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             line-height: 1.5;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .btn-list {
@@ -196,19 +208,19 @@
 
         .btn {
             width: 100%;
-            min-height: 58px;
-            padding: 16px 24px;
+            min-height: 56px;
+            padding: 16px 20px;
 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 12px;
 
-            border: 0;
-            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
 
             color: #fff;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             text-decoration: none;
 
@@ -220,12 +232,13 @@
         }
 
         .btn i {
-            font-size: 18px;
+            font-size: 17px;
         }
 
         .btn:hover {
-            transform: translateY(-3px) scale(1.01);
-            filter: brightness(1.05);
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            border-color: rgba(212, 175, 55, 0.4);
         }
 
         .btn:active {
@@ -234,35 +247,35 @@
 
         .btn-google {
             background: var(--primary-blue);
-            box-shadow: 0 10px 22px -6px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
         }
 
         .btn-instagram {
             background: var(--primary-pink);
-            box-shadow: 0 10px 22px -6px rgba(225, 48, 108, 0.4);
+            box-shadow: 0 8px 20px rgba(131, 24, 67, 0.3);
         }
 
         .btn-iban {
             background: var(--primary-green);
-            box-shadow: 0 10px 22px -6px rgba(4, 120, 87, 0.4);
+            box-shadow: 0 8px 20px rgba(6, 78, 59, 0.3);
         }
 
         .btn-contact {
             background: var(--primary-purple);
-            box-shadow: 0 10px 22px -6px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 20px rgba(59, 7, 100, 0.3);
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
         .page-header h2 {
             color: var(--text-title);
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .info-box {
@@ -271,49 +284,48 @@
             justify-content: space-between;
             align-items: center;
 
-            padding: 18px 20px;
+            padding: 16px 18px;
             margin-bottom: 12px;
 
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            transition: background 0.2s ease;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 18px;
+            transition: all 0.2s ease;
         }
 
         .info-box:hover {
             background: var(--box-bg-hover);
+            border-color: var(--gold-border);
         }
 
         .info-details {
             min-width: 0;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             text-align: left;
         }
 
         .info-label {
             color: var(--text-label);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
 
         .info-value {
             color: var(--text-main);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             word-break: break-all;
         }
 
         .action-icon-btn {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             flex-shrink: 0;
-            margin-left: 12px;
+            margin-left: 10px;
 
             display: flex;
             align-items: center;
@@ -322,29 +334,29 @@
             color: var(--text-main);
             background: var(--box-bg);
             border: 1px solid var(--box-border);
-            border-radius: 14px;
+            border-radius: 12px;
 
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .action-icon-btn:hover {
-            background: #8B5CF6;
-            color: #fff;
-            border-color: #8B5CF6;
+            background: var(--gold-gradient);
+            color: #0f172a;
+            border-color: transparent;
             transform: scale(1.05);
         }
 
         .section-title {
-            margin: 20px 0 12px;
+            margin: 16px 0 10px;
             text-align: left;
             width: 100%;
 
             color: var(--text-label);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
 
         .bank-grid {
@@ -352,22 +364,20 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .btn-bank {
-            height: 58px;
+            height: 52px;
             padding: 8px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
+            background: var(--box-bg);
+            border: 1px solid var(--box-border);
+            border-radius: 16px;
 
             cursor: pointer;
             overflow: hidden;
@@ -383,21 +393,20 @@
 
         .btn-bank:hover {
             background: var(--box-bg-hover);
-            transform: translateY(-3px);
-            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+            border-color: var(--gold-border);
         }
 
         .btn-back {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--box-bg);
             color: var(--text-main);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--box-border);
             margin-top: 10px;
         }
 
         .btn-back:hover {
             background: var(--box-bg-hover);
+            border-color: var(--gold-border);
         }
 
         .toast {
@@ -412,21 +421,21 @@
             align-items: center;
             gap: 12px;
 
-            padding: 16px 24px;
+            padding: 14px 24px;
 
             color: var(--toast-text);
             background: var(--toast-bg);
             border: 1px solid var(--card-border);
             border-radius: 50px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             white-space: nowrap;
 
             opacity: 0;
             pointer-events: none;
-            transform: translate(-50%, 50px);
+            transform: translate(-50%, 40px);
             transition: all 0.4s cubic-bezier(.175, .885, .32, 1.275);
         }
 
@@ -436,13 +445,16 @@
         }
 
         .toast i {
-            color: #10B981;
-            font-size: 20px;
+            color: #d4af37;
+            font-size: 18px;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 380px) {
             .bank-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .app-container {
+                padding: 24px 16px;
             }
         }
     </style>
@@ -450,27 +462,27 @@
 
 <body>
 
-<button
-    class="theme-toggle-btn"
-    onclick="toggleTheme()"
-    aria-label="Temayı Değiştir"
->
-    <i class="fa-solid fa-sun" id="themeIcon"></i>
-</button>
-
 <div class="app-container" id="appContainer">
+
+    <button
+        class="theme-toggle-btn"
+        onclick="toggleTheme()"
+        aria-label="Temayı Değiştir"
+    >
+        <i class="fa-solid fa-sun" id="themeIcon"></i>
+    </button>
 
     <!-- ANA SAYFA -->
     <div class="page-main">
 
         <div class="brand-logo-area">
-            <i class="fa-solid fa-bolt"></i>
+            <i class="fa-solid fa-crown"></i>
         </div>
 
         <h1 id="displayBusinessName">Luka Mersin</h1>
 
         <p class="subtitle">
-            Bizi Değerlendirin ve Sosyal Medyada Takip Edin.
+            VIP Hizmetler, İletişim ve Özel Ödeme Kanalları
         </p>
 
         <div class="btn-list">
@@ -521,7 +533,7 @@
 
         <div class="page-header">
             <h2>Banka Bilgileri</h2>
-            <p class="subtitle" style="margin-bottom:8px;">
+            <p class="subtitle" style="margin-bottom:6px;">
                 IBAN kopyalandı. Lütfen bankanızı seçin.
             </p>
         </div>
@@ -594,8 +606,8 @@
 
         <div class="page-header">
             <h2>İletişim Bilgileri</h2>
-            <p class="subtitle" style="margin-bottom:12px;">
-                İşletmemize ait doğrudan iletişim kanalları
+            <p class="subtitle" style="margin-bottom:10px;">
+                Doğrudan iletişim kanalları
             </p>
         </div>
 
@@ -703,12 +715,10 @@
     function openPage(page) {
         appContainer.classList.remove("show-iban", "show-contact");
         appContainer.classList.add(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function closePages() {
         appContainer.classList.remove("show-iban", "show-contact");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     async function copyText(text, label) {

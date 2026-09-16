@@ -15,8 +15,8 @@
 
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #d4af37, #aa771c, #f3e5ab);
-            --gold-border: rgba(212, 175, 55, 0.35);
+            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa771c 100%);
+            --gold-border: rgba(212, 175, 55, 0.4);
             
             --primary-blue: linear-gradient(135deg, #1e293b, #0f172a, #334155);
             --primary-pink: linear-gradient(135deg, #831843, #500724, #9f1239);
@@ -25,10 +25,10 @@
         }
 
         [data-theme="dark"] {
-            --bg-gradient: radial-gradient(circle at 50% 0%, #1a1c29 0%, #0a0b10 70%, #050508 100%);
-            --card-bg: rgba(18, 20, 32, 0.65);
-            --card-border: rgba(212, 175, 55, 0.15);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.05);
+            --bg-gradient: radial-gradient(circle at 50% 20%, #171923 0%, #0a0b10 60%, #030406 100%);
+            --card-bg: rgba(15, 17, 26, 0.75);
+            --card-border: rgba(212, 175, 55, 0.2);
+            --card-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.08);
 
             --text-title: #f8fafc;
             --text-subtitle: #cbd5e1;
@@ -36,7 +36,7 @@
             --text-label: #d4af37;
 
             --box-bg: rgba(255, 255, 255, 0.03);
-            --box-bg-hover: rgba(212, 175, 55, 0.08);
+            --box-bg-hover: rgba(212, 175, 55, 0.1);
             --box-border: rgba(255, 255, 255, 0.06);
 
             --toast-bg: #0f172a;
@@ -44,10 +44,10 @@
         }
 
         [data-theme="light"] {
-            --bg-gradient: radial-gradient(circle at 50% 0%, #f8fafc 0%, #e2e8f0 70%, #cbd5e1 100%);
+            --bg-gradient: radial-gradient(circle at 50% 20%, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
             --card-bg: rgba(255, 255, 255, 0.85);
             --card-border: rgba(170, 119, 28, 0.3);
-            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), 0 0 30px rgba(170, 119, 28, 0.05);
+            --card-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12), 0 0 40px rgba(170, 119, 28, 0.05);
 
             --text-title: #0f172a;
             --text-subtitle: #334155;
@@ -76,6 +76,7 @@
             background: var(--bg-gradient);
             background-attachment: fixed;
             overflow-x: hidden;
+            perspective: 1000px;
         }
 
         body {
@@ -85,6 +86,7 @@
             padding: 24px 16px;
         }
 
+        /* 3D Hologram Ana Kapsayıcı */
         .app-container {
             width: 100%;
             max-width: 460px;
@@ -93,13 +95,25 @@
             display: flex;
             flex-direction: column;
             background: var(--card-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid var(--card-border);
-            border-radius: 32px;
+            border-radius: 36px;
             box-shadow: var(--card-shadow);
-            padding: 36px 24px;
+            padding: 38px 24px;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+        }
+
+        /* Holografik Işık Yansıması Efekti */
+        .app-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(212,175,55,0.05) 100%);
+            pointer-events: none;
+            border-radius: 36px;
         }
 
         .theme-toggle-btn {
@@ -133,6 +147,7 @@
             align-items: center;
             text-align: center;
             transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+            transform: translateZ(20px);
         }
 
         .sub-page {
@@ -141,14 +156,14 @@
             left: 100%;
             opacity: 0;
             pointer-events: none;
-            padding: 36px 24px;
+            padding: 38px 24px;
             height: 100%;
             overflow-y: auto;
         }
 
         .app-container.show-iban .page-main,
         .app-container.show-contact .page-main {
-            transform: translateX(-105%);
+            transform: translateX(-105%) translateZ(20px);
             opacity: 0;
             pointer-events: none;
         }
@@ -161,19 +176,20 @@
         }
 
         .brand-logo-area {
-            width: 84px;
-            height: 84px;
-            border-radius: 26px;
+            width: 88px;
+            height: 88px;
+            border-radius: 28px;
             background: var(--gold-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #0f172a;
-            font-size: 34px;
+            font-size: 36px;
             margin-top: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            transform: translateZ(30px);
         }
 
         h1 {
@@ -182,6 +198,7 @@
             font-weight: 800;
             margin-bottom: 8px;
             letter-spacing: -.5px;
+            transform: translateZ(25px);
         }
 
         p.subtitle {
@@ -190,6 +207,7 @@
             font-weight: 500;
             line-height: 1.5;
             margin-bottom: 28px;
+            transform: translateZ(20px);
         }
 
         .btn-list {
@@ -197,9 +215,10 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
+            transform: translateZ(20px);
         }
 
-        /* --- PARILTI / SPOTLIGHT BUTON EFEKTİ --- */
+        /* --- SPOTLIGHT PARILTI BUTON EFEKTİ --- */
         .btn {
             width: 100%;
             min-height: 56px;
@@ -208,7 +227,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 18px;
             color: #fff;
             font-size: 15px;
@@ -217,21 +236,20 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Parmağın ve imlecin takip edeceği parıltı katmanı */
         .btn::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(
-                circle 100px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 255, 255, 0.25),
-                transparent 80%
+                circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.35),
+                transparent 75%
             );
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
             pointer-events: none;
         }
 
@@ -239,42 +257,29 @@
             opacity: 1;
         }
 
-        .btn i {
-            font-size: 17px;
+        .btn i, .btn span {
             position: relative;
             z-index: 2;
         }
 
-        .btn span, .btn {
-            position: relative;
-            z-index: 2;
+        .btn i {
+            font-size: 17px;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+            transform: translateY(-3px) scale(1.01);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
         }
 
         .btn:active {
-            transform: scale(.98);
+            transform: scale(.97);
         }
 
-        .btn-google {
-            background: var(--primary-blue);
-        }
-
-        .btn-instagram {
-            background: var(--primary-pink);
-        }
-
-        .btn-iban {
-            background: var(--primary-green);
-        }
-
-        .btn-contact {
-            background: var(--primary-purple);
-        }
+        .btn-google { background: var(--primary-blue); }
+        .btn-instagram { background: var(--primary-pink); }
+        .btn-iban { background: var(--primary-green); }
+        .btn-contact { background: var(--primary-purple); }
 
         .page-header {
             text-align: center;
@@ -387,11 +392,27 @@
             position: relative;
         }
 
+        .btn-bank::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212,175,55,0.2), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .btn-bank:hover::before {
+            opacity: 1;
+        }
+
         .btn-bank img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             border-radius: 6px;
+            position: relative;
+            z-index: 2;
         }
 
         .btn-bank:hover {
@@ -725,29 +746,55 @@
         }, 2500);
     }
 
-    // Butonlar üzerinde parmak / imleç hareketini takip eden parıltı koordinat hesaplayıcısı
+    // 3D Hologram Eğilme Efekti ve Spotlight Parıltı Dinamik Kodları
     document.addEventListener("DOMContentLoaded", () => {
         initTheme();
         loadBusinessData();
 
-        const buttons = document.querySelectorAll(".btn, .btn-bank");
-        buttons.forEach(btn => {
-            btn.addEventListener("mousemove", (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                btn.style.setProperty("--mouse-x", `${x}px`);
-                btn.style.setProperty("--mouse-y", `${y}px`);
+        // Buton parıltı koordinat takibi
+        const interactiveElements = document.querySelectorAll(".btn, .btn-bank");
+        interactiveElements.forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                el.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                el.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
             });
-            btn.addEventListener("touchmove", (e) => {
+            el.addEventListener("touchmove", (e) => {
                 if(!e.touches[0]) return;
-                const rect = btn.getBoundingClientRect();
-                const x = e.touches[0].clientX - rect.left;
-                const y = e.touches[0].clientY - rect.top;
-                btn.style.setProperty("--mouse-x", `${x}px`);
-                btn.style.setProperty("--mouse-y", `${y}px`);
+                const rect = el.getBoundingClientRect();
+                el.style.setProperty("--mouse-x", `${e.touches[0].clientX - rect.left}px`);
+                el.style.setProperty("--mouse-y", `${e.touches[0].clientY - rect.top}px`);
             }, {passive: true});
         });
+
+        // 3D Kart Eğilme Efekti (Masaüstü ve Mobil)
+        const container = document.getElementById("appContainer");
+        
+        function handleTilt(x, y) {
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const rotateX = ((y - centerY) / (rect.height / 2)) * -6; // Derece sınırları
+            const rotateY = ((x - centerX) / (rect.width / 2)) * 6;
+            container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        document.addEventListener("mousemove", (e) => {
+            handleTilt(e.clientX, e.clientY);
+        });
+
+        document.addEventListener("mouseleave", () => {
+            container.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+
+        // Mobilde jiroskop / dokunma desteği
+        window.addEventListener("deviceorientation", (e) => {
+            if (e.gamma !== null && e.beta !== null) {
+                const tiltX = Math.max(-10, Math.min(10, e.gamma));
+                const tiltY = Math.max(-10, Math.min(10, e.beta - 45));
+                container.style.transform = `rotateX(${-tiltY * 0.4}deg) rotateY(${tiltX * 0.4}deg)`;
+            }
+        }, true);
     });
 </script>
 

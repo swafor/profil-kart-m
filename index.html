@@ -89,7 +89,6 @@
             padding: 30px 16px;
         }
 
-        /* Genişletilmiş Modern Platform Konteyneri (ItemSatış / Dashboard Tarzı) */
         .app-container {
             width: 100%;
             max-width: 620px;
@@ -108,7 +107,6 @@
             transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
         }
 
-        /* Holografik Işık Yolu */
         .app-container::after {
             content: '';
             position: absolute;
@@ -144,10 +142,11 @@
             border-color: #d4af37;
         }
 
-        /* Gelişmiş Sayfa Geçiş Mimarisi */
+        /* Süper Akıcı Yana Kayma (Slide & Glide) Geçiş Mimarisi */
         .pages-wrapper {
             width: 100%;
             position: relative;
+            overflow: hidden;
             min-height: 380px;
         }
 
@@ -158,20 +157,24 @@
             left: 0;
             opacity: 0;
             pointer-events: none;
-            filter: blur(12px);
-            transform: scale(0.92) translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+            transform: translateX(60px);
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
         }
 
         .page.active {
             opacity: 1;
             pointer-events: auto;
-            filter: blur(0px);
-            transform: scale(1) translateY(0);
+            transform: translateX(0);
             position: relative;
         }
 
-        /* Profil / Banner Üst Alanı (Vitrin Tasarımı) */
+        .page.exit-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            position: absolute;
+        }
+
+        /* Profil / Banner Üst Alanı */
         .profile-header-grid {
             display: flex;
             align-items: center;
@@ -222,7 +225,7 @@
             letter-spacing: 0.3px;
         }
 
-        /* Genişletilmiş Dağıtık Grid Buton Yapısı (ItemSatış / Pazar Yeri Düzeni) */
+        /* Pazar Yeri Grid Düzeni */
         .marketplace-grid {
             width: 100%;
             display: grid;
@@ -480,7 +483,6 @@
             grid-column: span 2;
         }
 
-        /* Cam Efektli Toast Bildirimi */
         .toast {
             position: fixed;
             left: 50%;
@@ -755,8 +757,25 @@
     }
 
     function switchPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
+        const activePage = document.querySelector('.page.active');
+        const targetPage = document.getElementById(pageId);
+        
+        if (activePage === targetPage) return;
+
+        // Mevcut sayfayı sol tarafa kaydırarak çıkar
+        activePage.classList.remove('active');
+        activePage.classList.add('exit-left');
+
+        // Hedef sayfayı sağdan pürüzsüzce içeri süz
+        targetPage.classList.remove('exit-left');
+        targetPage.classList.add('active');
+
+        // Geçiş bittiğinde eski sayfanın sınıfını temizle
+        setTimeout(() => {
+            document.querySelectorAll('.page').forEach(p => {
+                if (p !== targetPage) p.classList.remove('exit-left');
+            });
+        }, 450);
     }
 
     async function copyText(text, label, btnElement) {

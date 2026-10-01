@@ -32,8 +32,8 @@
         }
 
         body {
-            background: #f7f0e4;
-            color: #38251d;
+            background: #fff4df;
+            color: #4a281c;
             font-family: "Montserrat", sans-serif;
             overflow-x: hidden;
         }
@@ -62,7 +62,7 @@
 
             z-index: 1000;
 
-            background: rgba(247, 240, 228, 0.75);
+            background: rgba(255, 244, 223, 0.82);
             backdrop-filter: blur(15px);
 
             border-bottom: 1px solid rgba(100, 70, 40, 0.1);
@@ -76,7 +76,7 @@
         }
 
         .logo span {
-            color: #b8894b;
+            color: #d97745;
         }
 
         .nav-links {
@@ -87,7 +87,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #38251d;
+            color: #4a281c;
             font-size: 13px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -95,7 +95,7 @@
         }
 
         .nav-links a:hover {
-            color: #b8894b;
+            color: #d97745;
         }
 
         /* =========================================
@@ -123,7 +123,7 @@
 
             border-radius: 50%;
 
-            background: #ead9bd;
+            background: #ffd6a5;
 
             top: -250px;
             right: -200px;
@@ -140,7 +140,7 @@
 
             border-radius: 50%;
 
-            background: #efe1cc;
+            background: #ffe5c2;
 
             bottom: -250px;
             left: -200px;
@@ -157,7 +157,7 @@
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 5px;
-            color: #b8894b;
+            color: #d97745;
             margin-bottom: 25px;
         }
 
@@ -175,7 +175,7 @@
 
         .hero h1 span {
             display: block;
-            color: #b8894b;
+            color: #d97745;
             font-style: italic;
         }
 
@@ -198,11 +198,11 @@
 
             padding: 17px 30px;
 
-            border: 1px solid #b8894b;
+            border: 1px solid #d97745;
 
             text-decoration: none;
 
-            color: #38251d;
+            color: #4a281c;
 
             font-size: 12px;
             letter-spacing: 2px;
@@ -212,9 +212,42 @@
         }
 
         .hero-button:hover {
-            background: #38251d;
+            background: #4a281c;
             color: white;
-            border-color: #38251d;
+            border-color: #4a281c;
+        }
+
+
+        .hero::before {
+            display: none;
+        }
+
+        .hero::after {
+            background: #ffc8dd;
+        }
+
+        .floating.one {
+            background: #f4a261;
+        }
+
+        .floating.two {
+            background: #e76f51;
+        }
+
+        .floating.three {
+            background: #90be6d;
+        }
+
+        .dot-chocolate { background: #6f4534; }
+        .dot-strawberry { background: #ef7f86; }
+        .dot-vanilla { background: #f6d98b; }
+        .dot-pistachio { background: #9bc27b; }
+        .dot-lemon { background: #f4df68; }
+        .dot-caramel { background: #e39a55; }
+
+        .section-title small,
+        .eyebrow {
+            color: #d97745;
         }
 
         /* =========================================
@@ -350,25 +383,27 @@
 
             align-items: center;
 
-            background: #38251d;
+            background: #4a281c;
 
-            color: #f7f0e4;
+            color: #fff7ea;
         }
 
         .story-image {
             min-height: 600px;
-
-            background:
-                linear-gradient(
-                    rgba(56,37,29,.1),
-                    rgba(56,37,29,.4)
-                ),
-                url("https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=1000&q=85");
-
-            background-size: cover;
-            background-position: center;
-
             position: relative;
+            overflow: hidden;
+            background: #e9c6a5;
+            border-radius: 18px;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(1.05);
         }
 
         .story-image::after {
@@ -380,7 +415,7 @@
         }
 
         .story-content small {
-            color: #d3a968;
+            color: #f2a65a;
 
             letter-spacing: 4px;
 
@@ -430,7 +465,7 @@
         }
 
         .section-title small {
-            color: #b8894b;
+            color: #d97745;
 
             letter-spacing: 5px;
 
@@ -562,9 +597,9 @@
         .flavor-card {
             padding: 50px 35px;
 
-            background: #fffaf2;
+            background: #fff9ed;
 
-            border: 1px solid #eadbc7;
+            border: 1px solid #f0cda8;
 
             transition: .5s;
 
@@ -581,7 +616,7 @@
         }
 
         .flavor-number {
-            color: #b8894b;
+            color: #d97745;
 
             font-size: 11px;
 
@@ -654,9 +689,9 @@
             max-width: 760px;
             margin: 0 auto 28px;
             padding: 22px 28px;
-            border: 1px solid #eadbc7;
-            background: #fffaf2;
-            color: #38251d;
+            border: 1px solid #f0cda8;
+            background: #fff9ed;
+            color: #4a281c;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -694,11 +729,11 @@
         .flavor-toggle .toggle-icon {
             width: 38px;
             height: 38px;
-            border: 1px solid #b8894b;
+            border: 1px solid #d97745;
             border-radius: 50%;
             display: grid;
             place-items: center;
-            color: #b8894b;
+            color: #d97745;
             font-size: 22px;
             transition: transform .35s ease;
             flex-shrink: 0;
@@ -744,13 +779,13 @@
         ========================================= */
 
         .cta {
-            background: #d8b47a;
+            background: #f4b860;
 
             padding: 120px 8%;
 
             text-align: center;
 
-            color: #38251d;
+            color: #4a281c;
         }
 
         .cta h2 {
@@ -776,7 +811,7 @@
         .cta-button {
             display: inline-block;
 
-            background: #38251d;
+            background: #4a281c;
 
             color: white;
 
@@ -796,12 +831,12 @@
         .cta-button:hover {
             background: white;
 
-            color: #38251d;
+            color: #4a281c;
         }
 
 
         .quick-contact {
-            background: #fffaf2;
+            background: #fff9ed;
             padding: 70px 8%;
             border-top: 1px solid #eadbc7;
             border-bottom: 1px solid #eadbc7;
@@ -817,7 +852,7 @@
         }
 
         .quick-contact small {
-            color: #b8894b;
+            color: #d97745;
             text-transform: uppercase;
             letter-spacing: 4px;
             font-size: 10px;
@@ -839,8 +874,8 @@
         .quick-contact-links a {
             min-width: 190px;
             padding: 18px 20px;
-            border: 1px solid #eadbc7;
-            color: #38251d;
+            border: 1px solid #f0cda8;
+            color: #4a281c;
             text-decoration: none;
             background: white;
             transition: .3s ease;
@@ -848,12 +883,12 @@
 
         .quick-contact-links a:hover {
             transform: translateY(-3px);
-            border-color: #b8894b;
+            border-color: #d97745;
         }
 
         .quick-contact-links span {
             display: block;
-            color: #b8894b;
+            color: #d97745;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 9px;
@@ -876,14 +911,122 @@
             }
         }
 
+
+        .contact-copy-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-copy-row .phone-link {
+            flex: 1;
+        }
+
+        .phone-link {
+            flex: 1;
+        }
+
+        .phone-link span,
+        .payment-label {
+            display: block;
+            color: #f2a65a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 9px;
+            margin-bottom: 7px;
+        }
+
+        .copy-contact-btn {
+            width: 46px;
+            min-width: 46px;
+            height: 46px;
+            border: 1px solid rgba(217,119,69,.28);
+            border-radius: 12px;
+            background: rgba(255,255,255,.82);
+            color: #d15f3b;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 5px 15px rgba(80,50,20,.08);
+            transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+
+        .copy-contact-btn svg {
+            width: 21px;
+            height: 21px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .copy-contact-btn:hover {
+            background: #fff0d9;
+            color: #b84d31;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(80,50,20,.12);
+        }
+
+        .copy-contact-btn:active {
+            transform: translateY(0) scale(.96);
+        }
+
+        .payment-info {
+            display: grid;
+            gap: 15px;
+        }
+
+        .payment-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255,249,237,.08);
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .payment-row strong {
+            display: block;
+            color: #fff7ea;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .iban-value {
+            word-break: break-all;
+        }
+
+        .copy-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%) translateY(15px);
+            background: #4a281c;
+            color: #fff7ea;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: .25s ease;
+            z-index: 9999;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
         /* =========================================
            FOOTER
         ========================================= */
 
         footer {
-            background: #241712;
+            background: #321b17;
 
-            color: #f7f0e4;
+            color: #fff7ea;
 
             padding: 100px 8% 40px;
         }
@@ -919,7 +1062,7 @@
         }
 
         footer h4 {
-            color: #d3a968;
+            color: #f2a65a;
 
             font-size: 11px;
 
@@ -1009,7 +1152,7 @@
             }
 
             .story-image {
-                min-height: 450px;
+                min-height: 400px;
             }
 
             .flavor-grid {
@@ -1129,7 +1272,7 @@
         </div>
 
         <h1>
-            Gerçek
+            Geleneksel
             <span>Dondurma.</span>
         </h1>
 
@@ -1143,7 +1286,7 @@
 
         </p>
 
-        <a href="#cesitler" class="hero-button">
+        <a href="#cesitler" class="hero-button" onclick="openFlavorsFromHero(event)">
 
             Lezzetleri Keşfet
 
@@ -1180,7 +1323,12 @@
 
 <section class="story" id="hikaye">
 
-    <div class="story-image"></div>
+    <div class="story-image">
+        <img
+            src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1100&q=90"
+            alt="Geleneksel dondurma"
+            loading="lazy">
+    </div>
 
     <div class="story-content">
 
@@ -1207,41 +1355,6 @@
             kültürüne kendi dokunuşumuzu katıyoruz.
 
         </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     MENÜ
-========================================= -->
-
-<section class="menu-section" id="cesitler">
-
-    <div class="section-title">
-
-        <small>
-            Lezzetin Dönüşü
-        </small>
-
-        <h2>
-            Bir külah,<br>
-            sonsuz lezzet.
-        </h2>
-
-    </div>
-
-
-    <div class="icecream-stage">
-
-        <div class="stage-scoop"></div>
-
-        <div class="stage-scoop"></div>
-
-        <div class="stage-scoop"></div>
-
-        <div class="stage-cone"></div>
 
     </div>
 
@@ -1498,9 +1611,23 @@
 
             <!-- BURAYI DEĞİŞTİR -->
 
-            <a href="tel:+905XXXXXXXXX">
-                +90 5XX XXX XX XX
-            </a>
+            <div class="contact-copy-row">
+                <a href="tel:+905XXXXXXXXX" class="phone-link">
+                    <span>Telefon</span>
+                    +90 5XX XXX XX XX
+                </a>
+                <button class="copy-contact-btn"
+                        type="button"
+                        onclick="saveContact(this)"
+                        aria-label="Telefon numarasını kopyala"
+                        title="Numarayı rehbere kaydet">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M19 8v6M16 11h6"/>
+    </svg>
+</button>
+            </div>
 
             <a href="#">
                 Niğde / Türkiye
@@ -1545,14 +1672,41 @@
                 Ödeme
             </h4>
 
-            <p class="iban">
+            <div class="payment-info">
+                <div class="payment-row">
+                    <div>
+                        <span class="payment-label">Alıcı</span>
+                        <strong>Ad Soyad</strong>
+                    </div>
+                    <button class="copy-contact-btn"
+                            type="button"
+                            onclick="copyText('Ad Soyad', this)"
+                            aria-label="İsim soyisimi kopyala"
+                            title="İsim soyisimi kopyala">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="9" y="9" width="11" height="11" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </button>
+                </div>
 
-                IBAN<br><br>
-
-                TR00 0000 0000 0000
-                0000 0000 00
-
-            </p>
+                <div class="payment-row">
+                    <div>
+                        <span class="payment-label">IBAN</span>
+                        <strong class="iban-value">TR00 0000 0000 0000 0000 0000 00</strong>
+                    </div>
+                    <button class="copy-contact-btn"
+                            type="button"
+                            onclick="copyText('TR00 0000 0000 0000 0000 0000 00', this)"
+                            aria-label="IBAN'ı kopyala"
+                            title="IBAN'ı kopyala">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="9" y="9" width="11" height="11" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </button>
+                </div>
+            </div>
 
         </div>
 
@@ -1577,6 +1731,80 @@
 
 <script>
 
+
+
+    async function copyText(text, button) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.focus();
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+
+            const original = button.innerHTML;
+            button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
+
+            const toast = document.getElementById("copyToast");
+            toast.textContent = "Kopyalandı";
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                button.innerHTML = original;
+                toast.classList.remove("show");
+            }, 1400);
+        } catch (error) {
+            console.error("Kopyalama başarısız:", error);
+        }
+    }
+
+    function saveContact(button) {
+        const vcard = [
+            "BEGIN:VCARD",
+            "VERSION:3.0",
+            "FN:Niğde Kornet Dondurma",
+            "ORG:Niğde Kornet Dondurma",
+            "TEL;TYPE=CELL:+905XXXXXXXXX",
+            "ADR;TYPE=WORK:;;Niğde;Niğde;;Türkiye",
+            "END:VCARD"
+        ].join("\r\n");
+
+        const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Nigde-Kornet-Dondurma.vcf";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        const toast = document.getElementById("copyToast");
+        toast.textContent = "Kişi kartı hazır";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function openFlavorsFromHero(event) {
+        event.preventDefault();
+        const section = document.getElementById("cesitler");
+        const button = document.querySelector(".flavor-toggle");
+
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        setTimeout(() => {
+            if (button && button.getAttribute("aria-expanded") !== "true") {
+                toggleFlavors(button);
+            }
+        }, 450);
+    }
 
     function toggleFlavors(button) {
         const panel = document.getElementById("flavorPanel");
@@ -1666,6 +1894,8 @@
 
 </script>
 
+
+<div class="copy-toast" id="copyToast" role="status" aria-live="polite"></div>
 
 </body>
 </html>

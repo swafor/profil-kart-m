@@ -32,6 +32,7 @@
             --toast-bg: #2B1408;
             --toast-text: #FFF8E7;
             --accent-gold: #D4A359;
+            --logo-bg: #2b1509;
         }
 
         /* --- AYDINLIK TEMA (Krem & Vanilya & Çikolata) --- */
@@ -50,6 +51,7 @@
             --toast-bg: #FFF8E7;
             --toast-text: #3A1E08;
             --accent-gold: #B87333;
+            --logo-bg: #fcedd9;
         }
 
         * {
@@ -91,7 +93,7 @@
             border-radius: 32px;
             border: 1px solid var(--card-border);
             box-shadow: var(--card-shadow);
-            padding: 40px 24px 32px 24px;
+            padding: 36px 24px 32px 24px;
             position: relative;
             overflow: hidden;
             min-height: 560px;
@@ -128,25 +130,28 @@
             background: var(--box-bg-hover);
         }
 
-        /* LOGO ALANI */
+        /* LOGO ALANI - ORANTILI & BEYAZSIZ */
         .logo-container {
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto 16px auto;
             border-radius: 50%;
-            background: #FFF8E7;
-            padding: 4px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 0 2px var(--accent-gold);
+            background: var(--logo-bg);
+            padding: 3px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 0 2px var(--accent-gold);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 50%;
+            mix-blend-mode: multiply; /* Beyaz alanları transparan yapma efekti */
+            filter: contrast(105%);
         }
 
         /* Sayfa Geçiş Ekranları */

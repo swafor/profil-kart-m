@@ -164,7 +164,7 @@
         .hero h1 {
             font-family: "Cormorant Garamond", serif;
 
-            font-size: clamp(70px, 9vw, 145px);
+            font-size: clamp(58px, 7vw, 105px);
 
             line-height: 0.78;
 
@@ -363,7 +363,7 @@
                     rgba(56,37,29,.1),
                     rgba(56,37,29,.4)
                 ),
-                url("https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1000&q=85");
+                url("https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=1000&q=85");
 
             background-size: cover;
             background-position: center;
@@ -373,16 +373,10 @@
 
         .story-image::after {
             content: "";
-
             position: absolute;
-
-            width: 90%;
-            height: 90%;
-
-            border: 1px solid rgba(255,255,255,.35);
-
-            top: 5%;
-            left: 5%;
+            inset: 18px;
+            border: 1px solid rgba(255,255,255,.16);
+            pointer-events: none;
         }
 
         .story-content small {
@@ -469,11 +463,11 @@
         .stage-cone {
             position: absolute;
 
-            width: 250px;
-            height: 330px;
+            width: 235px;
+            height: 310px;
 
-            left: 125px;
-            bottom: 20px;
+            left: 132px;
+            bottom: 25px;
 
             clip-path: polygon(4% 0,96% 0,50% 100%);
 
@@ -493,62 +487,55 @@
 
         .stage-scoop {
             position: absolute;
-
-            width: 230px;
-            height: 230px;
-
-            border-radius: 50%;
-
-            left: 135px;
-
+            width: 220px;
+            height: 190px;
+            border-radius: 50% 50% 46% 46%;
+            left: 140px;
             box-shadow:
-                inset -25px -20px 30px rgba(0,0,0,.08),
-                0 20px 30px rgba(50,30,20,.12);
-
+                inset -24px -18px 28px rgba(0,0,0,.10),
+                inset 10px 8px 16px rgba(255,255,255,.20),
+                0 16px 25px rgba(50,30,20,.12);
             z-index: 4;
+            animation: scoopFloat 4.5s ease-in-out infinite;
+        }
 
-            transform-origin: 50% 300px;
+        .stage-scoop::before {
+            content: "";
+            position: absolute;
+            width: 78%;
+            height: 24%;
+            left: 11%;
+            top: 12%;
+            border-radius: 50%;
+            background: rgba(255,255,255,.16);
+            filter: blur(5px);
+        }
 
-            animation: orbit 7s linear infinite;
+        .stage-scoop:nth-child(1) {
+            background: #f1c3bb;
+            top: 85px;
+            z-index: 6;
         }
 
         .stage-scoop:nth-child(2) {
-            background: #f1c3bb;
-            animation-delay: -2.3s;
+            background: #e4cf9b;
+            top: 165px;
+            left: 120px;
+            z-index: 5;
+            animation-delay: -.8s;
         }
 
         .stage-scoop:nth-child(3) {
-            background: #e4cf9b;
-            animation-delay: -4.6s;
-        }
-
-        .stage-scoop:nth-child(4) {
             background: #c9b29a;
-            animation-delay: -6.9s;
+            top: 245px;
+            left: 140px;
+            z-index: 4;
+            animation-delay: -1.6s;
         }
 
-        @keyframes orbit {
-
-            0% {
-                transform: rotate(0deg) translateX(0) rotate(0deg);
-            }
-
-            25% {
-                transform: rotate(90deg) translateX(40px) rotate(-90deg);
-            }
-
-            50% {
-                transform: rotate(180deg) translateX(0) rotate(-180deg);
-            }
-
-            75% {
-                transform: rotate(270deg) translateX(-40px) rotate(-270deg);
-            }
-
-            100% {
-                transform: rotate(360deg) translateX(0) rotate(-360deg);
-            }
-
+        @keyframes scoopFloat {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-7px) rotate(1deg); }
         }
 
         /* =========================================
@@ -653,6 +640,105 @@
             background: #c89155;
         }
 
+
+        /* =========================================
+           LEZZETLER - TIKLANABİLİR
+        ========================================= */
+
+        .flavors {
+            padding: 80px 8% 150px;
+        }
+
+        .flavor-toggle {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 auto 28px;
+            padding: 22px 28px;
+            border: 1px solid #eadbc7;
+            background: #fffaf2;
+            color: #38251d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: .3s ease;
+        }
+
+        .flavor-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(80,50,20,.08);
+        }
+
+        .flavor-toggle .toggle-text {
+            text-align: left;
+        }
+
+        .flavor-toggle strong {
+            display: block;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .flavor-toggle small {
+            color: #806e60;
+            font-size: 11px;
+            letter-spacing: .5px;
+        }
+
+        .flavor-toggle .toggle-icon {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #b8894b;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: #b8894b;
+            font-size: 22px;
+            transition: transform .35s ease;
+            flex-shrink: 0;
+        }
+
+        .flavor-toggle[aria-expanded="true"] .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .flavor-panel {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .45s ease;
+        }
+
+        .flavor-panel-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .flavor-panel.open {
+            grid-template-rows: 1fr;
+        }
+
+        .flavor-panel .flavor-grid {
+            padding-top: 4px;
+        }
+
+        @media(max-width: 600px) {
+            .flavor-toggle {
+                padding: 18px 20px;
+            }
+
+            .flavor-toggle strong {
+                font-size: 26px;
+            }
+        }
+
         /* =========================================
            CTA
         ========================================= */
@@ -711,6 +797,83 @@
             background: white;
 
             color: #38251d;
+        }
+
+
+        .quick-contact {
+            background: #fffaf2;
+            padding: 70px 8%;
+            border-top: 1px solid #eadbc7;
+            border-bottom: 1px solid #eadbc7;
+        }
+
+        .quick-contact-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .quick-contact small {
+            color: #b8894b;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 10px;
+        }
+
+        .quick-contact h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: .95;
+            margin-top: 12px;
+        }
+
+        .quick-contact-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .quick-contact-links a {
+            min-width: 190px;
+            padding: 18px 20px;
+            border: 1px solid #eadbc7;
+            color: #38251d;
+            text-decoration: none;
+            background: white;
+            transition: .3s ease;
+        }
+
+        .quick-contact-links a:hover {
+            transform: translateY(-3px);
+            border-color: #b8894b;
+        }
+
+        .quick-contact-links span {
+            display: block;
+            color: #b8894b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 9px;
+            margin-bottom: 7px;
+        }
+
+        @media(max-width: 700px) {
+            .quick-contact-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .quick-contact-links {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .quick-contact-links a {
+                width: 100%;
+            }
         }
 
         /* =========================================
@@ -834,7 +997,7 @@
             }
 
             .hero-icecream {
-                opacity: .18;
+                opacity: .28;
 
                 right: -80px;
             }
@@ -1103,8 +1266,20 @@
 
     </div>
 
+    <button class="flavor-toggle" type="button"
+            aria-expanded="false"
+            aria-controls="flavorPanel"
+            onclick="toggleFlavors(this)">
+        <span class="toggle-text">
+            <strong>Lezzetleri Gör</strong>
+            <small>Favori dondurma çeşitlerimizi görmek için dokun.</small>
+        </span>
+        <span class="toggle-icon">+</span>
+    </button>
 
-    <div class="flavor-grid">
+    <div class="flavor-panel" id="flavorPanel">
+      <div class="flavor-panel-inner">
+        <div class="flavor-grid">
 
 
         <div class="flavor-card">
@@ -1238,6 +1413,32 @@
 </section>
 
 
+
+<!-- =========================================
+     HIZLI İLETİŞİM
+========================================= -->
+<section class="quick-contact" id="hizli-iletisim">
+    <div class="quick-contact-inner">
+        <div>
+            <small>Hemen Ulaş</small>
+            <h2>Canın dondurma mı çekti?</h2>
+        </div>
+        <div class="quick-contact-links">
+            <a href="tel:+905XXXXXXXXX">
+                <span>Telefon</span>
+                +90 5XX XXX XX XX
+            </a>
+            <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">
+                <span>Konum</span>
+                Niğde / Türkiye ↗
+            </a>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+</section>
 <!-- =========================================
      CTA
 ========================================= -->
@@ -1375,6 +1576,15 @@
 
 
 <script>
+
+
+    function toggleFlavors(button) {
+        const panel = document.getElementById("flavorPanel");
+        const expanded = button.getAttribute("aria-expanded") === "true";
+
+        button.setAttribute("aria-expanded", String(!expanded));
+        panel.classList.toggle("open", !expanded);
+    }
 
     /*
        Hafif scroll animasyonu
